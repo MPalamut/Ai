@@ -1,0 +1,123 @@
+.sidebar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--sidebarBgColor);
+    position: fixed;
+    left: 0px;
+    height: 100vh;
+    transition: all .2s ease-in-out;
+}
+
+.sidebar .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.sidebar .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.sidebar button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--sidebarControlColor);
+    color: rgb(187, 187, 187);
+    cursor: pointer;
+    border: none;
+}
+
+.sidebar button.yellow {
+    background-color: rgb(255, 221, 0);
+}
+
+.sidebar button.blue {
+    background-color: rgb(78, 78, 149);
+}
+.sidebar button.green {
+    background-color: rgb(78, 149, 78);
+}
+
+.sidebar button svg {
+    width: 19px;
+    height: 19px;
+}
+
+.sidebar button:hover {
+    background-color: rgb(78, 78, 78);
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.sidebar :visited {
+    color: inherit;
+}
+
+.sidebar select {
+    background-color: rgb(113, 113, 113);
+    color: var(--fontColor);
+    border: none;
+    padding: 2px;
+    border-radius: .5em;
+    width: 85%;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 5px;
+    bottom: 55px;
+    width: 10vw;
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    font-size: .9em;
+    animation: .2s openSideBar ease-in-out;
+}
+
+.settings ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.settings ul li {
+    width: 100%;
+}
+
+.settings ul li a {
+    display: block;
+    padding: 9px;
+
+}
+
+.settings ul li a:hover {
+    background-color: var(--sidebarSettingsHoverBgColor);
+}
+
+@keyframes openSideBar {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}

@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--backgroundColor);
+  color: var(--fontColor);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --mainColor: rgb(0, 255, 217);
+  --fontColor: rgb(216, 216, 216);
+  --backgroundColor: rgb(24, 31, 45);
+  --outputUserBgColor: rgb(49, 49, 49);
+  --inputBgColor: rgb(27, 29, 37);
+  --sidebarBgColor: rgb(44, 52, 57);
+  --sidebarControlColor: rgb(44, 44, 44);
+  --sidebarSettingsBgColor: rgb(36, 38, 39);
+  --sidebarSettingsHoverBgColor: rgb(78, 78, 78);
+}
+
+[data-theme="light"] {
+  --mainColor: rgb(31, 167, 149);
+  --fontColor: rgb(24, 31, 45);
+  --backgroundColor: rgb(207, 207, 207);
+  --outputUserBgColor: rgb(145, 145, 145);
+  --inputBgColor: rgb(220, 220, 220);
+  --sidebarBgColor: rgb(164, 164, 164);
+  --sidebarControlColor: rgb(96, 96, 96);
+  --sidebarSettingsBgColor: rgb(220, 220, 220);
+  --sidebarSettingsHoverBgColor: rgb(96, 96, 96);
+}

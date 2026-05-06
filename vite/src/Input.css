@@ -1,0 +1,70 @@
+.inputContainer {
+    position: absolute;
+    bottom: 5vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+    min-height: 9vh;
+    box-sizing: border-box;
+    border-radius: .5em;
+    border: 1px solid var(--mainColor);
+    box-shadow: 5px 5px 10px black;
+}
+
+.inputContainer input {
+    width: 100vw;
+    padding: 15px;
+    color: var(--fontColor);
+    box-sizing: border-box;
+    border: none;
+    background-color: var(--inputBgColor);
+    border-radius: .6em;
+}
+
+.inputContainer button {
+    width: 5vw;
+    box-sizing: border-box;
+    border-radius: 0 .5em .5em 0;
+    border: none;
+    color: var(--fontColor);
+    background-color: var(--mainColor);
+    cursor: pointer;
+}
+
+.inputContainer button svg {
+    width: 19px;
+    height: 19px;
+}
+
+.inputContainer input:focus {
+    outline: none;
+}
+
+.inputContainer button:disabled {
+    background-color: var(--disabledColor);
+    color: rgb(99, 99, 99);
+}
+
+.loading {
+    background:
+        linear-gradient(black, black) padding-box,
+        radial-gradient(circle at left center,
+            rgb(255, 85, 0),
+            #ffee04,
+            #d9fcff,
+            #1c33ff,
+            rgb(247, 14, 255)) border-box;
+
+    border: 2px solid transparent;
+    background-size: 100% 100%, 200% 100%;
+    background-position: center, left center;
+    animation: gradientMove .9s ease-in-out infinite alternate;
+}
+
+@keyframes gradientMove {
+    to {
+        background-position: center, 100% center;
+    }
+}
