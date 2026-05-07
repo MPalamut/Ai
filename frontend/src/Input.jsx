@@ -9,7 +9,9 @@ export default function Input() {
     const {addOutput} = getStore()
     const {selectedModel} = getStore()
     const {loading, setLoading} = getStore()
+    const {setTokensUsed} = getStore()
     const inputRef = useRef()
+
     const responseReceived = () => {
         setLoading(false);
         setTimeout(() => { inputRef.current.focus() }, 1)
@@ -33,6 +35,9 @@ export default function Input() {
             const data = await res.json()
             const responseText = data.output[0].content[0].text
             const responseID = data.id
+            const tokensUsed = data.usage.output_tokens
+            setTokensUsed(tokensUsed)
+            console.log("Tokens used:", tokensUsed)
             setPreviousResponse(responseID)
             addOutput(responseText)
         } catch (error) { console.log(error) }

@@ -6,8 +6,8 @@ export function AppProvider({ children }) {
     const [selectedModel, setSelectedModel] = useState("")
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
+    const [tokensUsed, setTokensUsed] = useState()
     
-
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
     }, [theme])
@@ -24,7 +24,8 @@ export function AppProvider({ children }) {
         theme, toggleTheme,
         selectedModel, setSelectedModel,
         output, setOutput, addOutput,
-        loading, setLoading
+        loading, setLoading,
+        tokensUsed, setTokensUsed
     }
 
     return (

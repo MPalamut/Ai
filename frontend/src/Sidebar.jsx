@@ -45,7 +45,7 @@ export default function Sidebar() {
                         <ul>
                             <li><a href="#">Design</a></li>
                             <li><a href="#">Datenschutz</a></li>
-                            <li><a href="#">Feedback</a></li>
+                            <li><a href="#">Feedback</a></li> 
                             <li><a href="#">Informationen</a></li>
                             <li><a href="#">Hilfe</a></li>
                         </ul>

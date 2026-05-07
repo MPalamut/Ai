@@ -8,6 +8,7 @@
     left: 0px;
     height: 100vh;
     transition: all .2s ease-in-out;
+    font-size: .9em;
 }
 
 .sidebar .header {
@@ -20,8 +21,6 @@
 }
 
 .sidebar .footer {
-    display: flex;
-    flex-direction: column;
     gap: 5px;
     margin-bottom: 15px;
 }

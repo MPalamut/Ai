@@ -68,6 +68,11 @@
   color: var(--fontColor);
 }
 
+.tokens {
+font-size: .7em;
+color: yellow;
+}
+
 @keyframes fadeIn {
   to {opacity: 1;}
 }
