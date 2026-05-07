@@ -3,10 +3,8 @@ import "./Output.css"
 import { getStore } from "./Store.jsx";
 
 export default function Output() {
-    const { output } = getStore()
+    const { output , loading } = getStore()
     const scrollRef = useRef()
-    const { loading } = getStore()
-
 
     useEffect(() => {
         if (scrollRef.current) {

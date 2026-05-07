@@ -11,8 +11,7 @@ export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [models, setModels] = useState([])
-    const {selectedModel, setSelectedModel} = getStore();
-    const {theme, toggleTheme} = getStore();
+    const {selectedModel, setSelectedModel, theme, toggleTheme} = getStore();
 
     useEffect(() => {
         async function fetchModels() {

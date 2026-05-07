@@ -6,9 +6,7 @@ import { getStore } from "./Store";
 export default function Input() {
     const [input, setInput] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
-    const {output,addOutput} = getStore()
-    const {selectedModel} = getStore()
-    const {loading, setLoading} = getStore()
+    const {addOutput, selectedModel,loading,setLoading} = getStore()
     const inputRef = useRef()
 
     const responseReceived = () => {
