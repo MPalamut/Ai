@@ -6,10 +6,9 @@ import { getStore } from "./Store";
 export default function Input() {
     const [input, setInput] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
-    const {addOutput} = getStore()
+    const {output,addOutput} = getStore()
     const {selectedModel} = getStore()
     const {loading, setLoading} = getStore()
-    const {setTokensUsed} = getStore()
     const inputRef = useRef()
 
     const responseReceived = () => {
@@ -19,7 +18,7 @@ export default function Input() {
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
-        addOutput(input)
+        addOutput("user", input)
         setInput("")
         setLoading(true)
 
@@ -34,12 +33,10 @@ export default function Input() {
             const res = await fetch(url, { method: "POST" })
             const data = await res.json()
             const responseText = data.output[0].content[0].text
-            const responseID = data.id
             const tokensUsed = data.usage.output_tokens
-            setTokensUsed(tokensUsed)
-            console.log("Tokens used:", tokensUsed)
+            const responseID = data.id
+            addOutput("ai", responseText, tokensUsed)
             setPreviousResponse(responseID)
-            addOutput(responseText)
         } catch (error) { console.log(error) }
         responseReceived()
     }

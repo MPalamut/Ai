@@ -6,7 +6,7 @@ export function AppProvider({ children }) {
     const [selectedModel, setSelectedModel] = useState("")
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
-    const [tokensUsed, setTokensUsed] = useState()
+    // const [tokensUsed, setTokensUsed] = useState()
     
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -16,8 +16,9 @@ export function AppProvider({ children }) {
         setTheme(prev => prev == "root" ? "light" : "root")
     }
 
-    const addOutput = (text) => {
-        setOutput(prevOutput => [...prevOutput, text])
+
+    const addOutput = (role ,text, tokens = null) => {
+        setOutput(prev => [...prev, { role, text, tokens }])
     }
 
     const values = {
@@ -25,7 +26,7 @@ export function AppProvider({ children }) {
         selectedModel, setSelectedModel,
         output, setOutput, addOutput,
         loading, setLoading,
-        tokensUsed, setTokensUsed
+        // tokensUsed, setTokensUsed,
     }
 
     return (
