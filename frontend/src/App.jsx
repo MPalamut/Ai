@@ -4,8 +4,6 @@ import Output from './Output'
 import Sidebar from './Sidebar'
 import Input from './Input'
 
-
-
 export default function App() {
   return (
     <AppProvider>
