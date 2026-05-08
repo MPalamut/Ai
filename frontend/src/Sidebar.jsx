@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect, useState } from "react";
 import "./Sidebar.css";
 import { RxHamburgerMenu } from "react-icons/rx";

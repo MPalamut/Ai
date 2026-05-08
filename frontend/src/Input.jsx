@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState, useRef } from "react"
 import "./Input.css"
 import { AiOutlineSend } from "react-icons/ai";
