@@ -15,14 +15,10 @@ export function AppProvider({ children }) {
         setTheme(prev => prev == "root" ? "light" : "root")
     }
 
-    const addOutput = (role ,text, tokens = null) => {
-        setOutput(prev => [...prev, { role, text, tokens }])
-    }
-
     const values = {
         theme, toggleTheme,
         selectedModel, setSelectedModel,
-        output, setOutput, addOutput,
+        output, setOutput,
         loading, setLoading,
     }
 

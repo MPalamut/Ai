@@ -22,7 +22,7 @@ export default function Output() {
                 {output.map((item,index) => (
                     <div key={index}>
                      <pre>{item.text}
-                        {item.tokens !== null && <p className="tokens">Verbrauchte Tokens: {item.tokens}</p>}
+                        {item.tokens && <p className="tokens">Verbrauchte Tokens: {item.tokens}</p>}
                      </pre>
                       </div>
                     ))}

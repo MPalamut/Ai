@@ -6,7 +6,7 @@ import { getStore } from "./Store";
 export default function Input() {
     const [input, setInput] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
-    const {addOutput, selectedModel,loading,setLoading} = getStore()
+    const {setOutput, selectedModel,loading,setLoading} = getStore()
     const inputRef = useRef()
 
     const responseReceived = () => {
@@ -16,7 +16,7 @@ export default function Input() {
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
-        addOutput("user", input)
+        setOutput(prev => [...prev, { role: "user", text: input }])
         setInput("")
         setLoading(true)
 
@@ -33,7 +33,7 @@ export default function Input() {
             const responseText = data.output[0].content[0].text
             const tokensUsed = data.usage.output_tokens
             const responseID = data.id
-            addOutput("ai", responseText, tokensUsed)
+            setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
             setPreviousResponse(responseID)
         } catch (error) { console.log(error) }
         responseReceived()
