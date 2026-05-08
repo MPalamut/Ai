@@ -12,12 +12,8 @@ export function AppProvider({ children }) {
         document.documentElement.setAttribute("data-theme", theme)
     }, [theme])
 
-    const toggleTheme = () => {
-        setTheme(prev => prev == "root" ? "light" : "root")
-    }
-
     const values = {
-        theme, toggleTheme,
+        theme, setTheme,
         selectedModel, setSelectedModel,
         output, setOutput,
         loading, setLoading,

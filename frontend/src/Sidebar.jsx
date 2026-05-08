@@ -12,7 +12,7 @@ export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [models, setModels] = useState([])
-    const {selectedModel, setSelectedModel, theme, toggleTheme} = getStore();
+    const {selectedModel, setSelectedModel, theme, setTheme} = getStore();
 
     useEffect(() => {
         async function fetchModels() {
@@ -37,7 +37,7 @@ export default function Sidebar() {
                     <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
                         {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
                     </select>
-                    <button onClick={toggleTheme}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
+                    <button onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
                 </div>
                 <div className="footer">
                     <button onClick={() => setSettingsOpen(!settingsOpen)}><RxGear /></button>
