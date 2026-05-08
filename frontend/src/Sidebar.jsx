@@ -36,7 +36,7 @@ export default function Sidebar() {
                     <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
                         {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
                     </select>
-                    <button onClick={toggleTheme}>{theme == "root" ? <RxSun /> : <RxMoon />}</button>
+                    <button onClick={toggleTheme}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
                 </div>
                 <div className="footer">
                     <button onClick={() => setSettingsOpen(!settingsOpen)}><RxGear /></button>

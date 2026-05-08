@@ -18,11 +18,11 @@ export default function Output() {
     return (
         <>
             <div className="output" ref={scrollRef}>
-                {output.length == 0 && <h2 className="greeting">Hi, ich bin dein loaker Ai Agent</h2>}
+                {output.length === 0 && <h2 className="greeting">Hi, ich bin dein loaker Ai Agent</h2>}
                 {output.map((item,index) => (
                     <div key={index}>
                      <pre>{item.text}
-                        {item.tokens != null && <p className="tokens">Verbrauchte Tokens: {item.tokens}</p>}
+                        {item.tokens !== null && <p className="tokens">Verbrauchte Tokens: {item.tokens}</p>}
                      </pre>
                       </div>
                     ))}

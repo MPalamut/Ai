@@ -24,7 +24,7 @@ export default function Input() {
             input: input,
             selectedModel: selectedModel
         })
-        if (previousResponse != "") { params.append("previousResponse", previousResponse) }
+        if (previousResponse !== "") { params.append("previousResponse", previousResponse) }
 
         try {
             const url = `http://localhost:8000/responses?${params.toString()}`
