@@ -1,12 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import "./Sidebar.css";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { RxGear } from "react-icons/rx";
-import { RxSun } from "react-icons/rx";
-import { RxMoon } from "react-icons/rx";
+import { RxHamburgerMenu, RxGear, RxSun, RxMoon} from "react-icons/rx";
 import { getStore } from "./Store.jsx";
-
 
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
