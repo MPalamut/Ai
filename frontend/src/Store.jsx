@@ -7,7 +7,7 @@ export function AppProvider({ children }) {
     const [selectedModel, setSelectedModel] = useState("")
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
-    
+
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
     }, [theme])
