@@ -25,4 +25,5 @@ export function AppProvider({ children }) {
         </AppContext.Provider>
     )
 }
+
 export const getStore = () => useContext(AppContext)
