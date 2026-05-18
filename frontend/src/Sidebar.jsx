@@ -26,7 +26,7 @@ export default function Sidebar() {
 
     return (
         <>
-            <div className="sidebar" style={{ width: sidebarOpen ? "250px" : "150px" }}>
+            <div className="sidebar" style={{ minWidth: sidebarOpen ? "15vw" : "5vw" }}>
                 <div className="header">
                     <a href="/">Your Ai</a>
                     <button onClick={() => setSidebarOpen(!sidebarOpen)  }><RxHamburgerMenu /></button>

@@ -81,7 +81,7 @@
     position: fixed;
     left: 5px;
     bottom: 55px;
-    width: 10vw;
+    width: 15vw;
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);
     border-radius: .5em;
