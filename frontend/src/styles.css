@@ -19,11 +19,11 @@ body {
   --sidebarBgColor: rgb(44, 52, 57);
   --sidebarSettingsBgColor: rgb(36, 38, 39);
   --sidebarSettingsHoverBgColor: rgb(78, 78, 78);
-  --disabledColor: rgb(60, 60, 60);
+  --disabledColor: rgb(49, 49, 49);
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(148, 148, 148);
+  --mainColor: rgb(152, 152, 152);
   --fontColor: rgb(62, 62, 62);
   --backgroundColor: rgb(255, 255, 255);
   --outputUserBgColor: rgb(145, 145, 145);
