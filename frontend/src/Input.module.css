@@ -26,7 +26,7 @@
     box-sizing: border-box;
     border: none;
     background-color: var(--inputBgColor);
-    border-radius: .6em;
+    border-radius: .5em 0 0 .5em;
 }
 
 .inputHeader button {
