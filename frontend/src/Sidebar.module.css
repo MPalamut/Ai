@@ -7,8 +7,10 @@
     position: fixed;
     left: 0px;
     height: 100vh;
-    transition: all .2s ease-in-out;
+    
     font-size: .9em;
+    padding: 15px;
+   transition: all .2s ease-in-out;
 }
 
 .sidebar .header {
@@ -16,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 19px;
     margin-top: 15px;
 }
 
@@ -32,10 +34,11 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: var(--sidebarControlColor);
+    background-color: var(--mainColor);
     color: rgb(187, 187, 187);
     cursor: pointer;
-    border: none;
+    border: none; 
+    transition: all .2s ease-in-out;
 }
 
 .sidebar button.yellow {
@@ -52,6 +55,7 @@
 .sidebar button svg {
     width: 19px;
     height: 19px;
+    color: var(--fontColor);
 }
 
 .sidebar button:hover {
@@ -60,6 +64,12 @@
 
 .sidebar a {
     text-decoration: none;
+}
+
+.icon {
+    width: 55px;
+    height: auto;
+    display: block;
 }
 
 .sidebar :visited {

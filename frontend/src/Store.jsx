@@ -4,7 +4,6 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [theme, setTheme] = useState("root")
-    const [selectedModel, setSelectedModel] = useState("")
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -14,7 +13,6 @@ export function AppProvider({ children }) {
 
     const values = {
         theme, setTheme,
-        selectedModel, setSelectedModel,
         output, setOutput,
         loading, setLoading,
     }

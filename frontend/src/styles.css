@@ -11,19 +11,20 @@ body {
 }
 
 :root {
-  --mainColor: rgb(0, 255, 217);
-  --fontColor: rgb(216, 216, 216);
+  --mainColor: rgb(16, 197, 170);
+  --fontColor: rgb(240, 240, 240);
   --backgroundColor: rgb(24, 31, 45);
   --outputUserBgColor: rgb(49, 49, 49);
-  --inputBgColor: rgb(27, 29, 37);
+  --inputBgColor: rgb(16, 15, 15);
   --sidebarBgColor: rgb(44, 52, 57);
   --sidebarControlColor: rgb(44, 44, 44);
   --sidebarSettingsBgColor: rgb(36, 38, 39);
   --sidebarSettingsHoverBgColor: rgb(78, 78, 78);
+  --disabledColor: rgb(60, 60, 60);
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(31, 167, 149);
+  --mainColor: rgb(148, 148, 148);
   --fontColor: rgb(24, 31, 45);
   --backgroundColor: rgb(207, 207, 207);
   --outputUserBgColor: rgb(145, 145, 145);
@@ -32,4 +33,5 @@ body {
   --sidebarControlColor: rgb(96, 96, 96);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
   --sidebarSettingsHoverBgColor: rgb(96, 96, 96);
+  --disabledColor: rgb(200, 200, 200);
 }

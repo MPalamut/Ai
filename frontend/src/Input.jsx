@@ -1,14 +1,30 @@
 import React from 'react'
-import { useState, useRef } from "react"
-import "./Input.css"
-import { AiOutlineSend } from "react-icons/ai";
+import { useState, useEffect, useRef } from "react"
+import styles from "./Input.module.css"
+import { AiOutlineSend, AiOutlinePaperClip} from "react-icons/ai";
 import { getStore } from "./Store";
 
 export default function Input() {
     const [input, setInput] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
-    const {setOutput, selectedModel,loading,setLoading} = getStore()
     const inputRef = useRef()
+    const [models, setModels] = useState([])
+    const [selectedModel, setSelectedModel] = useState("")
+    const { setOutput, loading, setLoading } = getStore()
+
+    useEffect(() => {
+        async function fetchModels() {
+            try {
+                const url = "http://localhost:8000/models"
+                const res = await fetch(url)
+                const data = await res.json()
+                setModels(data.data)
+                setSelectedModel(data.data[0].id)
+            }
+            catch (error) { console.log(error) }
+        }
+        fetchModels();
+    }, []);
 
     const responseReceived = () => {
         setLoading(false);
@@ -42,17 +58,25 @@ export default function Input() {
 
     return (
         <>
-            <div className={`inputContainer ${loading ? "loading" : ""}`}>
-                <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder={loading ? "Bitte warten" : "Frage stellen"}
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }}
-                    disabled={loading}
-                />
-                <button onClick={Responses} disabled={!input.trim()}><AiOutlineSend /></button>
+            <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>
+                <div className={styles.inputHeader}>
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        placeholder={loading ? "Bitte warten" : "Frage stellen"}
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }}
+                        disabled={loading}
+                    />
+                    <button onClick={Responses} disabled={!input.trim()}><AiOutlineSend /></button>
+                </div>
+                <div className={styles.inputFooter}>
+                    <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
+                        {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
+                    </select>
+                    <button title="Bild hochladen"><AiOutlinePaperClip /> </button>
+                </div>
             </div>
         </>
     )

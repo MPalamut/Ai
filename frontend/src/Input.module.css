@@ -1,20 +1,26 @@
 .inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     position: absolute;
     bottom: 5vh;
     left: 50vw;
     transform: translateX(-50%);
-    display: flex;
-    flex-direction: row;
     width: 50vw;
-    min-height: 9vh;
     box-sizing: border-box;
     border-radius: .5em;
     border: 1px solid var(--mainColor);
     box-shadow: 5px 5px 10px black;
+    padding: 15px;
 }
 
-.inputContainer input {
-    width: 100vw;
+.inputHeader{
+    display: flex;
+    width: 100%;
+}
+
+.inputHeader input {
+    width: 100%;
     padding: 15px;
     color: var(--fontColor);
     box-sizing: border-box;
@@ -23,8 +29,8 @@
     border-radius: .6em;
 }
 
-.inputContainer button {
-    width: 5vw;
+.inputHeader button {
+    width: 2vw;
     box-sizing: border-box;
     border-radius: 0 .5em .5em 0;
     border: none;
@@ -33,18 +39,44 @@
     cursor: pointer;
 }
 
-.inputContainer button svg {
+.inputHeader button svg {
     width: 19px;
     height: 19px;
 }
 
-.inputContainer input:focus {
+.inputHeader input:focus {
     outline: none;
 }
 
-.inputContainer button:disabled {
+.inputHeader button:disabled {
     background-color: var(--disabledColor);
     color: rgb(99, 99, 99);
+}
+
+.inputFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputFooter select {
+    background-color: var(--inputBgColor);
+    color: var(--fontColor);
+    border: none;
+    padding: 2px;
+    border-radius: .5em;
+}
+
+.inputFooter button {
+    background-color: transparent;
+    border: none;
+    color: var(--fontColor);
+    cursor: pointer;
+}
+
+.inputFooter button svg {
+    width: 21px;
+    height: 21px;
 }
 
 .loading {
