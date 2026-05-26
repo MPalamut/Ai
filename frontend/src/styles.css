@@ -11,7 +11,7 @@ body {
 }
 
 :root {
-  --mainColor: rgb(0, 188, 160);
+  --mainColor: rgb(119, 74, 255);
   --fontColor: rgb(255, 255, 255);
   --backgroundColor: rgb(24, 31, 45);
   --outputUserBgColor: rgb(49, 49, 49);

@@ -6,6 +6,9 @@ export function AppProvider({ children }) {
     const [theme, setTheme] = useState("root")
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
+    const [fileName, setFileName] = useState("")
+    const [base64String, setBase64String] = useState("")
+    const [previousResponse, setPreviousResponse] = useState("")
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -15,6 +18,9 @@ export function AppProvider({ children }) {
         theme, setTheme,
         output, setOutput,
         loading, setLoading,
+        fileName, setFileName,
+        base64String, setBase64String,
+        previousResponse, setPreviousResponse
     }
 
     return (

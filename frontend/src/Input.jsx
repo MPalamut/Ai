@@ -1,16 +1,17 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from "./Input.module.css"
-import { AiOutlineSend, AiOutlinePaperClip} from "react-icons/ai";
+import { AiOutlineSend } from "react-icons/ai";
 import { getStore } from "./Store";
+import ImageUpload from "./ImageUpload";
 
 export default function Input() {
     const [input, setInput] = useState("")
-    const [previousResponse, setPreviousResponse] = useState("")
+    // const [previousResponse, setPreviousResponse] = useState("")
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, loading, setLoading } = getStore()
+    const { setOutput, previousResponse , setPreviousResponse,loading, base64String, setBase64String, setLoading } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
@@ -30,6 +31,7 @@ export default function Input() {
         setLoading(false);
         setTimeout(() => { inputRef.current.focus() }, 1)
     }
+    
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
@@ -37,24 +39,68 @@ export default function Input() {
         setInput("")
         setLoading(true)
 
-        const params = new URLSearchParams({
-            input: input,
+        const requestData = {
+            input: input.trim(),
             selectedModel: selectedModel
-        })
-        if (previousResponse !== "") { params.append("previousResponse", previousResponse) }
+        };
+
+        if (previousResponse) { requestData.previousResponse = previousResponse; }
+        if (base64String) { 
+            console.log("bild");
+            requestData.image = base64String;
+        }
 
         try {
-            const url = `http://localhost:8000/responses?${params.toString()}`
-            const res = await fetch(url, { method: "POST" })
+            const url = "http://localhost:8000/responses"
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestData)
+            })
+
             const data = await res.json()
+            console.log(data)
             const responseText = data.output[0].content[0].text
             const tokensUsed = data.usage.output_tokens
             const responseID = data.id
+
             setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
             setPreviousResponse(responseID)
-        } catch (error) { console.log(error) }
+        } catch (error) {
+            console.error(error)
+        }
         responseReceived()
     }
+
+    // async function Responses() {
+    //     setOutput(prev => [...prev, { role: "user", text: input }])
+    //     setInput("")
+    //     setLoading(true)
+
+    //     const params = new URLSearchParams({
+    //         input: input,
+    //         selectedModel: selectedModel
+
+    //     })
+    //     if (previousResponse !== "") { params.append("previousResponse", previousResponse) }
+    //     if (fileName !== "" && base64String !== "") {
+    //         params.append("image", base64String)
+    //     }
+
+    //     try {
+    //         const url = `http://localhost:8000/responses?${params.toString()}`
+    //         const res = await fetch(url, { method: "POST" })
+    //         const data = await res.json()
+    //         const responseText = data.output[0].content[0].text
+    //         const tokensUsed = data.usage.output_tokens
+    //         const responseID = data.id
+    //         setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
+    //         setPreviousResponse(responseID)
+    //     } catch (error) { console.log(error) }
+    //     responseReceived()
+    // }
 
     return (
         <>
@@ -75,7 +121,7 @@ export default function Input() {
                     <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
                         {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
                     </select>
-                    <button title="Bild hochladen"><AiOutlinePaperClip /> </button>
+                    <ImageUpload />
                 </div>
             </div>
         </>

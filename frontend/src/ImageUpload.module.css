@@ -1,0 +1,40 @@
+.inputFile {
+    display: none;
+}
+
+.uploadButton {
+    background-color: transparent;
+    border: none;
+    color: var(--fontColor);
+    cursor: pointer;
+}
+
+.uploadButton svg {
+    width: 21px;
+    height: 21px;
+}
+
+.fileWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid rgb(67, 67, 67);
+    border-radius: .2em;
+    padding: 2px;
+}
+
+.clearButton {
+    background-color: transparent;
+    border: none;
+    color: var(--fontColor);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: red;
+}
+
+.clearButton svg {
+   width: 16px;
+   height: 16px;
+}

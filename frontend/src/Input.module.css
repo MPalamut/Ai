@@ -57,6 +57,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 25px;
 }
 
 .inputFooter select {
@@ -65,18 +66,6 @@
     border: none;
     padding: 2px;
     border-radius: .5em;
-}
-
-.inputFooter button {
-    background-color: transparent;
-    border: none;
-    color: var(--fontColor);
-    cursor: pointer;
-}
-
-.inputFooter button svg {
-    width: 21px;
-    height: 21px;
 }
 
 .loading {
