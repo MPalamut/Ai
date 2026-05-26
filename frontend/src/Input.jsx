@@ -61,7 +61,6 @@ export default function Input() {
             })
 
             const data = await res.json()
-            console.log(data)
             const responseText = data.output[0].content[0].text
             const tokensUsed = data.usage.output_tokens
             const responseID = data.id
