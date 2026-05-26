@@ -73,34 +73,6 @@ export default function Input() {
         responseReceived()
     }
 
-    // async function Responses() {
-    //     setOutput(prev => [...prev, { role: "user", text: input }])
-    //     setInput("")
-    //     setLoading(true)
-
-    //     const params = new URLSearchParams({
-    //         input: input,
-    //         selectedModel: selectedModel
-
-    //     })
-    //     if (previousResponse !== "") { params.append("previousResponse", previousResponse) }
-    //     if (fileName !== "" && base64String !== "") {
-    //         params.append("image", base64String)
-    //     }
-
-    //     try {
-    //         const url = `http://localhost:8000/responses?${params.toString()}`
-    //         const res = await fetch(url, { method: "POST" })
-    //         const data = await res.json()
-    //         const responseText = data.output[0].content[0].text
-    //         const tokensUsed = data.usage.output_tokens
-    //         const responseID = data.id
-    //         setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
-    //         setPreviousResponse(responseID)
-    //     } catch (error) { console.log(error) }
-    //     responseReceived()
-    // }
-
     return (
         <>
             <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>
