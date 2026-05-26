@@ -91,4 +91,4 @@ def responses(payload: dict):
                 
             return lm_data
         except Exception as e:
-            return {"error": "Text-Anfrage fehlgeschlagen", "details": str(e)}
+            return {e}
