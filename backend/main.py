@@ -78,7 +78,6 @@ def responses(payload: dict):
             response = requests.post(url, headers=headers, json=data)
             lm_data = response.json()
             
-
             if "choices" in lm_data:
                 text_content = lm_data["choices"][0]["message"]["content"]
                 tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
