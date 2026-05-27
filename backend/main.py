@@ -28,7 +28,6 @@ def responses(payload: dict):
     selected_model = payload.get("selectedModel")
     previous_response = payload.get("previousResponse")
     image = payload.get("image")
-    
     headers = { "Content-Type": "application/json" }
     
     if image:
@@ -49,19 +48,15 @@ def responses(payload: dict):
         try:
             response = requests.post(url, headers=headers, json=data)
             lm_data = response.json()
-            
-            if "choices" in lm_data:
-                text_content = lm_data["choices"][0]["message"]["content"]
-                tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
-                res_id = lm_data.get("id", "")
-                
-                return {
-                    "id": res_id,
-                    "usage": {"output_tokens": tokens},
-                    "output": [{"content": [{"text": text_content}]}]
-                }
-            return lm_data
-            
+            text_content = lm_data["choices"][0]["message"]["content"]
+            tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
+            res_id = lm_data.get("id", "")
+            return {
+                "id": res_id,
+                "usage": {"output_tokens": tokens},
+                "output": [{"content": [{"text": text_content}]}]
+            }
+
         except Exception as e:
             return e
             
@@ -71,23 +66,10 @@ def responses(payload: dict):
             "model": selected_model,
             "input": input_text,
         }
+        
         if previous_response:
             data["previous_response_id"] = previous_response
 
-        try:
-            response = requests.post(url, headers=headers, json=data)
-            lm_data = response.json()
-            
-            if "choices" in lm_data:
-                text_content = lm_data["choices"][0]["message"]["content"]
-                tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
-                res_id = lm_data.get("id", "")
-                return {
-                    "id": res_id,
-                    "usage": {"output_tokens": tokens},
-                    "output": [{"content": [{"text": text_content}]}]
-                }
-                
-            return lm_data
-        except Exception as e:
-            return {e}
+        response = requests.post(url, headers=headers, json=data)
+        return response.json()
+        

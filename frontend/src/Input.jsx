@@ -11,7 +11,7 @@ export default function Input() {
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse , setPreviousResponse,loading, base64String, setBase64String, setLoading } = getStore()
+    const { setOutput, previousResponse , setPreviousResponse,loading, base64String, setLoading } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
