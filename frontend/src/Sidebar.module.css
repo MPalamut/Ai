@@ -72,19 +72,6 @@
     display: block;
 }
 
-.sidebar :visited {
-    color: inherit;
-}
-
-.sidebar select {
-    background-color: rgb(113, 113, 113);
-    color: var(--fontColor);
-    border: none;
-    padding: 2px;
-    border-radius: .5em;
-    width: 85%;
-}
-
 .settings {
     display: flex;
     justify-content: center;
@@ -121,6 +108,10 @@
 
 .settings ul li a:hover {
     background-color: var(--sidebarSettingsHoverBgColor);
+}
+
+.settings :visited{
+    color: inherit;
 }
 
 @keyframes openSideBar {
