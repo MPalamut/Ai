@@ -7,7 +7,6 @@ import ImageUpload from "./ImageUpload";
 
 export default function Input() {
     const [input, setInput] = useState("")
-    // const [previousResponse, setPreviousResponse] = useState("")
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
@@ -72,7 +71,7 @@ export default function Input() {
         }
         responseReceived()
     }
-
+    
     return (
         <>
             <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>

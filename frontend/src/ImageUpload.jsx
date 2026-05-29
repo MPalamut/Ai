@@ -16,7 +16,6 @@ export default function ImageUpload() {
         if (file) { setFileName(file.name); }
 
         const reader = new FileReader();
-
         reader.onloadend = () => {
             const result = reader.result;
             setBase64String(result);
