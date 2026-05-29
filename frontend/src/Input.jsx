@@ -71,7 +71,7 @@ export default function Input() {
         }
         responseReceived()
     }
-    
+
     return (
         <>
             <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>
