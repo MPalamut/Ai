@@ -40,13 +40,7 @@ export default function ImageUpload() {
                     </button>
                 </div>
                 :
-                <button
-                    className={styles.uploadButton}
-                    title="Bild hochladen"
-                    onClick={openFileDialog}
-                >
-                    <AiOutlinePaperClip />
-                </button>
+                <button className={styles.uploadButton}title="Bild hochladen" onClick={openFileDialog}> <AiOutlinePaperClip /></button>
             }
         </>
     )
