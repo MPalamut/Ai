@@ -1,9 +1,9 @@
 import React, { useState, useRef, useCallback } from "react";
-import styles from "./ImageUpload.module.css"
+import styles from "./FileUpload.module.css"
 import { getStore } from "./Store.jsx";
-import { AiOutlinePaperClip, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineFile,AiOutlineFileImage, AiOutlineClose } from "react-icons/ai";
 
-export default function ImageUpload() {
+export default function FileUpload() {
     const fileInputRef = useRef();
     const { fileName, setFileName, setBase64String, setPreviousResponse } = getStore();
 
@@ -28,10 +28,10 @@ export default function ImageUpload() {
         setPreviousResponse("");
         fileInputRef.current.value = "";
     };
-    
+
     return (
         <>
-            <input className={styles.inputFile} ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} />
+            <input className={styles.inputFile} ref={fileInputRef} type="file" accept="*/*" onChange={handleFileChange} />
             {fileName ?
                 <div className={styles.fileWrapper}>
                     <span className={styles.fileName}>{fileName}</span>
@@ -40,7 +40,10 @@ export default function ImageUpload() {
                     </button>
                 </div>
                 :
-                <button className={styles.uploadButton}title="Bild hochladen" onClick={openFileDialog}> <AiOutlinePaperClip /></button>
+                <>
+                    <button className={styles.uploadButton} title="Dokument hochladen" onClick={openFileDialog}> <AiOutlineFile /></button>
+                    <button className={styles.uploadButton} title="Bild hochladen" onClick={openFileDialog}> <AiOutlineFileImage /></button>
+                </>
             }
         </>
     )

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import styles from "./Input.module.css"
 import { AiOutlineSend } from "react-icons/ai";
 import { getStore } from "./Store";
-import ImageUpload from "./ImageUpload";
+import FileUpload from "./FileUpload";
 
 export default function Input() {
     const [input, setInput] = useState("")
@@ -34,7 +34,7 @@ export default function Input() {
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
-        setOutput(prev => [...prev, { role: "user", text: input }])
+        setOutput(prev => [...prev, { text: input }])
         setInput("")
         setLoading(true)
 
@@ -45,7 +45,6 @@ export default function Input() {
 
         if (previousResponse) { requestData.previousResponse = previousResponse; }
         if (base64String) { 
-            console.log("bild");
             requestData.image = base64String;
         }
 
@@ -88,10 +87,14 @@ export default function Input() {
                     <button onClick={Responses} disabled={!input.trim()}><AiOutlineSend /></button>
                 </div>
                 <div className={styles.inputFooter}>
+                    <div className={styles.inputFooterLeft}>
                     <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
                         {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
                     </select>
-                    <ImageUpload />
+                    </div>
+                    <div className={styles.inputFooterRight}>
+                    <FileUpload />
+                    </div>
                 </div>
             </div>
         </>
