@@ -10,7 +10,7 @@ export default function Input() {
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse , setPreviousResponse,loading, base64String, setLoading } = getStore()
+    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64String, imageBase64String, setLoading } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
@@ -30,7 +30,7 @@ export default function Input() {
         setLoading(false);
         setTimeout(() => { inputRef.current.focus() }, 1)
     }
-    
+
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
@@ -44,9 +44,8 @@ export default function Input() {
         };
 
         if (previousResponse) { requestData.previousResponse = previousResponse; }
-        if (base64String) { 
-            requestData.image = base64String;
-        }
+        if (fileBase64String) { requestData.file = fileBase64String; }
+        if (imageBase64String) { requestData.image = imageBase64String; }
 
         try {
             const url = "http://localhost:8000/responses"
@@ -88,12 +87,12 @@ export default function Input() {
                 </div>
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
-                    <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
-                        {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
-                    </select>
+                        <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
+                            {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
+                        </select>
                     </div>
                     <div className={styles.inputFooterRight}>
-                    <FileUpload />
+                        <FileUpload />
                     </div>
                 </div>
             </div>

@@ -7,7 +7,9 @@ export function AppProvider({ children }) {
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
     const [fileName, setFileName] = useState("")
-    const [base64String, setBase64String] = useState("")
+    const [imageName, setImageName] = useState("")
+    const [fileBase64String, setFileBase64String] = useState("")
+    const [imageBase64String, setimageBase64String] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
 
     useEffect(() => {
@@ -19,7 +21,9 @@ export function AppProvider({ children }) {
         output, setOutput,
         loading, setLoading,
         fileName, setFileName,
-        base64String, setBase64String,
+        imageName, setImageName,
+        fileBase64String, setFileBase64String,
+        imageBase64String, setimageBase64String,
         previousResponse, setPreviousResponse
     }
 
