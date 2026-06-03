@@ -27,7 +27,7 @@
     margin-bottom: 15px;
 }
 
-button {
+.sidebar button {
     display: flex;
     justify-content: center;
     align-items: center;

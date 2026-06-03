@@ -75,7 +75,7 @@
     background-color: var(--inputBgColor);
     color: var(--fontColor);
     width: 9vw;
-    padding: .2em;
+    padding: .5em;
     border-radius: .5em;
     cursor: pointer;
 }
