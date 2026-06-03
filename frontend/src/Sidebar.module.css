@@ -55,7 +55,7 @@
     text-decoration: none;
 }
 
-.temperature select {
+.temperature{
     color: var(--fontColor);
     background-color: var(--inputBgColor);
     border-radius: .5em;
