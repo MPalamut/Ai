@@ -22,12 +22,12 @@
     margin-top: 15px;
 }
 
-.sidebar .footer {
+.footer {
     gap: 5px;
     margin-bottom: 15px;
 }
 
-.sidebar button {
+button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,13 +41,13 @@
     transition: all .2s ease-in-out;
 }
 
-.sidebar button svg {
+button svg {
     width: 19px;
     height: 19px;
     color: var(--fontColor);
 }
 
-.sidebar button:hover {
+ .sidebar button:hover {
     background-color: rgb(103, 103, 103);
 }
 
