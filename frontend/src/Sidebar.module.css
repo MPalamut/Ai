@@ -7,10 +7,10 @@
     position: fixed;
     left: 0px;
     height: 100vh;
-    
+
     font-size: .9em;
     padding: 15px;
-   transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .sidebar .header {
@@ -37,19 +37,8 @@
     background-color: var(--mainColor);
     color: rgb(187, 187, 187);
     cursor: pointer;
-    border: none; 
+    border: none;
     transition: all .2s ease-in-out;
-}
-
-.sidebar button.yellow {
-    background-color: rgb(255, 221, 0);
-}
-
-.sidebar button.blue {
-    background-color: rgb(78, 78, 149);
-}
-.sidebar button.green {
-    background-color: rgb(78, 149, 78);
 }
 
 .sidebar button svg {
@@ -59,11 +48,19 @@
 }
 
 .sidebar button:hover {
-    background-color: rgb(78, 78, 78);
+    background-color: rgb(103, 103, 103);
 }
 
 .sidebar a {
     text-decoration: none;
+}
+
+.temperature select {
+    color: var(--fontColor);
+    background-color: var(--inputBgColor);
+    border-radius: .5em;
+    cursor: pointer;
+    padding: .2em;
 }
 
 .icon {
@@ -110,7 +107,7 @@
     background-color: var(--sidebarSettingsHoverBgColor);
 }
 
-.settings :visited{
+.settings :visited {
     color: inherit;
 }
 

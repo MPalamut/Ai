@@ -6,18 +6,16 @@ import { AiOutlineFile, AiOutlineFileImage, AiOutlineClose } from "react-icons/a
 export default function FileUpload() {
     const fileInputRef = useRef();
     const imageInputRef = useRef();
-    const { setPreviousResponse, fileName, setFileName, setFileBase64String, imageName, setImageName, setimageBase64String } = getStore();
+    const { setPreviousResponse, fileName, setFileName, fileBase64, setFileBase64, imageName, setImageName, imageBase64, setImageBase64 } = getStore();
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             setFileName(file.name);
             const reader = new FileReader();
-            reader.onloadend = () => {
-                setFileBase64String(reader.result);
-            };
+            reader.onloadend = () => {setFileBase64(reader.result);};
             reader.readAsDataURL(file);
-        }
+        }   
     };
 
     const openFileDialog = () => { fileInputRef.current.click(); };
@@ -26,10 +24,7 @@ export default function FileUpload() {
         const image = event.target.files[0];
         if (image) { setImageName(image.name); }
         const reader = new FileReader();
-        reader.onloadend = () => {
-            const result = reader.result;
-            setimageBase64String(result);
-        };
+        reader.onloadend = () => {setImageBase64(reader.result); };
         reader.readAsDataURL(image);
     };
 
@@ -38,9 +33,9 @@ export default function FileUpload() {
     const handleClear = () => {
         setPreviousResponse("");
         setFileName("");
-        setFileBase64String("");
+        setFileBase64("");
         setImageName("");
-        setimageBase64String("");
+        setImageBase64("");
         fileInputRef.current.value = "";
         imageInputRef.current.value = "";
     };

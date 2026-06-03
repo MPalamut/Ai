@@ -9,7 +9,7 @@ import { getStore } from "./Store.jsx";
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
-    const {theme, setTheme} = getStore();
+    const {theme, setTheme, temperature, setTemperature} = getStore();
 
     return (
         <>
@@ -18,6 +18,14 @@ export default function Sidebar() {
                     <a href="/"><img className={styles.icon} src={icon} alt="Your Ai" /></a>
                     <button onClick={() => setSidebarOpen(!sidebarOpen)  }><RxHamburgerMenu /></button>
                     <button onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
+                    <div className={styles.temperature}>
+                             <select name="temperature" id="temperature" value={temperature} onChange={e => setTemperature(parseFloat(e.target.value))}>
+                            <option value="0.1">Schnelles Denken</option>
+                            <option value="0.7">Präzises Denken</option>
+                            <option value="1.9">Tiefgründiges Denken</option>
+                        </select>
+                    </div>
+                  
                 </div>
                 <div className="footer">
                     <button onClick={() => setSettingsOpen(!settingsOpen)}><RxGear /></button>

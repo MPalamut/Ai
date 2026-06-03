@@ -4,6 +4,7 @@ import requests
 from pypdf import PdfReader
 import base64
 import io
+from docx import Document
 
 app = FastAPI()
 
@@ -29,57 +30,80 @@ def models():
 @app.post("/responses")
 def responses(payload: dict):
     url = "http://localhost:1234/v1/chat/completions"
-    input_text = payload.get("input")
     selected_model = payload.get("selectedModel")
+    input_text = payload.get("input")
+    temperature = payload.get("temperature")
     previous_response = payload.get("previousResponse")
     file = payload.get("file")
     image = payload.get("image")
-    headers = { "Content-Type": "application/json" }
-    
+    headers = {"Content-Type": "application/json"}
+
     if file:
+        extracted_text = ""
+        doc_type_label = ""
+        
         try:
-            if "," in file:
-                file = file.split(",")[1]
-            
-            pdf_bytes = base64.b64decode(file)
-            pdf_stream = io.BytesIO(pdf_bytes)
-            reader = PdfReader(pdf_stream)
-            pdf_text = ""
-            for page in reader.pages:
-                text = page.extract_text()
-                if text:
-                    pdf_text += text + "\n"
-            
-            max_chars = 12000 
-            if len(pdf_text) > max_chars:
-                pdf_text = pdf_text[:max_chars]
-   
-            combined_prompt = f"{input_text}\n\nKontext aus dem PDF-Dokument:\n{pdf_text}"
+            docx = file.startswith( "data:application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+
+            if "," in file:file = file.split(",")[1]
+            file_bytes = base64.b64decode(file)
+            file_stream = io.BytesIO(file_bytes)
+
+            if docx:
+                doc_type_label = "Word"
+                document = Document(file_stream)
+                for para in document.paragraphs:
+                    if para.text:
+                        extracted_text += para.text + "\n"
+
+                for table in document.tables:
+                    for row in table.rows:
+                        row_text = [cell.text.strip() for cell in row.cells if cell.text.strip()]
+                        if row_text:
+                            extracted_text += "\n" + "\t".join(row_text)
+                    extracted_text += "\n"
+
+                max_chars = 11000
+                if len(extracted_text) > max_chars:
+                    extracted_text = extracted_text[:max_chars]
+
+            else:
+                doc_type_label = "PDF"
+                reader = PdfReader(file_stream)
+                for page in reader.pages:
+                    text = page.extract_text()
+                    if text:extracted_text += text + "\n"
+
+                max_chars = 12000
+                if len(extracted_text) > max_chars:
+                    extracted_text = extracted_text[:max_chars]
+
+            combined_prompt = f"{input_text}\n{doc_type_label}\n{extracted_text}"
+
             data = {
                 "model": selected_model,
                 "messages": [
                     {
                         "role": "user",
-                        "content": combined_prompt
+                        "content": combined_prompt,
                     }
-                ]
+                ],
             }
-            
+
             response = requests.post(url, headers=headers, json=data)
             lm_data = response.json()
             text_content = lm_data["choices"][0]["message"]["content"]
             tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
             res_id = lm_data.get("id", "")
-            
+
             return {
                 "id": res_id,
                 "usage": {"output_tokens": tokens},
-                "output": [{"content": [{"text": text_content}]}]
+                "output": [{"content": [{"text": text_content}]}],
             }
-
         except Exception as e:
-            return {"error": f"Fehler bei der PDF-Verarbeitung: {str(e)}"}
-       
+            return {"error": f"Fehler bei der Dokumenten-Verarbeitung: {str(e)}"}
+
     if image:
         data = {
             "model": selected_model,
@@ -88,12 +112,12 @@ def responses(payload: dict):
                     "role": "user",
                     "content": [
                         {"type": "text", "text": input_text},
-                        {"type": "image_url", "image_url": {"url": image}}
-                    ]
+                        {"type": "image_url", "image_url": {"url": image}},
+                    ],
                 }
-            ]
+            ],
         }
-        
+
         try:
             response = requests.post(url, headers=headers, json=data)
             lm_data = response.json()
@@ -103,19 +127,20 @@ def responses(payload: dict):
             return {
                 "id": res_id,
                 "usage": {"output_tokens": tokens},
-                "output": [{"content": [{"text": text_content}]}]
+                "output": [{"content": [{"text": text_content}]}],
             }
 
         except Exception as e:
             return e
-            
+
     else:
         url = "http://localhost:1234/v1/responses"
         data = {
             "model": selected_model,
             "input": input_text,
+            "temperature": temperature
         }
-        
+
         if previous_response:
             data["previous_response_id"] = previous_response
 

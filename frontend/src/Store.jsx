@@ -8,9 +8,10 @@ export function AppProvider({ children }) {
     const [loading, setLoading] = useState(false)
     const [fileName, setFileName] = useState("")
     const [imageName, setImageName] = useState("")
-    const [fileBase64String, setFileBase64String] = useState("")
-    const [imageBase64String, setimageBase64String] = useState("")
+    const [fileBase64, setFileBase64] = useState("")
+    const [imageBase64, setImageBase64] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
+    const [temperature, setTemperature] = useState(0.1)
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -21,10 +22,11 @@ export function AppProvider({ children }) {
         output, setOutput,
         loading, setLoading,
         fileName, setFileName,
+        fileBase64, setFileBase64,
         imageName, setImageName,
-        fileBase64String, setFileBase64String,
-        imageBase64String, setimageBase64String,
-        previousResponse, setPreviousResponse
+        imageBase64, setImageBase64,
+        previousResponse, setPreviousResponse,
+        temperature, setTemperature
     }
 
     return (

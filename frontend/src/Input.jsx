@@ -10,7 +10,7 @@ export default function Input() {
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64String, imageBase64String, setLoading } = getStore()
+    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
@@ -40,12 +40,13 @@ export default function Input() {
 
         const requestData = {
             input: input.trim(),
-            selectedModel: selectedModel
+            selectedModel: selectedModel,
+            temperature: temperature
         };
 
         if (previousResponse) { requestData.previousResponse = previousResponse; }
-        if (fileBase64String) { requestData.file = fileBase64String; }
-        if (imageBase64String) { requestData.image = imageBase64String; }
+        if (fileBase64) { requestData.file = fileBase64; }
+        if (imageBase64) { requestData.image = imageBase64; }
 
         try {
             const url = "http://localhost:8000/responses"
@@ -64,9 +65,7 @@ export default function Input() {
 
             setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
             setPreviousResponse(responseID)
-        } catch (error) {
-            console.error(error)
-        }
+        } catch (error) { console.error(error)}
         responseReceived()
     }
 
