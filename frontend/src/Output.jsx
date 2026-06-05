@@ -15,7 +15,7 @@ export default function Output() {
             }
         }
     }, [output]);
-
+    
     return (
         <>
             <div className={styles.output} ref={scrollRef}>
