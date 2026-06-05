@@ -11,7 +11,7 @@ body {
 }
 
 :root {
-  --mainColor: rgb(133, 77, 255);
+  --mainColor: rgb(131, 73, 254);
   --fontColor: rgb(240, 240, 240);
   --backgroundColor: rgb(24, 31, 45);
   --outputUserBgColor: rgb(49, 49, 49);
@@ -23,7 +23,7 @@ body {
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(122, 158, 174);
+  --mainColor: rgb(129, 173, 191);
   --fontColor: rgb(64, 64, 64);
   --backgroundColor: rgb(246, 246, 246);
   --outputUserBgColor: rgb(145, 145, 145);

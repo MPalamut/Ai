@@ -16,7 +16,7 @@ export function AppProvider({ children }) {
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
     }, [theme])
-
+    
     const values = {
         theme, setTheme,
         output, setOutput,
