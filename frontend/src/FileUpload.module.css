@@ -31,10 +31,10 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: red;
 }
 
 .clearButton svg {
    width: 16px;
    height: 16px;
+   color: red;
 }
