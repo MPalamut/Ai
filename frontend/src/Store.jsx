@@ -12,6 +12,11 @@ export function AppProvider({ children }) {
     const [imageBase64, setImageBase64] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
     const [temperature, setTemperature] = useState(0.1)
+    const [textToSpeech, setTextToSpeech] = useState(false)
+    const [speechLanguage, setSpeechLanguage] = useState("de-DE")
+    const [speechVolume, setSpeechVolume] = useState(1)
+    const [speechRate, setSpeechRate] = useState(1.1)
+    const [speechPitch, setSpeechPitch] = useState(1)
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -26,7 +31,12 @@ export function AppProvider({ children }) {
         imageName, setImageName,
         imageBase64, setImageBase64,
         previousResponse, setPreviousResponse,
-        temperature, setTemperature
+        temperature, setTemperature,
+        textToSpeech, setTextToSpeech,
+        speechLanguage, setSpeechLanguage,
+        speechRate, setSpeechRate,
+        speechVolume, setSpeechVolume,
+        speechPitch, setSpeechPitch
     }
 
     return (

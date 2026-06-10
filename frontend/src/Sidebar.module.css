@@ -111,6 +111,23 @@ button svg {
     color: inherit;
 }
 
+.voiceControl {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    position: fixed;
+    left: 15vw;
+    bottom: 15vh;
+    width: 15vw;
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    font-size: .9em;
+    padding: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    animation: .18s openSideBar ease-in-out;
+}
+
 @keyframes openSideBar {
     from {
         opacity: 0;
