@@ -19,12 +19,7 @@ export default function Accessiblity() {
             utterance.pitch = speechPitch;
             window.speechSynthesis.speak(utterance);
         }
-
-        if (!textToSpeech) {
-            window.speechSynthesis.cancel();
-        }
-    }, [output, textToSpeech]);
-
+    }, [output, textToSpeech, speechLanguage, speechVolume, speechRate, speechPitch]);
 
     return (
         <>
@@ -39,16 +34,15 @@ export default function Accessiblity() {
                     </div>
                 </fieldset>
 
-
                 <fieldset>
                     <legend> Sprachsteuerung</legend>
-                    <div className={styles.speechCheckbox}>
-                        <label htmlFor="speech"> Audioausgabe </label>
+                    <div className={styles.speech}>
+                        <label htmlFor="speech"> Audioausgabe: </label>
                         <input type="checkbox" name="speech" id="speech" checked={textToSpeech} onChange={(e) => setTextToSpeech(e.target.checked)} />
                     </div>
 
                     <div>
-                        <label htmlFor="speechLanguage"> Sprache  </label>
+                        <label htmlFor="speechLanguage">Sprache: </label>
                         <select value={speechLanguage} onChange={(e) => setSpeechLanguage(e.target.value)}>
                             <option value="de-DE">Deutsch (de-DE)</option>
                             <option value="en-US">Englisch (en-US)</option>
