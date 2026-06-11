@@ -1,0 +1,57 @@
+.accBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--mainColor);
+    color: rgb(187, 187, 187);
+    cursor: pointer;
+    border: none;
+}
+
+.accBtn svg {
+    width: 50px;
+    height: 50px;
+}
+
+.accMenu{
+    position:absolute;
+    left: 150px;
+    top: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--sidebarSettingsBgColor);
+    padding: 10px;
+    border-radius: .5em;
+    animation: .2s openSideBar ease-in-out;
+}
+
+.accMenu div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.accMenu .speechCheckbox input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    margin-right: 55px;
+}
+
+.accMenu fieldset{
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   padding: 9px;
+}
+
+.accMenu fieldset legend{
+    color:rgb(159, 159, 159);
+}
+
+
+@keyframes openSideBar {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}

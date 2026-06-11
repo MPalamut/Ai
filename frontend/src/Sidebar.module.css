@@ -27,7 +27,7 @@
     margin-bottom: 15px;
 }
 
-.sidebar button {
+.sidebarBtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,7 +125,13 @@ button svg {
     font-size: .9em;
     padding: 8px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    z-index: 1000;
     animation: .18s openSideBar ease-in-out;
+}
+
+.voiceControl div {
+    display: flex;
+    justify-content: space-between;
 }
 
 @keyframes openSideBar {

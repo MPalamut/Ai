@@ -12,10 +12,11 @@ export function AppProvider({ children }) {
     const [imageBase64, setImageBase64] = useState("")
     const [previousResponse, setPreviousResponse] = useState("")
     const [temperature, setTemperature] = useState(0.1)
+    const [fontSize, setFontSize] = useState(.9)
     const [textToSpeech, setTextToSpeech] = useState(false)
     const [speechLanguage, setSpeechLanguage] = useState("de-DE")
     const [speechVolume, setSpeechVolume] = useState(1)
-    const [speechRate, setSpeechRate] = useState(1.1)
+    const [speechRate, setSpeechRate] = useState(1)
     const [speechPitch, setSpeechPitch] = useState(1)
 
     useEffect(() => {
@@ -32,6 +33,7 @@ export function AppProvider({ children }) {
         imageBase64, setImageBase64,
         previousResponse, setPreviousResponse,
         temperature, setTemperature,
+        fontSize, setFontSize,
         textToSpeech, setTextToSpeech,
         speechLanguage, setSpeechLanguage,
         speechRate, setSpeechRate,

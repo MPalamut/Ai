@@ -4,7 +4,7 @@ import styles from "./Output.module.css"
 import { getStore } from "./Store.jsx";
 
 export default function Output() {
-    const { output , loading } = getStore()
+    const { output , loading , fontSize} = getStore()
     const scrollRef = useRef()
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function Output() {
             <div className={styles.output} ref={scrollRef}>
                 {output.length === 0 && <h2 className={styles.greeting}>Ai Agent</h2>}
                 {output.map((item,index) => (
-                    <div key={index}>
+                    <div style={{ fontSize: `${fontSize}rem` }} key={index}>
                      <pre>{item.text}
                         {item.tokens && <p className={styles.tokens}>Verbrauchte Tokens: {item.tokens}</p>}
                      </pre>
