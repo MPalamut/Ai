@@ -74,6 +74,7 @@ export default function Input() {
             <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>
                 <div className={styles.inputHeader}>
                     <input
+                        id = "prompt"
                         ref={inputRef}
                         type="text"
                         placeholder={loading ? "Bitte warten" : "Frage stellen"}

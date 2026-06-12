@@ -1,12 +1,12 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Accessibility.module.css"
-import { RxSpeakerLoud, RxSpeakerOff } from "react-icons/rx";
 import { BsUniversalAccessCircle } from "react-icons/bs"
 import { getStore } from "./Store.jsx";
 
 export default function Accessiblity() {
-    const [accessibilityMenuOpen, setaccessibilityMenuOpen] = useState(false)
+    const [accessibilityMenuOpen, setAccessibilityMenuOpen] = useState(false)
+    const accessibilityMenuOpenRef = useRef()
     const { output, fontSize, setFontSize, textToSpeech, setTextToSpeech, speechLanguage, setSpeechLanguage, speechVolume, setSpeechVolume, speechRate, setSpeechRate, speechPitch, setSpeechPitch } = getStore();
 
     useEffect(() => {
@@ -19,13 +19,29 @@ export default function Accessiblity() {
             utterance.pitch = speechPitch;
             window.speechSynthesis.speak(utterance);
         }
-    }, [output, textToSpeech, speechLanguage, speechVolume, speechRate, speechPitch]);
+    }, [output, textToSpeech]);
+
+    useEffect(() => {
+        function clickOutside(e) {
+            if (accessibilityMenuOpenRef.current) {
+                const clickedInsideMenu = accessibilityMenuOpenRef.current.contains(e.target);
+                const clickedOnButton = e.target.closest(`.${styles.accBtn}`);
+                if (!clickedInsideMenu && !clickedOnButton) {
+                    setAccessibilityMenuOpen(false)
+                }
+            }
+        }
+        document.addEventListener('mousedown', clickOutside);
+        return () => {
+            document.removeEventListener('mousedown', clickOutside);
+        };
+    }, [])
 
     return (
         <>
-            <button className={styles.accBtn} title="accessiblity" onClick={() => { setaccessibilityMenuOpen(!accessibilityMenuOpen) }}>   <BsUniversalAccessCircle /></button>
+            <button className={styles.accBtn} title="accessiblity" onClick={() => { setAccessibilityMenuOpen(!accessibilityMenuOpen) }}>   <BsUniversalAccessCircle /></button>
 
-            {accessibilityMenuOpen && <div className={styles.accMenu}>
+            {accessibilityMenuOpen && <div className={styles.accMenu} ref={accessibilityMenuOpenRef}>
                 <fieldset>
                     <legend>Schrift</legend>
                     <div>
@@ -65,7 +81,6 @@ export default function Accessiblity() {
                     </div>
                 </fieldset>
             </div>}
-
         </>
     )
 }

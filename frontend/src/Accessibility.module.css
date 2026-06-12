@@ -31,10 +31,6 @@
     justify-content: space-between;
 }
 
-.accMenu .speech {
-
-}
-
 .accMenu .speech input[type="checkbox"] {
     width: 25px;
     height: 25px;
@@ -50,7 +46,6 @@
 .accMenu fieldset legend{
     color:rgb(159, 159, 159);
 }
-
 
 @keyframes openSideBar {
     from {
