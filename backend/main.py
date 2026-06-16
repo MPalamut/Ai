@@ -31,7 +31,6 @@ def models():
 
 @app.post("/responses")
 def responses(payload: dict):
-    # url = "http://localhost:1234/v1/chat/completions"
     url = "http://localhost:1234/v1/responses"
     headers = {"Content-Type": "application/json"}
     selected_model = payload.get("selectedModel")
