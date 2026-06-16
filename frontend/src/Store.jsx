@@ -18,6 +18,7 @@ export function AppProvider({ children }) {
     const [speechVolume, setSpeechVolume] = useState(1)
     const [speechRate, setSpeechRate] = useState(1)
     const [speechPitch, setSpeechPitch] = useState(1)
+    const [rag, setRag] = useState(false)
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -38,7 +39,8 @@ export function AppProvider({ children }) {
         speechLanguage, setSpeechLanguage,
         speechRate, setSpeechRate,
         speechVolume, setSpeechVolume,
-        speechPitch, setSpeechPitch
+        speechPitch, setSpeechPitch,
+        rag, setRag
     }
 
     return (

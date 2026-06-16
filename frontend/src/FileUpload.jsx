@@ -1,4 +1,5 @@
-import React, { useState, useRef} from "react";
+import React from "react";
+import { useState, useEffect, useRef } from "react"
 import styles from "./FileUpload.module.css"
 import { getStore } from "./Store.jsx";
 import { AiOutlineFile, AiOutlineFileImage, AiOutlineClose } from "react-icons/ai";

@@ -4,13 +4,14 @@ import styles from "./Input.module.css"
 import { AiOutlineSend } from "react-icons/ai";
 import { getStore } from "./Store";
 import FileUpload from "./FileUpload";
+import Rag from './Rag';
 
 export default function Input() {
     const [input, setInput] = useState("")
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature } = getStore()
+    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, rag } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
@@ -38,6 +39,7 @@ export default function Input() {
         setInput("")
         setLoading(true)
 
+       
         const requestData = {
             input: input.trim(),
             selectedModel: selectedModel,
@@ -45,9 +47,11 @@ export default function Input() {
         };
 
         if (previousResponse) { requestData.previousResponse = previousResponse; }
-        if (fileBase64) { requestData.file = fileBase64; }
+        // if (fileBase64) { requestData.file = fileBase64; }
         if (imageBase64) { requestData.image = imageBase64; }
+        // if (rag) {requestData.rag = rag}
 
+        console.log(requestData)
         try {
             const url = "http://localhost:8000/responses"
             const res = await fetch(url, {
@@ -64,8 +68,9 @@ export default function Input() {
             const responseID = data.id
 
             setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
-            setPreviousResponse(responseID)
-        } catch (error) { console.error(error)}
+            if(!previousResponse) {setPreviousResponse(responseID)}
+            
+        } catch (error) { console.error(error) }
         responseReceived()
     }
 
@@ -74,7 +79,7 @@ export default function Input() {
             <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>
                 <div className={styles.inputHeader}>
                     <input
-                        id = "prompt"
+                        id="prompt"
                         ref={inputRef}
                         type="text"
                         placeholder={loading ? "Bitte warten" : "Frage stellen"}
@@ -92,6 +97,7 @@ export default function Input() {
                         </select>
                     </div>
                     <div className={styles.inputFooterRight}>
+                        <Rag />
                         <FileUpload />
                     </div>
                 </div>

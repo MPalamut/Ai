@@ -82,7 +82,7 @@
 
 .loading {
     background:
-        linear-gradient(black, black) padding-box,
+        linear-gradient(var(--backgroundColor), var(--backgroundColor)) padding-box,
         radial-gradient(circle at left center,
             rgb(255, 85, 0),
             #ffee04,

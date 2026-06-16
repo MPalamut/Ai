@@ -5,12 +5,14 @@ from pypdf import PdfReader
 import base64
 import io
 from docx import Document
+from openai import OpenAI
+import os
 
 app = FastAPI()
 
 origins = [
     "http://localhost",
-    "http://localhost:5173",
+    "http://localhost:5173"
 ]
 
 app.add_middleware(
@@ -29,15 +31,67 @@ def models():
 
 @app.post("/responses")
 def responses(payload: dict):
-    url = "http://localhost:1234/v1/chat/completions"
+    # url = "http://localhost:1234/v1/chat/completions"
+    url = "http://localhost:1234/v1/responses"
+    headers = {"Content-Type": "application/json"}
     selected_model = payload.get("selectedModel")
     input_text = payload.get("input")
     temperature = payload.get("temperature")
     previous_response = payload.get("previousResponse")
     file = payload.get("file")
     image = payload.get("image")
-    headers = {"Content-Type": "application/json"}
+    rag = payload.get("rag", False)
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    Docfolder = os.path.join(BASE_DIR, "documents")
 
+    if rag:
+        rag_text = ""
+
+        for filename in os.listdir(Docfolder):
+            file_path = os.path.join(Docfolder, filename)
+
+            if filename.lower().endswith(".pdf"):
+                reader = PdfReader(file_path)
+                for page in reader.pages:
+                    text = page.extract_text()
+                    if text:
+                        rag_text += text + "\n"
+                                    
+            elif filename.lower().endswith(".docx"):
+                doc = Document(file_path)
+                for para in doc.paragraphs:
+                    if para.text:
+                        rag_text += para.text + "\n"
+            
+        max_chars = 11000
+        
+        if len(rag_text) > max_chars:
+                rag_text = rag_text[:max_chars]
+        
+        combined_prompt = f"{rag_text}\n\nFrage: {input_text}"
+       
+        data = {
+                "model": selected_model,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": combined_prompt,
+                    }
+                ],
+            }
+            
+        response = requests.post(url, headers=headers, json=data)
+        lm_data = response.json()
+        text_content = lm_data["choices"][0]["message"]["content"]
+        tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
+        res_id = lm_data.get("id", "")
+
+        return {
+                "id": res_id,
+                "usage": {"output_tokens": tokens},
+                "output": [{"content": [{"text": text_content}]}],
+        }
+        
     if file:
         extracted_text = ""
         doc_type_label = ""
@@ -51,12 +105,12 @@ def responses(payload: dict):
 
             if docx:
                 doc_type_label = "Word"
-                document = Document(file_stream)
-                for para in document.paragraphs:
+                doc = Document(file_stream)
+                for para in doc.paragraphs:
                     if para.text:
                         extracted_text += para.text + "\n"
 
-                for table in document.tables:
+                for table in doc.tables:
                     for row in table.rows:
                         row_text = [cell.text.strip() for cell in row.cells if cell.text.strip()]
                         if row_text:
@@ -96,6 +150,7 @@ def responses(payload: dict):
             tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
             res_id = lm_data.get("id", "")
 
+
             return {
                 "id": res_id,
                 "usage": {"output_tokens": tokens},
@@ -103,20 +158,85 @@ def responses(payload: dict):
             }
         except Exception as e:
             return {"error": f"Fehler bei der Dokumenten-Verarbeitung: {str(e)}"}
-
+  
     if image:
+        data = {
+            "model": selected_model,
+            "input": 
+            [
+                {
+                    "role": "user",
+                    "content": 
+                    [
+                        { "type": "input_text", "text": input_text },
+                        { "type": "input_image", "image_url": image}
+                    ]
+                }
+            ]
+        }
+        
+        if previous_response:
+            data["previous_response_id"] = previous_response
+
+        response = requests.post(url, headers=headers, json=data)
+        return response.json()
+
+    # if image:
+    #     data = {
+    #         "model": selected_model,
+    #         "messages": [
+    #             {
+    #                 "role": "user",
+    #                 "content": [
+    #                     {"type": "text", "text": input_text},
+    #                     {"type": "image_url", "image_url": {"url": image}},
+    #                 ],
+    #             }
+    #         ],
+    #     }
+
+    #     try:
+    #         response = requests.post(url, headers=headers, json=data)
+    #         lm_data = response.json()
+    #         text_content = lm_data["choices"][0]["message"]["content"]
+    #         tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
+    #         res_id = lm_data.get("id", "")
+    #         return {
+    #             "id": res_id,
+    #             "usage": {"output_tokens": tokens},
+    #             "output": [{"content": [{"text": text_content}]}],
+    #         }
+
+    #     except Exception as e:
+    #         return e
+
+    else:
+        data = {
+            "model": selected_model,
+            "input": input_text,
+            "temperature": temperature
+        }
+
+        if previous_response:
+            data["previous_response_id"] = previous_response
+
+        response = requests.post(url, headers=headers, json=data)
+        return response.json()
+    
+    # else:
         data = {
             "model": selected_model,
             "messages": [
                 {
                     "role": "user",
-                    "content": [
-                        {"type": "text", "text": input_text},
-                        {"type": "image_url", "image_url": {"url": image}},
-                    ],
+                    "content": input_text
                 }
-            ],
+            ], 
+            "temperature": temperature,
         }
+
+        if previous_response:
+            data["previous_response_id"] = previous_response
 
         try:
             response = requests.post(url, headers=headers, json=data)
@@ -132,17 +252,3 @@ def responses(payload: dict):
 
         except Exception as e:
             return e
-
-    else:
-        url = "http://localhost:1234/v1/responses"
-        data = {
-            "model": selected_model,
-            "input": input_text,
-            "temperature": temperature
-        }
-
-        if previous_response:
-            data["previous_response_id"] = previous_response
-
-        response = requests.post(url, headers=headers, json=data)
-        return response.json()

@@ -10,8 +10,10 @@ export default function Accessiblity() {
     const { output, fontSize, setFontSize, textToSpeech, setTextToSpeech, speechLanguage, setSpeechLanguage, speechVolume, setSpeechVolume, speechRate, setSpeechRate, speechPitch, setSpeechPitch } = getStore();
 
     useEffect(() => {
+        window.speechSynthesis.cancel();
+
         if (textToSpeech && output.length > 0) {
-            const cleanText = output[output.length - 1].text.replace(/\p{Emoji_Presentation}/gu, '');
+            const cleanText = output[output.length - 1].text.replace(/\p{Emoji_Presentation}/u, '');
             const utterance = new SpeechSynthesisUtterance(cleanText);
             utterance.lang = speechLanguage;
             utterance.volume = speechVolume;
