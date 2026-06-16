@@ -181,35 +181,6 @@ def responses(payload: dict):
         response = requests.post(url, headers=headers, json=data)
         return response.json()
 
-    # if image:
-    #     data = {
-    #         "model": selected_model,
-    #         "messages": [
-    #             {
-    #                 "role": "user",
-    #                 "content": [
-    #                     {"type": "text", "text": input_text},
-    #                     {"type": "image_url", "image_url": {"url": image}},
-    #                 ],
-    #             }
-    #         ],
-    #     }
-
-    #     try:
-    #         response = requests.post(url, headers=headers, json=data)
-    #         lm_data = response.json()
-    #         text_content = lm_data["choices"][0]["message"]["content"]
-    #         tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
-    #         res_id = lm_data.get("id", "")
-    #         return {
-    #             "id": res_id,
-    #             "usage": {"output_tokens": tokens},
-    #             "output": [{"content": [{"text": text_content}]}],
-    #         }
-
-    #     except Exception as e:
-    #         return e
-
     else:
         data = {
             "model": selected_model,
@@ -222,33 +193,3 @@ def responses(payload: dict):
 
         response = requests.post(url, headers=headers, json=data)
         return response.json()
-    
-    # else:
-        data = {
-            "model": selected_model,
-            "messages": [
-                {
-                    "role": "user",
-                    "content": input_text
-                }
-            ], 
-            "temperature": temperature,
-        }
-
-        if previous_response:
-            data["previous_response_id"] = previous_response
-
-        try:
-            response = requests.post(url, headers=headers, json=data)
-            lm_data = response.json()
-            text_content = lm_data["choices"][0]["message"]["content"]
-            tokens = lm_data.get("usage", {}).get("completion_tokens", 0)
-            res_id = lm_data.get("id", "")
-            return {
-                "id": res_id,
-                "usage": {"output_tokens": tokens},
-                "output": [{"content": [{"text": text_content}]}],
-            }
-
-        except Exception as e:
-            return e
