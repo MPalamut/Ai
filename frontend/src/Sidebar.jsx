@@ -3,7 +3,7 @@ import styles from "./Sidebar.module.css"
 import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
 import Accessiblity from './Accessibility.jsx';
-import { RxHamburgerMenu, RxPencil2, RxGear, RxSun, RxMoon } from "react-icons/rx"
+import { RxPencil2, RxGear, RxSun, RxMoon } from "react-icons/rx"
 import { getStore } from "./Store.jsx"
 
 export default function Sidebar() {
@@ -21,6 +21,7 @@ export default function Sidebar() {
                 }
             }
         }
+        
         document.addEventListener('mousedown', clickOutside);
         return () => {
             document.removeEventListener('mousedown', clickOutside);
