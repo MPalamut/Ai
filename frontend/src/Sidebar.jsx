@@ -48,7 +48,7 @@ export default function Sidebar() {
                     {<Accessiblity />}
                 </div>
                 <div className="footer">
-                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen)}}><RxGear /></button>
+                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /></button>
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <ul>
                             <li><a href="#">Sprachsteuerung</a></li>
