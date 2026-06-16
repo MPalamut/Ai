@@ -51,7 +51,6 @@ export default function Input() {
         if (imageBase64) { requestData.image = imageBase64; }
         // if (rag) {requestData.rag = rag}
 
-
         try {
             const url = "http://localhost:8000/responses"
             const res = await fetch(url, {
@@ -63,8 +62,6 @@ export default function Input() {
             })
 
             const data = await res.json()
-            console.log(data)
-            // const responseText = data.output[1].content[0].text
             const responseText = data.output.find(i => i.type === "message").content[0].text;
             const tokensUsed = data.usage.output_tokens
             const responseID = data.id
