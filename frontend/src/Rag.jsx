@@ -7,7 +7,7 @@ const {rag, setRag} = getStore();
 
     return (
         <>
-            <input type="checkbox" id="rag" name="rag" checked={rag} onChange={(e) => setRag(e.target.checked)} />
+            <input type="checkbox" id="rag" checked={rag} onChange={(e) => setRag(e.target.checked)} />
             <label htmlFor="rag">rag</label>
         </>
     )
