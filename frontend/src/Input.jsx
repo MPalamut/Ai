@@ -11,7 +11,7 @@ export default function Input() {
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, rag } = getStore()
+    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, rag, setGeneration, setCompleteTokens } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
@@ -39,7 +39,6 @@ export default function Input() {
         setInput("")
         setLoading(true)
 
-       
         const requestData = {
             input: input.trim(),
             selectedModel: selectedModel,
@@ -63,11 +62,14 @@ export default function Input() {
 
             const data = await res.json()
             const responseText = data.output.find(i => i.type === "message").content[0].text;
-            const tokensUsed = data.usage.output_tokens
+            const tokensUsed = data.usage.total_tokens
             const responseID = data.id
 
             setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
             if(!previousResponse) {setPreviousResponse(responseID)}
+            setGeneration(previous => previous + 1 )
+
+            setCompleteTokens (previous => previous + tokensUsed)
             
         } catch (error) { console.error(error) }
         responseReceived()

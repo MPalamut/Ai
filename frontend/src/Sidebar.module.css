@@ -46,7 +46,7 @@ button svg {
     color: var(--fontColor);
 }
 
- .sidebar button:hover {
+.sidebar button:hover {
     background-color: rgb(103, 103, 103);
 }
 
@@ -54,7 +54,7 @@ button svg {
     text-decoration: none;
 }
 
-.temperature{
+.temperature {
     color: var(--fontColor);
     background-color: var(--inputBgColor);
     border-radius: .5em;
@@ -66,6 +66,38 @@ button svg {
     width: 55px;
     height: auto;
     display: block;
+}
+
+.tokenInfo {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    border-radius: .5em;
+    padding: 2px;
+}
+
+.tokenInfo label {
+    position: relative;
+    cursor: pointer;
+}
+
+.tokenInfo label::after {
+    content: attr(data-tooltip);
+    visibility: hidden;
+    position: absolute;
+    background-color: var(--sidebarSettingsBgColor);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 1;
+    left: 100%;
+    width: max-content;
+}
+
+.tokenInfo label:hover::after {
+    visibility: visible;
+    animation: .2s openSideBar ease-in-out forwards;
 }
 
 .settings {
@@ -110,28 +142,7 @@ button svg {
     color: inherit;
 }
 
-.voiceControl {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    position: fixed;
-    left: 15vw;
-    bottom: 15vh;
-    width: 15vw;
-    background-color: var(--sidebarSettingsBgColor);
-    color: var(--fontColor);
-    border-radius: .5em;
-    font-size: .9em;
-    padding: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    z-index: 1000;
-    animation: .18s openSideBar ease-in-out;
-}
 
-.voiceControl div {
-    display: flex;
-    justify-content: space-between;
-}
 
 @keyframes openSideBar {
     from {

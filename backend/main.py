@@ -91,7 +91,7 @@ def responses(payload: dict):
                 "output": [{"content": [{"text": text_content}]}],
         }
         
-    if file:
+
         extracted_text = ""
         doc_type_label = ""
         
@@ -158,6 +158,72 @@ def responses(payload: dict):
         except Exception as e:
             return {"error": f"Fehler bei der Dokumenten-Verarbeitung: {str(e)}"}
   
+    if file:
+        extracted_text = ""
+        doc_type_label = ""
+        docx = file.startswith("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+
+        if "," in file:
+            file = file.split(",")[1]
+        file_bytes = base64.b64decode(file)
+        file_stream = io.BytesIO(file_bytes)
+        
+        if docx:
+            doc_type_label = "Word"
+            doc = Document(file_stream)
+            for para in doc.paragraphs:
+                if para.text:
+                    extracted_text += para.text + "\n"
+                
+            for table in doc.tables:
+                for row in table.rows:
+                    row_text = [cell.text.strip() for cell in row.cells if cell.text.strip()]
+                    if row_text:
+                        extracted_text += "\n" + "\t".join(row_text) + "\n"
+
+            max_chars = 11000
+            if len(extracted_text) > max_chars:
+                extracted_text = extracted_text[:max_chars]
+                
+        else:
+            doc_type_label = "PDF"
+            reader = PdfReader(file_stream)
+            for page in reader.pages:
+                text = page.extract_text()
+                if text:
+                    extracted_text += text + "\n"
+
+        max_chars = 12000
+        if len(extracted_text) > max_chars:
+            extracted_text = extracted_text[:max_chars]
+        
+        data = {
+            "model": selected_model,
+            "input": 
+            [
+                {
+                    "role": "user",
+                    "content": 
+                    [
+                        { 
+                            "type": "input_text", 
+                            "text": input_text 
+                        },
+                        { 
+                            "type": "input_text",
+                            "text": extracted_text
+                        }
+                    ]
+                }
+            ]
+        }
+
+        if previous_response:
+            data["previous_response_id"] = previous_response
+
+        response = requests.post(url, headers=headers, json=data)
+        return response.json()
+    
     if image:
         data = {
             "model": selected_model,
@@ -167,8 +233,14 @@ def responses(payload: dict):
                     "role": "user",
                     "content": 
                     [
-                        { "type": "input_text", "text": input_text },
-                        { "type": "input_image", "image_url": image}
+                        { 
+                            "type": "input_text", 
+                            "text": input_text 
+                        },
+                        { 
+                            "type": "input_image",
+                            "image_url": image
+                        }
                     ]
                 }
             ]
@@ -183,7 +255,19 @@ def responses(payload: dict):
     else:
         data = {
             "model": selected_model,
-            "input": input_text,
+            "input": 
+            [
+                {
+                    "role": "user",
+                    "content": 
+                    [
+                        { 
+                            "type": "input_text", 
+                            "text": input_text 
+                        }
+                    ]
+                }
+            ],
             "temperature": temperature
         }
 

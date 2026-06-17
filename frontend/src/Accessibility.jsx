@@ -13,7 +13,7 @@ export default function Accessiblity() {
         window.speechSynthesis.cancel();
 
         if (textToSpeech && output.length > 0) {
-            const cleanText = output[output.length - 1].text.replace(/\p{Emoji_Presentation}/u, '');
+            const cleanText = output[output.length - 1].text.replace(/\p{Emoji_Presentation}/gu, '');
             const utterance = new SpeechSynthesisUtterance(cleanText);
             utterance.lang = speechLanguage;
             utterance.volume = speechVolume;
@@ -41,7 +41,7 @@ export default function Accessiblity() {
 
     return (
         <>
-            <button className={styles.accBtn} title="accessiblity" onClick={() => { setAccessibilityMenuOpen(!accessibilityMenuOpen) }}>   <BsUniversalAccessCircle /></button>
+            <button className={styles.accBtn} title="Barrierefreiheit" onClick={() => { setAccessibilityMenuOpen(!accessibilityMenuOpen) }}>   <BsUniversalAccessCircle /></button>
 
             {accessibilityMenuOpen && <div className={styles.accMenu} ref={accessibilityMenuOpenRef}>
                 <fieldset>

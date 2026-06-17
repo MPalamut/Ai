@@ -9,7 +9,7 @@ import { getStore } from "./Store.jsx"
 export default function Sidebar() {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const settingsOpenRef = useRef();
-    const { theme, setTheme, temperature, setTemperature } = getStore();
+    const { theme, setTheme, temperature, setTemperature, generation, completeTokens } = getStore();
 
     useEffect(() => {
         function clickOutside(e) {
@@ -21,7 +21,7 @@ export default function Sidebar() {
                 }
             }
         }
-        
+
         document.addEventListener('mousedown', clickOutside);
         return () => {
             document.removeEventListener('mousedown', clickOutside);
@@ -41,12 +41,23 @@ export default function Sidebar() {
                     ><RxPencil2 />
                     </button>
                     <button className={styles.sidebarBtn} title="Farbbmodus wechseln" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
-                    <select className={styles.temperature} name="temperature" id="temperature" value={temperature} onChange={e => setTemperature(parseFloat(e.target.value))}>
+                    <select className={styles.temperature} title="Denkweise" value={temperature} onChange={e => setTemperature(parseFloat(e.target.value))}>
                         <option value="0.1">Schnelles Denken</option>
                         <option value="0.7">Präzises Denken</option>
                         <option value="1.9">Tiefgründiges Denken</option>
                     </select>
                     {<Accessiblity />}
+
+                    {generation > 0 &&
+                        (<div className={styles.tokenInfo} >
+                            <label title="Test" data-tooltip="Je mehr Durchläufe, desto langsamer die Antwortzeit und ungenauer die Antworten">Generationen: {generation}</label>
+                            <label data-tooltip="Ab 4096 Tokens wird der Chatverlauf am anfang getrimmt">Gesamtverbrauch: {completeTokens}</label>
+                             {/* <span className={styles.tokenInfoHover}>Je mehr Durchläufe, desto ungenauer die Ergebnisse</span>
+                             <span className={styles.tokenInfoHover}>TOKENVERBRAUCH</span> */}
+                        </div>
+                        )
+                    }
+
                 </div>
                 <div>
                     <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /></button>
