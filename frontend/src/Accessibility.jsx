@@ -7,7 +7,7 @@ import { getStore } from "./Store.jsx";
 export default function Accessiblity() {
     const [accessibilityMenuOpen, setAccessibilityMenuOpen] = useState(false)
     const accessibilityMenuOpenRef = useRef()
-    const { output, fontSize, setFontSize, textToSpeech, setTextToSpeech, speechLanguage, setSpeechLanguage, speechVolume, setSpeechVolume, speechRate, setSpeechRate, speechPitch, setSpeechPitch } = getStore();
+    const { output, fontSize, theme,setTheme, setFontSize, textToSpeech, setTextToSpeech, speechLanguage, setSpeechLanguage, speechVolume, setSpeechVolume, speechRate, setSpeechRate, speechPitch, setSpeechPitch } = getStore();
 
     useEffect(() => {
         window.speechSynthesis.cancel();
@@ -49,6 +49,14 @@ export default function Accessiblity() {
                     <div>
                         <label htmlFor="font">Schriftgröße</label>
                         <input type="range" id="font" name="font" min=".6" max="2" step="0.1" value={fontSize} onChange={(e) => setFontSize(e.target.value)} />
+                    </div>
+                </fieldset>
+
+                 <fieldset>
+                    <legend>Kontrastmodus</legend>
+                    <div>
+                        <label htmlFor="contrast">Aktivieren</label>
+                        <input type="checkbox" name="contrast" id="contrast" checked={theme == "contrast"} onChange={(e) => setTheme(e.target.checked ? "contrast" : "root")} />
                     </div>
                 </fieldset>
 

@@ -16,7 +16,7 @@ export default function Input() {
     useEffect(() => {
         async function fetchModels() {
             try {
-                const url = "http://localhost:8000/models"
+                const url = "http://172.16.16.106:8000/models"
                 const res = await fetch(url)
                 const data = await res.json()
                 setModels(data.data)
@@ -51,7 +51,7 @@ export default function Input() {
         // if (rag) {requestData.rag = rag}
 
         try {
-            const url = "http://localhost:8000/responses"
+            const url = "http://172.16.16.106:8000/responses"
             const res = await fetch(url, {
                 method: "POST",
                 headers: {

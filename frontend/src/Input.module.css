@@ -84,17 +84,19 @@
     background:
         linear-gradient(var(--backgroundColor), var(--backgroundColor)) padding-box,
         radial-gradient(circle at left center,
-            rgb(255, 85, 0),
-            #ffee04,
+            rgb(255, 55, 0),
+            #d0ff00,
             #d9fcff,
-            #1c33ff,
-            rgb(247, 14, 255)) border-box;
+            #0055ff,
+            rgb(234, 0, 255)) border-box;
 
     border: 2px solid transparent;
     background-size: 100% 100%, 200% 100%;
     background-position: center, left center;
     animation: gradientMove .9s ease-in-out infinite alternate;
+    box-shadow: 0 0 15px rgb(0, 166, 255);
 }
+
 
 @keyframes gradientMove {
     to {

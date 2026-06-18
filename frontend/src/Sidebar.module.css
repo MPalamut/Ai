@@ -47,7 +47,7 @@ button svg {
 }
 
 .sidebar button:hover {
-    background-color: rgb(103, 103, 103);
+   filter: brightness(0.75);
 }
 
 .sidebar a {
