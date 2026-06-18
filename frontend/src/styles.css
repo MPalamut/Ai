@@ -24,13 +24,13 @@ body {
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(39, 222, 207);
+  --mainColor: rgb(74, 201, 251);
   --mainColorDarker : color-mix(in srgb, var(--maincolor) 85%, black);
   --fontColor: rgb(64, 64, 64);
   --backgroundColor: rgb(255, 255, 255);
   --outputUserBgColor: rgb(145, 145, 145);
   --inputBgColor: rgb(220, 220, 220);
-  --sidebarBgColor: rgb(76, 187, 180);
+  --sidebarBgColor: rgb(164, 211, 214);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
   --sidebarSettingsHoverBgColor: rgb(125, 125, 125);
   --disabledColor: rgb(202, 202, 202);
