@@ -11,7 +11,7 @@ export default function Input() {
     const inputRef = useRef()
     const [models, setModels] = useState([])
     const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, rag, setGeneration, setCompleteTokens } = getStore()
+    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
 
     useEffect(() => {
         async function fetchModels() {
@@ -98,7 +98,6 @@ export default function Input() {
                         </select>
                     </div>
                     <div className={styles.inputFooterRight}>
-                        <Rag />
                         <FileUpload />
                     </div>
                 </div>

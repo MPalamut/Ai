@@ -12,20 +12,6 @@
     transition: all .2s ease-in-out;
 }
 
-.header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 19px;
-    margin-top: 15px;
-}
-
-.footer {
-    gap: 5px;
-    margin-bottom: 15px;
-}
-
 .sidebarBtn {
     display: flex;
     justify-content: center;
@@ -37,8 +23,27 @@
     color: rgb(187, 187, 187);
     cursor: pointer;
     border: none;
+    box-shadow: 2px 2px 5px black;
     transition: all .2s ease-in-out;
 }
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.footer {
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 11px;
+}
+
 
 button svg {
     width: 19px;
@@ -47,7 +52,7 @@ button svg {
 }
 
 .sidebar button:hover {
-   filter: brightness(0.75);
+   filter: brightness(.6);
 }
 
 .sidebar a {
@@ -111,6 +116,7 @@ button svg {
     color: var(--fontColor);
     border-radius: .5em;
     font-size: .9em;
+     box-shadow: 5px 5px 5px black;
     animation: .2s openSideBar ease-in-out;
 }
 
@@ -141,7 +147,6 @@ button svg {
 .settings :visited {
     color: inherit;
 }
-
 
 
 @keyframes openSideBar {

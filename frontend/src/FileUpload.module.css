@@ -2,20 +2,68 @@
     display: none;
 }
 
+.wrapper {
+    position: relative;
+}
+
 .uploadButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: transparent;
     border: none;
     color: var(--fontColor);
     cursor: pointer;
+    background-color: var(--mainColor);
+    border-radius: 50%;
+    padding: 5px;
+    transition: all .2s ease-in-out;
 }
 
-.uploadButton svg {
-    width: 21px;
-    height: 21px;
+.uploadButton:hover {
+    filter: brightness(0.75);
 }
 
-.fileWrapper {
+.uploadButton svg {}
+
+.menu {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    top: 0;
+    left: 75%;
+    transform: translateY(-50%);
+    width: 15vw;
+    padding: 15px;
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    font-size: .9em;
+    box-shadow: 5px 5px 5px black;
+    animation: .2s moveUp ease-in-out;
+}
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 6px;
+    color: var(--fontColor);
+    background-color: var(--sidebarSettingsBgColor);
+    cursor: pointer;
+    border-radius: .5em;
+    border: none;
+}
+
+.menuButton:hover {
+    background-color: var(  --sidebarSettingsHoverBgColor);
+}
+
+.fileWrapper{
+     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
@@ -34,7 +82,14 @@
 }
 
 .clearButton svg {
-   width: 16px;
-   height: 16px;
-   color: red;
+    width: 16px;
+    height: 16px;
+    color: red;
+}
+
+@keyframes moveUp {
+    from {
+        opacity: 0;
+        transform: translateY(1px);
+    }
 }

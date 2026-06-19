@@ -19,7 +19,7 @@ body {
   --inputBgColor: rgb(30, 29, 29);
   --sidebarBgColor: rgb(44, 52, 57);
   --sidebarSettingsBgColor: rgb(36, 38, 39);
-  --sidebarSettingsHoverBgColor: rgb(78, 78, 78);
+  --sidebarSettingsHoverBgColor: rgb(19, 19, 19);
   --disabledColor: rgb(49, 49, 49);
 }
 
@@ -32,7 +32,7 @@ body {
   --inputBgColor: rgb(220, 220, 220);
   --sidebarBgColor: rgb(164, 211, 214);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
-  --sidebarSettingsHoverBgColor: rgb(125, 125, 125);
+  --sidebarSettingsHoverBgColor: rgb(236, 236, 236);
   --disabledColor: rgb(202, 202, 202);
 }
 
