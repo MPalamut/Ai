@@ -19,7 +19,7 @@ export default function Output() {
     return (
         <>
             <div className={styles.output} ref={scrollRef}>
-                {output.length === 0 && <h2 className={styles.greeting}>snutig Ai Agent</h2>}
+                {output.length === 0 && <h2 className={styles.greeting}>snutig</h2>}
                 {output.map((item,index) => (
                     <div style={{ fontSize: `${fontSize}rem` }} key={index}>
                      <pre>{item.text}

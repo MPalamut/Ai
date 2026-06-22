@@ -3,6 +3,8 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
+    const [models, setModels] = useState([])
+    const [selectedModel, setSelectedModel] = useState("")
     const [theme, setTheme] = useState("root")
     const [output, setOutput] = useState([])
     const [loading, setLoading] = useState(false)
@@ -22,11 +24,14 @@ export function AppProvider({ children }) {
     const [generation, setGeneration] = useState(0)
     const [completeTokens, setCompleteTokens] = useState(0)
 
+
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
     }, [theme])
     
     const values = {
+        models, setModels,
+        selectedModel, setSelectedModel,
         theme, setTheme,
         output, setOutput,
         loading, setLoading,

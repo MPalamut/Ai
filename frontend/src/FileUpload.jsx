@@ -81,7 +81,7 @@ export default function FileUpload() {
                 :
                 <>
                     <div className="wrapper">
-                        <button className={styles.uploadButton} title="Dokument und Bild" onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
+                        <button className={`${styles.uploadButton} tooltip`} data-tooltip="Datei hochladen"  onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
                         {menuopen && <div className={styles.menu} ref={menuOpenRef}>
                             <button className={styles.menuButton} title="Dokument hochladen" onClick={openFileDialog}><AiOutlineFile /> Dokumenten hochladen</button>
                             <button className={styles.menuButton} title="Bild hochladen" onClick={openImageDialog}> <AiOutlineFileImage /> Bild hochladen </button>

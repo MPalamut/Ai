@@ -1,63 +1,56 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from "./Input.module.css"
-import { AiOutlineSend } from "react-icons/ai";
-import { getStore } from "./Store";
+import { AiOutlineSend, AiOutlineCloseCircle } from "react-icons/ai";
 import FileUpload from "./FileUpload";
-import Rag from './Rag';
+import FetchModels from './FetchModels';
+import { getStore } from "./Store";
 
 export default function Input() {
     const [input, setInput] = useState("")
     const inputRef = useRef()
-    const [models, setModels] = useState([])
-    const [selectedModel, setSelectedModel] = useState("")
-    const { setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
-
-    useEffect(() => {
-        async function fetchModels() {
-            try {
-                const url = "http://172.16.16.106:8000/models"
-                const res = await fetch(url)
-                const data = await res.json()
-                setModels(data.data)
-                setSelectedModel(data.data[0].id)
-            }
-            catch (error) { console.log(error) }
-        }
-        fetchModels();
-    }, []);
-
-    const responseReceived = () => {
-        setLoading(false);
-        setTimeout(() => { inputRef.current.focus() }, 1)
-    }
+    const abortControllerRef = useRef(null);
+    const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
 
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
+         setInput("")
+        
+        if (loading) {
+            console.log("loading")
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            }
+            setLoading(false)
+            return;
+        }
+
         setOutput(prev => [...prev, { text: input }])
-        setInput("")
         setLoading(true)
 
-        const requestData = {
-            input: input.trim(),
-            selectedModel: selectedModel,
-            temperature: temperature
-        };
-
-        if (previousResponse) { requestData.previousResponse = previousResponse; }
-        if (fileBase64) { requestData.file = fileBase64; }
-        if (imageBase64) { requestData.image = imageBase64; }
-        // if (rag) {requestData.rag = rag}
-
         try {
+            abortControllerRef.current = new AbortController();
+            const signal = abortControllerRef.current.signal;
+
+            const requestData = {
+                input: input.trim(),
+                selectedModel: selectedModel,
+                temperature: temperature
+            };
+
+            if (previousResponse) { requestData.previousResponse = previousResponse; }
+            if (fileBase64) { requestData.file = fileBase64; }
+            if (imageBase64) { requestData.image = imageBase64; }
+
             const url = "http://172.16.16.106:8000/responses"
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(requestData)
+                body: JSON.stringify(requestData),
+                signal: signal
             })
 
             const data = await res.json()
@@ -66,13 +59,14 @@ export default function Input() {
             const responseID = data.id
 
             setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
-            if(!previousResponse) {setPreviousResponse(responseID)}
-            setGeneration(previous => previous + 1 )
+            if (!previousResponse) { setPreviousResponse(responseID) }
+            setGeneration(previous => previous + 1)
+            setCompleteTokens(previous => previous + tokensUsed)
 
-            setCompleteTokens (previous => previous + tokensUsed)
-            
         } catch (error) { console.error(error) }
-        responseReceived()
+        setLoading(false)
+        abortControllerRef.current = null;
+        setTimeout(() => { inputRef.current.focus() }, 1)
     }
 
     return (
@@ -89,13 +83,11 @@ export default function Input() {
                         onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }}
                         disabled={loading}
                     />
-                    <button onClick={Responses} disabled={!input.trim()}><AiOutlineSend /></button>
+                    <button onClick={Responses} disabled={!input.trim() && !loading}>{loading ? <AiOutlineCloseCircle /> : <AiOutlineSend />}</button>
                 </div>
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
-                        <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
-                            {models.filter(m => !m.id.includes("embedding")).map(m => (<option key={m.id}>{m.id}</option>))}
-                        </select>
+                       <FetchModels />
                     </div>
                     <div className={styles.inputFooterRight}>
                         <FileUpload />

@@ -3,7 +3,7 @@
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    background-color: var(--sidebarBgColor);
+    background-color: var(--secondaryColor);
     position: fixed;
     left: 0px;
     height: 100vh;
@@ -79,30 +79,6 @@ button svg {
     border: 1px solid gray;
     border-radius: .5em;
     padding: 2px;
-}
-
-.tokenInfo label {
-    position: relative;
-    cursor: pointer;
-}
-
-.tokenInfo label::after {
-    content: attr(data-tooltip);
-    visibility: hidden;
-    position: absolute;
-    background-color: var(--sidebarSettingsBgColor);
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px;
-    z-index: 1;
-    left: 100%;
-    width: max-content;
-}
-
-.tokenInfo label:hover::after {
-    visibility: visible;
-    animation: .2s openSideBar ease-in-out forwards;
 }
 
 .settings {

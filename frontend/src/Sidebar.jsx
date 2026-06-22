@@ -33,25 +33,24 @@ export default function Sidebar() {
             <div className={styles.sidebar}>
                 <div className={styles.header}>
                     <img className={styles.icon} src={icon} alt="Your Ai" />
-                    <button className={styles.sidebarBtn} title="Neuer Chat" onClick={() => {
+                    <button className={`${styles.sidebarBtn} tooltip`} data-tooltip="Neuer Chat" onClick={() => {
                         const confirm = window.confirm("Neuer Chat");
                         if (confirm) { window.location.href = "/" }
                     }
                     }
                     ><RxPencil2 />
                     </button>
-                    <button className={styles.sidebarBtn} title="Farbbmodus wechseln" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
+                    <button className={`${styles.sidebarBtn} tooltip`} data-tooltip="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
                     <select className={styles.temperature} title="Denkweise" value={temperature} onChange={e => setTemperature(parseFloat(e.target.value))}>
                         <option value="0.1">Schnelles Denken</option>
                         <option value="0.7">Präzises Denken</option>
                         <option value="1.9">Tiefgründiges Denken</option>
                     </select>
                    
-
                     {generation > 0 &&
                         (<div className={styles.tokenInfo} >
-                            <label title="Test" data-tooltip="Je mehr Durchläufe, desto langsamer die Antwortzeit und ungenauer die Antworten">Generationen: {generation}</label>
-                            <label data-tooltip="Ab 4096 Tokens wird der Chatverlauf am anfang getrimmt">Gesamtverbrauch: {completeTokens}</label>
+                            <label className="tooltip" data-tooltip="Je mehr Durchläufe, desto langsamer die Antwortzeit und ungenauer die Antworten">Generationen: {generation}</label>
+                            <label className="tooltip" data-tooltip="Ab 4096 Tokens wird der Chatverlauf am anfang getrimmt">Gesamtverbrauch: {completeTokens}</label>
                         </div>
                         )
                     }
@@ -59,7 +58,7 @@ export default function Sidebar() {
 
                 <div className={styles.footer}>
                      {/* {<Accessiblity />} */}
-                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /></button>
+                    <button className={`${styles.sidebarBtn} tooltip`} data-tooltip="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /></button>
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <ul>
                             <li><a href="#">Sprachsteuerung</a></li>

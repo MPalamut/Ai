@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests
+import httpx
 from pypdf import PdfReader
 import base64
 import io
 from docx import Document
-
 
 app = FastAPI()
 
@@ -30,7 +30,7 @@ def models():
     return response.json()
 
 @app.post("/responses")
-def responses(payload: dict):
+async def responses(payload: dict):
     url = "http://172.16.16.106:1234/v1/responses"
     headers = {"Content-Type": "application/json"}
     selected_model = payload.get("selectedModel")
@@ -155,6 +155,7 @@ def responses(payload: dict):
 
         if previous_response:
             data["previous_response_id"] = previous_response
-
+        
         response = requests.post(url, headers=headers, json=data)
         return response.json()
+   

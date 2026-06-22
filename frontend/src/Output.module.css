@@ -66,7 +66,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
     color: var(--fontColor);
-    animation: fadeIn 1s ease-in-out;
+    border-radius: 16px;
+    animation: greeting 2s ease-in-out;
   }
 
   .tokens {
@@ -77,6 +78,22 @@
   @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
+  }
+  
+  @keyframes greeting {
+   from {
+      opacity: 0;
+      color: rgb(0, 195, 255);
+      filter: blur(5px);
+     box-shadow: 1px 1px 500px rgb(255, 255, 255);
+    }
+
+    to{
+      opacity: 1;
+      color: rgb(51, 134, 149);
+      filter: blur(0);
+       box-shadow: 1px 1px 25px rgb(127, 185, 255);
+    }
   }
 
   @keyframes preloader {
