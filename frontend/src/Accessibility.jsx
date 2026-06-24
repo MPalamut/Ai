@@ -41,7 +41,7 @@ export default function Accessiblity() {
 
     return (
         <>
-            <button className={`${styles.accBtn} tooltip`} data-tooltip="Barrierefreiheit" onClick={() => { setAccessibilityMenuOpen(!accessibilityMenuOpen) }}>   <BsUniversalAccessCircle /></button>
+            <button className={styles.accBtn} title="Barrierefreiheit" onClick={() => { setAccessibilityMenuOpen(!accessibilityMenuOpen) }}>   <BsUniversalAccessCircle /></button>
 
             {accessibilityMenuOpen && <div className={styles.accMenu} ref={accessibilityMenuOpenRef}>
                 <fieldset>

@@ -14,19 +14,17 @@ body {
   --mainColor: rgb(117, 59, 253);
   --secondaryColor: rgb(44, 52, 57);
   --fontColor: rgb(247, 247, 247);
-  --backgroundColor: rgb(24, 31, 45);
+  --backgroundColor: rgb(0, 12, 36);
   --outputUserBgColor: rgb(49, 49, 49);
   --inputBgColor: rgb(30, 29, 29);
   --sidebarSettingsBgColor: rgb(36, 38, 39);
   --sidebarSettingsHoverBgColor: rgb(19, 19, 19);
   --disabledColor: rgb(49, 49, 49);
-  --headbarButtonBgColor: rgb(88, 88, 88);
-  --headbarButtonColor: gray;
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(74, 201, 251);
-  --secondaryColor: rgb(152, 188, 190);
+  --mainColor: rgb(190, 239, 255);
+  --secondaryColor: rgb(206, 217, 225);
   --fontColor: rgb(64, 64, 64);
   --backgroundColor: rgb(255, 255, 255);
   --outputUserBgColor: rgb(145, 145, 145);
@@ -36,9 +34,9 @@ body {
   --disabledColor: rgb(202, 202, 202);
 }
 
-[data-theme="contrast"]{
-   --mainColor: rgb(0, 0, 0);
-  --mainColorDarker : color-mix(in srgb, var(--maincolor) 85%, black);
+[data-theme="contrast"] {
+  --mainColor: rgb(0, 0, 0);
+  --mainColorDarker: color-mix(in srgb, var(--maincolor) 85%, black);
   --fontColor: rgb(255, 255, 255);
   --backgroundColor: rgb(43, 43, 43);
   --outputUserBgColor: rgb(145, 145, 145);
@@ -49,9 +47,9 @@ body {
   --disabledColor: rgb(202, 202, 202);
 }
 
-.tooltip {
-    position: relative;
-    cursor: pointer;
+/* .tooltip {
+  position: relative;
+  cursor: pointer;
 }
 
 .tooltip:hover {
@@ -59,29 +57,32 @@ body {
 }
 
 .tooltip:after {
-    content: attr(data-tooltip);
-    visibility: hidden;
-    position: absolute;
-    background-color: var(--sidebarSettingsBgColor);
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px;
-    z-index: 1;
-    left: 1;
-    bottom: -25px;
-    width: max-content;
+  content: attr(data-tooltip);
+  visibility: hidden;
+  position: absolute;
+  background-color: var(--sidebarSettingsBgColor);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 1;
+  left: 1;
+  bottom: -25px;
+  width: max-content;
 
 }
 
 .tooltip:hover::after {
-    visibility: visible;
-    animation: .2s slideIn ease-in-out forwards;
+  animation: slideIn .2s ease-in-out .5s forwards;
 }
 
 @keyframes slideIn {
-   from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-}
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    visibility: visible;
+  }
+} */

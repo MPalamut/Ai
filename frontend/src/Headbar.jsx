@@ -1,16 +1,16 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from './Headbar.module.css'
-import { AiFillGithub } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineGithub } from "react-icons/ai";
 
 
 export default function Headbar() {
     return (
         <>
             <div className={styles.main}>
-                <a href="https://github.com/MPalamut/Ai.git" target="_blank" title ="Github Repository" >
-                    <AiFillGithub />
-                </a>
+                <a href="https://snutig.de" target="_blank" title="Github Repository" ><AiOutlineHome /></a>
+                <a href="https://github.com/MPalamut/Ai.git" target="_blank" title="Github Repository" > <AiOutlineGithub /> </a>
+                <a className ={styles.anmelden} href="#"  title="Anmelden">Anmelden</a>
             </div>
         </>
     )

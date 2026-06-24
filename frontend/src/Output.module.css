@@ -21,7 +21,7 @@
     white-space: pre-wrap;
     border: 1px solid rgb(104, 104, 104);
     border-radius: .5em;
-    padding: 5px;
+    padding: 15px;
     box-sizing: border-box;
     opacity: 0;
     animation: fadeIn .5s ease-in-out forwards;
@@ -61,38 +61,55 @@
   }
 
   .greeting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: absolute;
+    letter-spacing: 2px;
+    width: 100px;
+    gap: 10px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     color: var(--fontColor);
     border-radius: 16px;
+    text-shadow: 0px 0px 15px rgb(255, 255, 255);
     animation: greeting 2s ease-in-out;
   }
 
   .tokens {
+    margin-top: 5px;
     font-size: .9em;
     color: var(--mainColor)
   }
 
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+  .lastMessage pre {
+    animation: fadeIn .5s ease-in-out forwards,
+      popIn 5s ease-in-out !important;
   }
-  
-  @keyframes greeting {
-   from {
+
+  @keyframes fadeIn {
+    from {
       opacity: 0;
-      color: rgb(0, 195, 255);
-      filter: blur(5px);
-     box-shadow: 1px 1px 500px rgb(255, 255, 255);
     }
 
-    to{
+    to {
       opacity: 1;
-      color: rgb(51, 134, 149);
+    }
+  }
+
+  @keyframes greeting {
+    from {
+      opacity: 0;
+      filter: blur(5px);
+      text-shadow: 5px 5px 150px white;
+    }
+
+    to {
+      opacity: 1;
+      color: rgb(68, 202, 255);
       filter: blur(0);
-       box-shadow: 1px 1px 25px rgb(127, 185, 255);
     }
   }
 
@@ -100,5 +117,16 @@
     to {
       opacity: 1;
       transform: translateY(15px);
+    }
+  }
+
+  @keyframes popIn {
+    from {
+      border-color: rgb(255, 255, 255);
+      box-shadow: 5px 5px 50px var(--mainColor);
+    }
+
+    to {
+      border-color: var(--mainColor);
     }
   }

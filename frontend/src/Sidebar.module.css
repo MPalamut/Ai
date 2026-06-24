@@ -84,6 +84,8 @@ button svg {
 .settings {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    gap: 2px;
     position: fixed;
     left: 5px;
     bottom: 55px;
@@ -91,38 +93,23 @@ button svg {
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);
     border-radius: .5em;
+    padding: 15px;
     font-size: .9em;
-     box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px black;
     animation: .2s openSideBar ease-in-out;
 }
 
-.settings ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
-    width: 100%;
+.settings button{
+    padding: 5px;
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--fontColor);
+     border: none;
+
+}
+.settings button:hover {
+cursor: pointer;
 }
 
-.settings ul li {
-    width: 100%;
-}
-
-.settings ul li a {
-    display: block;
-    padding: 9px;
-}
-
-.settings ul li a:hover {
-    background-color: var(--sidebarSettingsHoverBgColor);
-}
-
-.settings :visited {
-    color: inherit;
-}
 
 
 @keyframes openSideBar {

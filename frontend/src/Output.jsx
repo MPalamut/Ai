@@ -19,10 +19,16 @@ export default function Output() {
     return (
         <>
             <div className={styles.output} ref={scrollRef}>
-                {output.length === 0 && <h2 className={styles.greeting}>snutig</h2>}
+                {output.length === 0 && 
+                <div className={styles.greeting}>
+                     <h1 className={styles.greetingTitle}>SNUTY</h1>
+                <span className = {styles.greetingSpan}>DEIN LOKALES SPRACHMODEL</span>
+                </div>
+                }
+             
                 {output.map((item,index) => (
-                    <div style={{ fontSize: `${fontSize}rem` }} key={index}>
-                     <pre>{item.text}
+                    <div  className= {index == output.length - 1 && index % 2 != 0 ? styles.lastMessage : ""} style={{ fontSize: `${fontSize}rem` }} key={index}>
+                     <pre> {item.text }
                         {item.tokens && <p className={styles.tokens}>Verbrauchte Tokens: {item.tokens}</p>}
                      </pre>
                       </div>
