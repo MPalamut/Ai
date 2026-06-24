@@ -8,7 +8,7 @@ export default function Headbar() {
     return (
         <>
             <div className={styles.main}>
-                <a href="https://snutig.de" target="_blank" title="Github Repository" ><AiOutlineHome /></a>
+                <a href="https://snutig.de" target="_blank" title="Homepage" ><AiOutlineHome /></a>
                 <a href="https://github.com/MPalamut/Ai.git" target="_blank" title="Github Repository" > <AiOutlineGithub /> </a>
                 <a className ={styles.anmelden} href="#"  title="Anmelden">Anmelden</a>
             </div>
