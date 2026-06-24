@@ -22,7 +22,7 @@ export default function Output() {
                 {output.length === 0 && 
                 <div className={styles.greeting}>
                      <h1 className={styles.greetingTitle}>SNUTY</h1>
-                <span className = {styles.greetingSpan}>DEIN LOKALES SPRACHMODEL</span>
+                <span className = {styles.greetingSpan}>DEIN LOKALES SPRACHMODELL</span>
                 </div>
                 }
              
