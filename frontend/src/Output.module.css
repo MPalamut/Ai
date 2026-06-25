@@ -78,7 +78,7 @@
   }
 
   .greetingTitle{
-       text-shadow: 0px 0px 15px white;
+       text-shadow: 0px 0px 15px var(--fontColor);
   }
 
   .greetingSpan{
