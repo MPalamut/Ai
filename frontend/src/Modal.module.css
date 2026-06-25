@@ -5,8 +5,43 @@
     transform: translate(-50%, -50%);
     width: 50vw;
     height: 50vh;
-    background-color: rgb(131, 131, 131);
+    background-color: var(--sidebarSettingsBgColor);
     border-radius: .5em;
     background-origin: padding-box;
-    /* visibility: hidden; */
-} 
+
+    z-index: 100;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.title {}
+
+.close {}
+
+.close button {
+    background-color: rgb(255, 109, 109);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5em;
+    border: none;
+}
+
+.close button:hover {
+    cursor: pointer;
+    filter: brightness(.6);
+}
+
+.close svg {
+    width: 25px;
+    height: 25px;
+}
+
+.content {
+    padding: 10px;
+    height: 100%;
+}

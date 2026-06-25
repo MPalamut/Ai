@@ -11,10 +11,11 @@ body {
 }
 
 :root {
-  --mainColor: rgb(117, 59, 253);
-  --secondaryColor: rgb(44, 52, 57);
-  --fontColor: rgb(247, 247, 247);
-  --backgroundColor: rgb(0, 12, 36);
+  --mainColor: rgb(153, 181, 150);
+  --secondaryColor: #151515;
+  --fontColor: rgb(255, 255, 255);
+  --fontColorSecondary: rgb(201, 201, 201);
+  --backgroundColor: rgb(29, 29, 29);
   --outputUserBgColor: rgb(49, 49, 49);
   --inputBgColor: rgb(30, 29, 29);
   --sidebarSettingsBgColor: rgb(36, 38, 39);

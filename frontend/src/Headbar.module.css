@@ -8,8 +8,9 @@
     height: 5vh;
     width: 100%;
     padding: 5px;
-    margin-top: 15px;;
-    margin-right: 15px
+    margin-top: 15px;
+    ;
+    margin-right: 15px;
 }
 
 .main a {
@@ -18,24 +19,30 @@
     align-items: center;
     background-color: var(--secondaryColor);
     border-radius: .5em;
-    width: 35px;
-    height: 30px;
+    padding: 11px;
     cursor: pointer;
+    color: var(--fontColor);
     border: none;
     transition: all .2s;
-    color: var(--fontColor);
     border: 1px solid rgb(153, 153, 153);
 }
 
-.main .anmelden {
-    background-color: var(--mainColor);
+.anmelden {
     width: 90px;
+    min-height: 25px;
     text-align: center;
     text-decoration: none;
-    font-size: .9em;
+    border-radius: .5em;
+    border: none;
+    transition: all .2s;
 }
 
 .main a:hover {
+    filter: brightness(.6);
+}
+
+.main button:hover {
+    cursor: pointer;
     filter: brightness(.6);
 }
 

@@ -41,7 +41,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 11px;
+    margin-bottom: 25px;
 }
 
 
@@ -57,14 +57,6 @@ button svg {
 
 .sidebar a {
     text-decoration: none;
-}
-
-.temperature {
-    color: var(--fontColor);
-    background-color: var(--inputBgColor);
-    border-radius: .5em;
-    cursor: pointer;
-    padding: .2em;
 }
 
 .icon {
@@ -104,13 +96,11 @@ button svg {
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);
      border: none;
-
 }
+
 .settings button:hover {
 cursor: pointer;
 }
-
-
 
 @keyframes openSideBar {
     from {

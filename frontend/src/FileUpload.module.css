@@ -13,7 +13,6 @@
     justify-content: center;
     background-color: transparent;
     border: none;
-    color: var(--fontColor);
     cursor: pointer;
     background-color: var(--mainColor);
     border-radius: 50%;
@@ -31,10 +30,8 @@
     justify-content: center;
     gap: 5px;
     position: absolute;
-    top: 0;
-    left: 75%;
-    transform: translateY(-50%);
-    width: 15vw;
+    top: 1%;
+    left: 1%;
     padding: 15px;
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);

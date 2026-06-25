@@ -74,8 +74,15 @@
     transform: translate(-50%, -50%);
     color: var(--fontColor);
     border-radius: 16px;
-    text-shadow: 0px 0px 15px var(--fontColor);
     animation: greeting 2s ease-in-out;
+  }
+
+  .greetingTitle{
+       text-shadow: 0px 0px 15px white;
+  }
+
+  .greetingSpan{
+    color: rgb(85, 85, 85);
   }
 
   .tokens {
@@ -102,13 +109,11 @@
   @keyframes greeting {
     from {
       opacity: 0;
-      filter: blur(5px);
-      text-shadow: 5px 5px 150px var(--fontColor);
+      filter: blur(15px);
     }
 
     to {
       opacity: 1;
-      color: rgb(68, 202, 255);
       filter: blur(0);
     }
   }

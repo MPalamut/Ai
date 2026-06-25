@@ -10,7 +10,7 @@ export default function Sidebar() {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const settingsOpenRef = useRef();
     const [modalText, setModalText] = useState("")
-    const { theme, setTheme, temperature, setTemperature, generation, completeTokens } = getStore();
+    const { theme, setTheme, generation, completeTokens } = getStore();
 
     useEffect(() => {
         function clickOutside(e) {
@@ -19,7 +19,7 @@ export default function Sidebar() {
                 const clickedOnButton = e.target.closest(`.${styles.sidebarBtn}`);
                 if (!clickedInsideMenu && !clickedOnButton) {
                     setSettingsOpen(false)
-                    setModalText("")
+                   
                 }
             }
         }
@@ -43,12 +43,6 @@ export default function Sidebar() {
                     ><RxPencil2 />
                     </button>
                     <button className={styles.sidebarBtn} title ="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
-                    <select className={styles.temperature} title="Denkweise" value={temperature} onChange={e => setTemperature(parseFloat(e.target.value))}>
-                        <option value="0.1">Schnelles Denken</option>
-                        <option value="0.7">Präzises Denken</option>
-                        <option value="1.9">Tiefgründiges Denken</option>
-                    </select>
-
                     {generation > 0 &&
                         (<div className={styles.tokenInfo} >
                             <label title ="Durchläufe">Generationen: {generation}</label>
@@ -63,10 +57,11 @@ export default function Sidebar() {
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <button onClick={() => setModalText("dsgvo")}>Datenschutz</button>
                         <button onClick={() => setModalText("hilfe")}>Hilfe</button>
-                        <Modal isOpen={modalText != ""} text={modalText}/>
+                        <button onClick={() => setModalText("feedback")}>Feedback</button>
                     </div>}
                 </div>
-            </div>
+            </div>  
+             {modalText && <Modal text={modalText} onClose={() => setModalText("")}/>}
         </>
     )
 }

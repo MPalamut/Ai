@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from "./Input.module.css"
-import { AiOutlineSend, AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineSend, AiOutlineBars } from "react-icons/ai";
+import MoreFeatures from "./MoreFeatures"
 import FileUpload from "./FileUpload";
-import FetchModels from './FetchModels';
 import { getStore } from "./Store";
+import FetchModels from './FetchModels';
 
 export default function Input() {
     const [input, setInput] = useState("")
@@ -15,17 +16,7 @@ export default function Input() {
     setTimeout(() => { inputRef.current.focus() }, 1)
 
     async function Responses() {
-         setInput("")
-        
-        // if (loading) {
-        //     console.log("loading")
-        //     if (abortControllerRef.current) {
-        //         abortControllerRef.current.abort();
-        //     }
-        //     setLoading(false)
-        //     return;
-        // }
-
+        setInput("")
         setOutput(prev => [...prev, { text: input }])
         setLoading(true)
 
@@ -83,14 +74,16 @@ export default function Input() {
                         onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }}
                         disabled={loading}
                     />
-                    <button title="Prompt" onClick={Responses} disabled={!input.trim() && !loading}><AiOutlineSend /></button>
+                    <button className={styles.promtBtn} title="Prompt" onClick={Responses} disabled={!input.trim() && !loading}><AiOutlineSend /></button>
                 </div>
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
-                       <FetchModels />
+                        <FetchModels/>
+                        <MoreFeatures />
+                        <FileUpload />
                     </div>
                     <div className={styles.inputFooterRight}>
-                        <FileUpload />
+
                     </div>
                 </div>
             </div>

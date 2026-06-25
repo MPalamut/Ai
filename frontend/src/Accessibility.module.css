@@ -1,7 +1,7 @@
 .accBtn {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    bottom: 25px;
+    right: 15px;
     width: 60px;
     height: 60px;
     display: flex;
