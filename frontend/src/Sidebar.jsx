@@ -10,7 +10,7 @@ export default function Sidebar() {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const settingsOpenRef = useRef();
     const [modalText, setModalText] = useState("")
-    const { theme, setTheme, generation, completeTokens } = getStore();
+    const { theme, setTheme } = getStore();
 
     useEffect(() => {
         function clickOutside(e) {
@@ -19,7 +19,6 @@ export default function Sidebar() {
                 const clickedOnButton = e.target.closest(`.${styles.sidebarBtn}`);
                 if (!clickedInsideMenu && !clickedOnButton) {
                     setSettingsOpen(false)
-                   
                 }
             }
         }
@@ -43,21 +42,14 @@ export default function Sidebar() {
                     ><RxPencil2 />
                     </button>
                     <button className={styles.sidebarBtn} title ="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
-                    {generation > 0 &&
-                        (<div className={styles.tokenInfo} >
-                            <label title ="Durchläufe">Generationen: {generation}</label>
-                            <label title="Gesamttoken">Gesamtverbrauch: {completeTokens}</label>
-                        </div>
-                        )
-                    }
                 </div>
 
                 <div className={styles.footer}>
                     <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /></button>
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
-                        <button onClick={() => setModalText("dsgvo")}>Datenschutz</button>
-                        <button onClick={() => setModalText("hilfe")}>Hilfe</button>
-                        <button onClick={() => setModalText("feedback")}>Feedback</button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Hilfe</button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("feedback")}>Feedback</button>
                     </div>}
                 </div>
             </div>  

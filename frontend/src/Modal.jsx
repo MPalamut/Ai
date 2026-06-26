@@ -28,7 +28,6 @@ export default function Modal({ text, onClose }) {
         };
     }, [onClose])
     
-          
     return (
         <>
             <div className={styles.modal} ref={modalOpenref}>

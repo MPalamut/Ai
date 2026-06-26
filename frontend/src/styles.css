@@ -5,8 +5,8 @@
 }
 
 body {
-  background-color: var(--backgroundColor);
   color: var(--fontColor);
+  background-color: var(--backgroundColor);
   font-family: Arial, Helvetica, sans-serif;
 }
 

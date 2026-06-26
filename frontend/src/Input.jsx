@@ -74,7 +74,7 @@ export default function Input() {
                         onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }}
                         disabled={loading}
                     />
-                    <button className={styles.promtBtn} title="Prompt" onClick={Responses} disabled={!input.trim() && !loading}><AiOutlineSend /></button>
+                    <button className={styles.sendBtn} title="Senden" onClick={Responses} disabled={!input.trim()}><AiOutlineSend /></button>
                 </div>
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>

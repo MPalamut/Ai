@@ -9,7 +9,7 @@
     align-items: center;
     border-radius: 50%;
     background-color: var(--mainColor);
-    color: rgb(187, 187, 187);
+    color: var(--fontColor);
     cursor: pointer;
     border: none;
     box-shadow: 5px 5px 5px black;

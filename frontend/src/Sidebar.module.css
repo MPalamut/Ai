@@ -20,11 +20,15 @@
     height: 35px;
     border-radius: 50%;
     background-color: var(--mainColor);
-    color: rgb(187, 187, 187);
     cursor: pointer;
     border: none;
     box-shadow: 2px 2px 5px black;
     transition: all .2s ease-in-out;
+}
+.sidebarBtn svg {
+    width: 19px;
+    height: 19px;
+    color: var(--fontColor);
 }
 
 .header {
@@ -44,13 +48,6 @@
     margin-bottom: 25px;
 }
 
-
-button svg {
-    width: 19px;
-    height: 19px;
-    color: var(--fontColor);
-}
-
 .sidebar button:hover {
    filter: brightness(.6);
 }
@@ -65,19 +62,11 @@ button svg {
     display: block;
 }
 
-.tokenInfo {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid gray;
-    border-radius: .5em;
-    padding: 2px;
-}
-
 .settings {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 2px;
+    gap: 5px;
     position: fixed;
     left: 5px;
     bottom: 55px;
@@ -91,16 +80,21 @@ button svg {
     animation: .2s openSideBar ease-in-out;
 }
 
-.settings button{
-    padding: 5px;
-    background-color: var(--sidebarSettingsBgColor);
+.settingsBtn{
     color: var(--fontColor);
-     border: none;
+background-color: transparent;
+    padding: 5px;
+    border: none;
 }
 
-.settings button:hover {
-cursor: pointer;
+.settingsBtn:hover{
+    cursor: pointer;
+    background-color: var(--secondaryColor);
+
 }
+
+
+
 
 @keyframes openSideBar {
     from {

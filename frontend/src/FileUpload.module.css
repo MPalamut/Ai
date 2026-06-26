@@ -15,6 +15,7 @@
     border: none;
     cursor: pointer;
     background-color: var(--mainColor);
+    color: var(--fontColor);
     border-radius: 50%;
     padding: 5px;
     transition: all .2s ease-in-out;

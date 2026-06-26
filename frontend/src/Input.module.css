@@ -29,7 +29,7 @@
     border-radius: .5em 0 0 .5em;
 }
 
-.promtBtn{
+.sendBtn{
     box-sizing: border-box;
     padding: 9px;
     border-radius: 0 .5em .5em 0;
@@ -39,8 +39,8 @@
     cursor: pointer;
 }
 
-.promtBtn:hover{
-filter:brightness(.6)
+.sendBtn:hover{
+filter:brightness(.6);
 }
 
 .inputHeader button svg {

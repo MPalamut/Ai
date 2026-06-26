@@ -3,9 +3,10 @@
     justify-content: center;
     align-items: center;
     background-color: var(--mainColor);
-    border-radius: 50%;
+    color: var(--fontColor);
     padding: 5px;
     border: none;
+    border-radius: 50%;
 }
 
 .moreFeatures:hover {

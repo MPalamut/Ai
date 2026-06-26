@@ -4,7 +4,7 @@ import styles from "./Output.module.css"
 import { getStore } from "./Store.jsx";
 
 export default function Output() {
-    const { output , loading , fontSize} = getStore()
+    const { output , loading , fontSize, generation, completeTokens} = getStore()
     const scrollRef = useRef()
 
     useEffect(() => {
@@ -28,8 +28,9 @@ export default function Output() {
              
                 {output.map((item,index) => (
                     <div  className= {index == output.length - 1 && index % 2 != 0 ? styles.lastMessage : ""} style={{ fontSize: `${fontSize}rem` }} key={index}>
-                     <pre> {item.text }
-                        {item.tokens && <p className={styles.tokens}>Verbrauchte Tokens: {item.tokens}</p>}
+                     <pre> {item.text } {item.tokens && <p className={styles.tokens}>Verbrauchte Tokens: {item.tokens} {index == output.length -1 && (
+                        <span>{"/"} Generation: {generation} {"/"} Gesamttoken: {completeTokens}</span>
+                     )}  </p>}
                      </pre>
                       </div>
                     ))}
