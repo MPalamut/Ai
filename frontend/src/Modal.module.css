@@ -33,8 +33,6 @@
     color: rgb(156, 156, 156);
 }
 
-.close {}
-
 .close button {
     background-color: rgb(255, 109, 109);
     display: flex;
