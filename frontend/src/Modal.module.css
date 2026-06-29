@@ -1,15 +1,26 @@
+.modalBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+}
+
+
 .modal {
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50vw;
-    height: 50vh;
     background-color: var(--sidebarSettingsBgColor);
     border-radius: .5em;
     background-origin: padding-box;
-
     z-index: 100;
+    box-shadow: 10px 10px 15px black;
 }
 
 .header {
@@ -18,7 +29,9 @@
     padding: 10px;
 }
 
-.title {}
+.title {
+    color: rgb(156, 156, 156);
+}
 
 .close {}
 
@@ -42,6 +55,25 @@
 }
 
 .content {
-    padding: 10px;
+    padding: 15px;
     height: 100%;
+    font-size: 1em;
+}
+
+.content ul {
+    list-style-position: inside;
+    margin-top: 15px;
+}
+
+.content li {
+    margin-bottom: 10px;
+}
+
+.hinweis {
+    background-color: #ffe06f;
+    color: #000000;
+    padding: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: .5em;
 }

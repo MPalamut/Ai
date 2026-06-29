@@ -23,9 +23,9 @@ export default function Sidebar() {
             }
         }
 
-        document.addEventListener('mousedown', clickOutside);
+        document.addEventListener('mouseup', clickOutside);
         return () => {
-            document.removeEventListener('mousedown', clickOutside);
+            document.removeEventListener('mouseup', clickOutside);
         };
     }, [])
 
@@ -34,21 +34,15 @@ export default function Sidebar() {
             <div className={styles.sidebar}>
                 <div className={styles.header}>
                     <img className={styles.icon} src={icon} alt="Your Ai" />
-                    <button className={styles.sidebarBtn} title ="Neuer Chat" onClick={() => {
-                        const confirm = window.confirm("Neuer Chat");
-                        if (confirm) { window.location.href = "/" }
-                    }
-                    }
-                    ><RxPencil2 />
-                    </button>
-                    <button className={styles.sidebarBtn} title ="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />}</button>
+                    <button className={styles.sidebarBtn} title ="Neuer Chat" onClick={() => { window.location.href = "/" }}><RxPencil2 /> Neuer Chat</button>
+                    <button className={styles.sidebarBtn} title ="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} Farbmodus</button>
                 </div>
 
                 <div className={styles.footer}>
-                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /></button>
+                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /> Einstellungen</button>
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
-                        <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Hilfe</button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("feedback")}>Feedback</button>
                     </div>}
                 </div>
