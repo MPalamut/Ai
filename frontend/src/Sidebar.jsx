@@ -34,20 +34,21 @@ export default function Sidebar() {
             <div className={styles.sidebar}>
                 <div className={styles.header}>
                     <img className={styles.icon} src={icon} alt="Your Ai" />
-                    <button className={styles.sidebarBtn} title ="Neuer Chat" onClick={() => { window.location.href = "/" }}><RxPencil2 /> Neuer Chat</button>
-                    <button className={styles.sidebarBtn} title ="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} Farbmodus</button>
+                    <button className={styles.sidebarBtn} title="Neuer Chat" onClick={() => { window.location.href = "/" }}><RxPencil2 /> <span className={styles.sidebarBtnSpan}>Neuer Chat</span></button>
+                    <button className={styles.sidebarBtn} title="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} <span className={styles.sidebarBtnSpan}>Farbmodus</span> </button>
                 </div>
 
                 <div className={styles.footer}>
-                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /> Einstellungen</button>
+                    <button className={styles.sidebarBtn} title="Einstellungen" onClick={() => { setSettingsOpen(!settingsOpen) }}><RxGear /> <span className={styles.sidebarBtnSpan}>Einstellungen</span></button>
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
-                        <button className={styles.settingsBtn} onClick={() => setModalText("feedback")}>Feedback</button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("about")}>About</button>
                     </div>}
                 </div>
-            </div>  
-             {modalText && <Modal text={modalText} onClose={() => setModalText("")}/>}
+            </div>
+            {modalText && <Modal text={modalText} onClose={() => setModalText("")} />}
         </>
     )
 }

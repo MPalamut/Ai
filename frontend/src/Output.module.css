@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    height: 82vh;
+    height: 70vh;
     scroll-behavior: smooth;
     overflow: auto;
     scrollbar-color: gray black;
+    margin-top: 95px;
     padding-top: 15px;
     padding-bottom: 15px;
   }

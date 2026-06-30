@@ -66,3 +66,12 @@
         transform: translateX(50px);
     }
 }
+
+@media (max-width: 640px) {
+  .accBtn {
+     bottom: 50px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+  }
+}

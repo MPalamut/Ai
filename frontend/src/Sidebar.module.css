@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    align-items: center;
     background-color: var(--secondaryColor);
     position: fixed;
+    top: 0px;
     left: 0px;
     height: 100vh;
     font-size: .9em;
@@ -12,7 +12,19 @@
     transition: all .2s ease-in-out;
 }
 
-.sidebar img {
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.icon {
+    width: 55px;
+    height: auto;
+    display: block;
     margin-bottom: 50px;
 }
 
@@ -27,6 +39,7 @@
     cursor: pointer;
     border: none;
     transition: all .2s ease-in-out;
+    width: 100%;
 }
 
 .sidebar button:hover {
@@ -39,14 +52,7 @@
     color: var(--mainColor);
 }
 
-.header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 15px;
-}
+
 
 .footer {
     display: flex;
@@ -57,16 +63,11 @@
     margin-bottom: 25px;
 }
 
-
 .sidebar a {
     text-decoration: none;
 }
 
-.icon {
-    width: 55px;
-    height: auto;
-    display: block;
-}
+
 
 .settings {
     display: flex;
@@ -98,9 +99,25 @@
     background-color: var(--secondaryColor);
 }
 
+@media (max-width: 640px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .icon{
+visibility: hidden;
+  }
+
+  .sidebarBtnSpan {
+   display: none;
+ 
+  }
+}
+
 @keyframes openSideBar {
     from {
         opacity: 0;
         transform: translateX(-50px);
     }
 }
+
