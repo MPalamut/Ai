@@ -6,6 +6,9 @@ from pypdf import PdfReader
 import base64
 import io
 from docx import Document
+import os
+import json
+from datetime import datetime
 
 app = FastAPI()
 
@@ -159,3 +162,29 @@ async def responses(payload: dict):
         response = requests.post(url, headers=headers, json=data)
         return response.json()
    
+@app.post("/report")
+async def report(payload: dict):
+    report_text = payload.get("reportText")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file = os.path.join(current_dir, "reports.json")
+    
+    report_entry = {
+        "timestamp": timestamp,
+        "report": report_text
+    }
+
+    if os.path.exists(file):
+        with open(file, "r") as f:
+            reports_data = json.load(f)
+    else:
+        reports_data = []
+
+    reports_data.append(report_entry)
+
+    with open(file, "w") as f:
+        json.dump(reports_data, f, indent=4)
+
+    return {"message": "Report received", "report": report_entry}
+
+    return {"message": "This is a test endpoint"}

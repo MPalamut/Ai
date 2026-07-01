@@ -25,11 +25,11 @@
     color: var(--fontColor);
     box-sizing: border-box;
     border: none;
-    background-color: var(--secondaryColor);
+    background-color: var(--inputColor);
     border-radius: .5em 0 0 .5em;
 }
 
-.sendBtn{
+.sendBtn {
     box-sizing: border-box;
     padding: 9px;
     border-radius: 0 .5em .5em 0;
@@ -39,11 +39,17 @@
     cursor: pointer;
 }
 
-.sendBtn:hover{
-filter:brightness(.6);
+.sendBtn:hover {
+    filter: brightness(.6);
 }
 
-.inputHeader button svg {
+.sendBtn:disabled {
+    background-color: var(--disabledColor);
+    color: rgb(99, 99, 99);
+     pointer-events: none;
+}
+
+.sendBtn svg {
     width: 19px;
     height: 19px;
 }
@@ -52,10 +58,6 @@ filter:brightness(.6);
     outline: none;
 }
 
-.inputHeader button:disabled {
-    background-color: var(--disabledColor);
-    color: rgb(99, 99, 99);
-}
 
 .inputFooter {
     display: flex;
@@ -76,7 +78,7 @@ filter:brightness(.6);
 }
 
 .inputFooter select {
-    background-color: var(--inputBgColor);
+    background-color: var(--inputColor);
     color: var(--fontColor);
     width: 9vw;
     padding: .2em;

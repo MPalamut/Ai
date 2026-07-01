@@ -55,7 +55,7 @@
 }
 
 .menuButton:hover {
-    background-color: var(  --sidebarSettingsHoverBgColor);
+    background-color: var( --secondaryColor);
 }
 
 .fileWrapper{

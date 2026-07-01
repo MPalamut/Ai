@@ -40,8 +40,7 @@ export default function Input() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(requestData),
-                signal: signal
+                body: JSON.stringify(requestData)
             })
 
             const data = await res.json()

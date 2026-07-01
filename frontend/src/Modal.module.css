@@ -62,15 +62,6 @@
     font-size: .95em;
 }
 
-.content ul {
-    list-style-position: inside;
-    margin-top: 15px;
-}
-
-.content li {
-    margin-bottom: 10px;
-}
-
 .content a:link, .content a:visited
 {
     color: #6bb5fe;
@@ -84,4 +75,39 @@
     margin-top: 15px;
     margin-bottom: 15px;
     border-radius: .5em;
+}
+
+.report {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.report textarea {
+    resize: none;
+    padding: 10px;
+    border-radius: .5em;
+    border: 1px solid var(--mainColor);
+    background-color: var(--inputBgColor);
+    color: var(--fontColor);
+}
+
+.reportBtn {
+    background-color: var(--mainColor);
+    color: var(--fontColor);
+    border: none;
+    padding: 10px;
+    border-radius: .5em;
+    transition: all .2s;
+    width: 100px;
+}
+
+.reportBtn:hover {
+    cursor: pointer;
+    filter: brightness(.6);
+}
+
+.reportBtn:disabled {
+    background-color: var(--disabledColor);
+ pointer-events: none;
 }
