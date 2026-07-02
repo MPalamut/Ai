@@ -1,0 +1,94 @@
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    background-color: var(--sidebarSettingsBgColor);
+    border-radius: .5em;
+    background-origin: padding-box;
+    box-shadow: 10px 10px 15px black;
+    padding: 15px;
+
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: .5em .5em 0 0;
+    margin-bottom: 15px;
+}
+
+.close{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    border-radius: .2em;
+    padding: 5px;
+    cursor: pointer;
+    border: none;
+    width: 19px;
+    height: 19px;
+}
+
+.auth {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: stretch;
+    border-radius: .5em;
+    border: 1px solid rgb(104, 104, 104);
+    background-color: var(--sidebarSettingsBgColor);
+    gap: 5px;
+    padding: 5px;
+}
+
+.auth div {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 5px;
+}
+.auth label {
+   font-size: small;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form input {
+    padding: 5px;
+    border-radius: .5em;
+    border: 1px solid rgb(104, 104, 104);
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--textColor);
+}
+
+.send {
+padding: 5px;
+    background-color: var(--mainColor);
+    cursor: pointer;
+border-radius: .5em;
+border: none;
+}

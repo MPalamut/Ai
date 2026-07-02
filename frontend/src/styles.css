@@ -14,7 +14,7 @@ body {
   --mainColor: rgb(153, 181, 150);
   --secondaryColor: #343e3d;
   --fontColor: rgb(246, 246, 246);
-  --fontColorSecondary: rgb(201, 201, 201);
+  --fontColorSecondary: rgb(0, 0, 0);
   --backgroundColor: rgb(29, 29, 29);
   --outputUserBgColor: rgb(49, 49, 49);
   --inputColor: rgb(16, 16, 16);

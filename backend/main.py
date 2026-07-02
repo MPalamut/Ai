@@ -9,6 +9,8 @@ from docx import Document
 import os
 import json
 from datetime import datetime
+from backend.database import init_db
+from backend.routes import router as api_router
 
 app = FastAPI()
 
@@ -25,6 +27,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+init_db()
+app.include_router(api_router)
+
 
 @app.get("/models")
 def models():
