@@ -4,7 +4,6 @@ import styles from './Headbar.module.css'
 import { AiOutlineHome, AiOutlineGithub } from "react-icons/ai";
 import Register from './Register';
 
-
 export default function Headbar() {
     const [showRegisterMenu, setShowRegisterMenu] = useState(false);
     return (
