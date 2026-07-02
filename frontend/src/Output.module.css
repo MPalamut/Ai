@@ -84,19 +84,6 @@
 
   .greetingSpan {
     color: rgb(92, 92, 92);
-    position: relative;
-  }
-
-  .greetingSpan:before {
-    position: absolute;
-    bottom: 0;
-    content: "";
-    display: inline-block;
-    width: 2px;
-    height: 5px;
-    background-color: rgb(200, 240, 255);
-    animation: moveFullWidth 2s ease-in-out forwards;
-    animation-delay: 1s;
   }
 
   .tokens {
@@ -147,22 +134,5 @@
 
     to {
       border-color: var(--mainColor);
-    }
-  }
-
-  @keyframes moveFullWidth {
-    0% {
-      box-shadow: 0 0 150px rgb(134, 235, 255);
-    }
-
-    50% {
-      width: 100%;
-    }
-
-    100% {
-      box-shadow: 0px 0px 1px rgb(134, 235, 255);
-      opacity: 0;
-      height: 1px;
-      right: 0px;
     }
   }
