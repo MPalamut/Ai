@@ -152,7 +152,6 @@
 
   @keyframes moveFullWidth {
     0% {
-      transform: translateX(0);
       box-shadow: 0 0 150px rgb(134, 235, 255);
     }
 
