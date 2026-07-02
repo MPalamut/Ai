@@ -52,7 +52,6 @@ export default function Register({ onClose }) {
         }
     };
 
-
     const handleClickOutside = (e) => {
         if (e.target === e.currentTarget) {
             onClose();
