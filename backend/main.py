@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests
-import httpx
 from pypdf import PdfReader
 import base64
 import io
@@ -30,7 +29,6 @@ app.add_middleware(
 
 init_db()
 app.include_router(api_router)
-
 
 @app.get("/models")
 def models():

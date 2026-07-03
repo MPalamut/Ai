@@ -14,5 +14,6 @@ def init_db():
             password TEXT NOT NULL     
         )
     ''')
-
+    
+    conn.commit()
     conn.close()

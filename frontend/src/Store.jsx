@@ -23,7 +23,7 @@ export function AppProvider({ children }) {
     const [rag, setRag] = useState(false)
     const [generation, setGeneration] = useState(0)
     const [completeTokens, setCompleteTokens] = useState(0)
-
+    const [authenticatedUser, setAuthenticatedUser] = useState("")
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -49,7 +49,8 @@ export function AppProvider({ children }) {
         speechPitch, setSpeechPitch,
         rag, setRag,
         generation, setGeneration,
-        completeTokens,setCompleteTokens
+        completeTokens,setCompleteTokens,
+        authenticatedUser, setAuthenticatedUser
     }
 
     return (

@@ -33,7 +33,7 @@
     margin-bottom: 15px;
 }
 
-.close{
+.close {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,9 +46,13 @@
     height: 19px;
 }
 
+.close:hover {
+    filter: brightness(.6);
+}
+
 .auth {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
     border-radius: .5em;
@@ -65,8 +69,9 @@
     justify-content: center;
     gap: 5px;
 }
+
 .auth label {
-   font-size: small;
+    font-size: small;
 }
 
 .form {
@@ -86,9 +91,13 @@
 }
 
 .send {
-padding: 5px;
+    padding: 5px;
     background-color: var(--mainColor);
     cursor: pointer;
-border-radius: .5em;
-border: none;
+    border-radius: .5em;
+    border: none;
+}
+
+.send:hover {
+    filter: brightness(.6);
 }

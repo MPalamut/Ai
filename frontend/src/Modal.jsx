@@ -2,10 +2,19 @@ import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from './Modal.module.css'
 import { AiOutlineClose } from "react-icons/ai";
+import { getStore } from "./Store";
 
 export default function Modal({ text, onClose }) {
     const [reportText, setReportText] = useState("");
     const modalOpenref = useRef();
+    const { authenticatedUser } = getStore();
+
+    useEffect(() => {
+        if (text === "report" && !authenticatedUser) {
+            alert("Bitte melde dich an, um einen Bericht zu senden");
+            onClose();
+        }
+    }, [text, authenticatedUser, onClose]);
 
     const report = async () => {
         try {
@@ -19,13 +28,13 @@ export default function Modal({ text, onClose }) {
             })
 
             const data = await res.json()
-           
+
             if (res.ok) {
                 alert("Bericht erfolgreich gesendet")
                 setReportText("")
             } else { alert("Fehler beim Senden des Berichts") }
         }
-        
+
         catch (error) { console.log(error) }
     }
 
@@ -127,8 +136,8 @@ export default function Modal({ text, onClose }) {
         report: {
             title: "Bericht senden", content: (
                 <>
-                  <p> Wenn du einen Bug oder ein Problem gefunden hast, kannst du hier direkt einen Bericht senden.
-                    Bitte beschreibe das Problem so genau wie möglich, damit wir es nachvollziehen und schnellsmöglich beheben können.
+                    <p> Wenn du einen Bug oder ein Problem gefunden hast, kannst du hier direkt einen Bericht senden.
+                        Bitte beschreibe das Problem so genau wie möglich, damit wir es nachvollziehen und schnellsmöglich beheben können.
                     </p>
                     <br />
                     <div className={styles.report}>
