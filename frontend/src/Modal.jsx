@@ -119,7 +119,8 @@ export default function Modal({ text, onClose }) {
                     <p><strong>Lizensierung</strong> MIT Open Source Lizenz</p>
                     <br />
                     <h2>Urheberrecht (c) 2026 snutig GmbH</h2>
-                    <p>    Hiermit wird jeder Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die „Software“) erhält, gebührenfrei die Erlaubnis erteilt,
+                    <p> 
+                        Hiermit wird jeder Person, die eine Kopie dieser Software besitzt, gebührenfrei die Erlaubnis erteilt,
                         uneingeschränkt mit der Software zu handeln, einschließlich, aber nicht beschränkt auf das Recht, sie zu nutzen, zu kopieren, zu modifizieren, zusammenzufügen,
                         zu veröffentlichen, zu verbreiten, unterzulizenzieren und/oder Kopien der Software zu verkaufen, und Personen, denen die Software zur Verfügung gestellt wird,
                         dies unter den folgenden Bedingungen zu gestatten:
