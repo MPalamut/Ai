@@ -7,16 +7,21 @@ import { getStore } from "./Store";
 export default function Modal({ text, onClose }) {
     const [reportText, setReportText] = useState("");
     const modalOpenref = useRef();
-    const { authenticatedUser } = getStore();
+    const { username } = getStore();
 
     useEffect(() => {
-        if (text === "report" && !authenticatedUser) {
+        if (text === "report" && !username) {
             alert("Bitte melde dich an, um einen Bericht zu senden");
             onClose();
         }
-    }, [text, authenticatedUser, onClose]);
+    }, [text, username, onClose]);
 
     const report = async () => {
+        const reportData = {
+            username: username,
+            reportText: reportText.trim()
+        }
+
         try {
             const url = "http://172.16.16.106:8000/report"
             const res = await fetch(url, {
@@ -24,17 +29,16 @@ export default function Modal({ text, onClose }) {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ reportText: reportText.trim() })
+                body: JSON.stringify(reportData)
             })
 
             const data = await res.json()
 
-            if (res.ok) {
+            if (data.status === "success") {
                 alert("Bericht erfolgreich gesendet")
                 setReportText("")
             } else { alert("Fehler beim Senden des Berichts") }
         }
-
         catch (error) { console.log(error) }
     }
 

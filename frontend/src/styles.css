@@ -29,8 +29,8 @@ body {
   --fontColor: rgb(64, 64, 64);
   --fontColorSecondary: rgb(201, 201, 201);
   --backgroundColor: rgb(255, 255, 255);
-  --outputUserBgColor: rgb(145, 145, 145);
-  --inputColor: rgb(198, 198, 198);
+  --outputUserBgColor: rgb(235, 235, 235);
+  --inputColor: rgb(231, 231, 231);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
   --sidebarSettingsHoverBgColor: rgb(236, 236, 236);
   --disabledColor: rgb(202, 202, 202);

@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppProvider } from './Store'
+import Home from './Home'
 import Headbar from './Headbar'
 import Input from './Input'
 import Output from './Output'
@@ -9,6 +10,7 @@ import Accessiblity from './Accessibility'
 export default function App() {
   return (
     <AppProvider>
+      <Home />
       <Headbar />
        <Input />
       <Sidebar />

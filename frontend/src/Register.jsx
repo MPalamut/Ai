@@ -7,12 +7,10 @@ export default function Register({ onClose }) {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [authMode, setAuthMode] = useState("register");
-    const { authenticatedUser, setAuthenticatedUser } = getStore()
+    const { setUsername } = getStore()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const endpoint = authMode === "register" ? "/register" : "/login";
 
         if (!name || !password) {
             alert("Bitte fülle alle Felder aus");
@@ -65,7 +63,7 @@ export default function Register({ onClose }) {
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    setAuthenticatedUser(payload.username);
+                    setUsername(name);
                     alert(result.message);
                     onClose();
                 } else {
@@ -89,12 +87,12 @@ export default function Register({ onClose }) {
                     <div className={styles.auth}>
                         <div>
                             <input type="radio" id="register" name="auth" value="register" checked={authMode === "register"} onChange={() => setAuthMode("register")} />
-                            <label for="register">Registrieren</label>
+                            <label htmlFor="register">Registrieren</label>
                         </div>
 
                         <div>
                             <input type="radio" id="login" name="auth" value="login" checked={authMode === "login"} onChange={() => setAuthMode("login")} />
-                            <label for="login">Einloggen</label>
+                            <label htmlFor="login">Einloggen</label>
                         </div>
 
                     </div>

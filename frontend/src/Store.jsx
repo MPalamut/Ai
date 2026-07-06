@@ -23,7 +23,7 @@ export function AppProvider({ children }) {
     const [rag, setRag] = useState(false)
     const [generation, setGeneration] = useState(0)
     const [completeTokens, setCompleteTokens] = useState(0)
-    const [authenticatedUser, setAuthenticatedUser] = useState("")
+    const [username, setUsername] = useState("")
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme)
@@ -50,7 +50,7 @@ export function AppProvider({ children }) {
         rag, setRag,
         generation, setGeneration,
         completeTokens,setCompleteTokens,
-        authenticatedUser, setAuthenticatedUser
+        username, setUsername
     }
 
     return (

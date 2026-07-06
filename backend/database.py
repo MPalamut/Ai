@@ -14,6 +14,23 @@ def init_db():
             password TEXT NOT NULL     
         )
     ''')
-    
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS reports (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            reportText TEXT NOT NULL,
+            createdAt TEXT NOT NULL    
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS visits (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ip TEXT NOT NULL,
+            dateTime TEXT NOT NULL    
+        )
+    ''')
+
     conn.commit()
     conn.close()
