@@ -131,7 +131,7 @@ export default function Modal({ text, onClose }) {
                         Die Software wird ohne Mängelgewähr und ohne jegliche ausdrückliche oder implizierte Garantie zur Verfügung gestellt,
                         einschließlich, aber nicht beschränkt auf die Garantie der Marktgängigkeit, der Eignung für einen bestimmten Zweck und der Nichtverletzung von Rechten dritter.
                         In keinem Fall sind die Autoren oder Urheberrechtsinhaber für Ansprüche, Schäden oder sonstige Haftung haftbar, ob in Folge eines Vertrages,
-                        einer unerlaubten Handlung oder anderweitig, die sich aus, jenseits oder in Verbindung mit der Software oder der Nutzung oder anderen Geschäften mit der Software ergeben.
+                        einer unerlaubten Handlung oder anderweitig, die sich aus, oder in Verbindung mit der Software oder der Nutzung oder anderen Geschäften mit der Software ergeben.
                     </p>
 
                 </>
