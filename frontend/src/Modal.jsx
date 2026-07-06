@@ -141,8 +141,7 @@ export default function Modal({ text, onClose }) {
         report: {
             title: "Bericht senden", content: (
                 <>
-                    <p> Wenn du einen Bug oder ein Problem gefunden hast, kannst du hier direkt einen Bericht senden.
-                        Bitte beschreibe das Problem so genau wie möglich, damit wir es nachvollziehen und schnellsmöglich beheben können.
+                    <p>Bericht oder Feedback
                     </p>
                     <br />
                     <div className={styles.report}>
