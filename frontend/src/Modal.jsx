@@ -141,9 +141,6 @@ export default function Modal({ text, onClose }) {
         report: {
             title: "Bericht senden", content: (
                 <>
-                    <p>Bericht oder Feedback
-                    </p>
-                    <br />
                     <div className={styles.report}>
                         <textarea value={reportText} onChange={(e) => setReportText(e.target.value)} cols="30" rows="10"></textarea>
                         <button className={styles.reportBtn} onClick={(e) => { report() }} disabled={reportText.trim() === ""}>Absenden</button>

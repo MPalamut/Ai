@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect, useRef } from "react";
 import styles from "./Output.module.css"
 import { getStore } from "./Store.jsx";
 
 export default function Output() {
     const { output , loading , fontSize, generation, completeTokens} = getStore()
+    const [mybool, setMybool] = useState(true)
     const scrollRef = useRef()
 
     useEffect(() => {

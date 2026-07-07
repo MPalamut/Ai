@@ -1,138 +1,142 @@
-  .output {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    height: 70vh;
-    scroll-behavior: smooth;
-    overflow: auto;
-    scrollbar-color: gray black;
-    margin-top: 95px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
+ .output {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+   height: 70vh;
+   scroll-behavior: smooth;
+   overflow: auto;
+   scrollbar-color: gray black;
+   margin-top: 95px;
+   padding-top: 15px;
+   padding-bottom: 15px;
+ }
 
-  .output div {
-    width: 100%;
-    line-height: 1.1em;
-  }
+ .output div {
+   width: 100%;
+   line-height: 1.1em;
+ }
 
-  .output div pre {
-    width: 50%;
-    margin: auto;
-    white-space: pre-wrap;
-    border: 1px solid rgb(104, 104, 104);
-    border-radius: .5em;
-    padding: 15px;
-    box-sizing: border-box;
-    opacity: 0;
-    animation: fadeIn .5s ease-in-out forwards;
-  }
+ .output div pre {
+   width: 50%;
+   margin: auto;
+   white-space: pre-wrap;
+   border: 1px solid rgb(104, 104, 104);
+   border-radius: .5em;
+   padding: 15px;
+   box-sizing: border-box;
+   opacity: 0;
+   animation: fadeIn .5s ease-in-out forwards;
+ }
 
-  .output div:nth-child(odd) pre {
-    background-color: var(--outputUserBgColor);
-    text-align: end;
-  }
+ .output div:nth-child(odd) pre {
+   background-color: var(--outputUserBgColor);
+   text-align: end;
+ }
 
-  .preloader {
-    text-align: center;
-    padding: 6px;
-  }
+ .preloader {
+   text-align: center;
+   padding: 6px;
+ }
 
-  .preloader span {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin: 5px;
-    background-color: var(--mainColor);
-    opacity: 0.1;
-    animation: preloader .4s ease-in-out infinite alternate;
-  }
+ .preloader span {
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+   border-radius: 50%;
+   margin: 5px;
+   background-color: var(--mainColor);
+   opacity: 0.1;
+   animation: preloader .4s ease-in-out infinite alternate;
+ }
 
-  .preloader span:nth-child(1) {
-    animation-delay: 0.2s;
-  }
+ .preloader span:nth-child(1) {
+   animation-delay: 0.2s;
+ }
 
-  .preloader span:nth-child(2) {
-    animation-delay: 0.4s;
-  }
+ .preloader span:nth-child(2) {
+   animation-delay: 0.4s;
+ }
 
-  .preloader span:nth-child(3) {
-    animation-delay: 0.6s;
-  }
+ .preloader span:nth-child(3) {
+   animation-delay: 0.6s;
+ }
 
-  .greeting {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: absolute;
-    letter-spacing: 2px;
-    width: 100px;
-    gap: 10px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--fontColor);
-    border-radius: 16px;
-    animation: greeting 2s ease-in-out;
-  }
+ .greeting {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   position: absolute;
+   letter-spacing: 2px;
+   width: 100px;
+   gap: 10px;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   color: var(--fontColor);
+   border-radius: 16px;
+   animation: greeting 2s ease-in-out;
+ }
 
-  .greetingTitle {
-    text-shadow: 0px 0px 15px var(--fontColor);
-  }
+ .greetingTitle {
+   text-shadow: 0px 0px 15px var(--fontColor);
+ }
 
-  .greetingSpan {
-    color: rgb(92, 92, 92);
-  }
+ .greetingSpan {
+   color: rgb(92, 92, 92);
+ }
 
-  .tokens {
-    margin-top: 5px;
-    font-size: .9em;
-    color: var(--mainColor)
-  }
+ .tokens {
+   margin-top: 5px;
+   font-size: .9em;
+   color: var(--mainColor)
+ }
 
-  .lastMessage pre {
-    animation: fadeIn .5s ease-in-out forwards,
-      popIn 5s ease-in-out !important;
-  }
+ .lastMessage pre {
+   animation: fadeIn .5s ease-in-out forwards,
+     popIn 5s ease-in-out !important;
+ }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
+ @keyframes fadeIn {
+   from {
+     opacity: 0;
+   }
 
-    to {
-      opacity: 1;
-    }
-  }
+   to {
+     opacity: 1;
+   }
+ }
 
-  @keyframes greeting {
-    from {
-      opacity: 0;
-      filter: blur(15px);
-    }
+ @keyframes greeting {
+   from {
+     opacity: 0;
+     filter: blur(15px);
+   }
 
-    to {
-      opacity: 1;
-      filter: blur(0);
-    }
-  }
+   to {
+     opacity: 1;
+     filter: blur(0);
+   }
+ }
 
-  @keyframes preloader {
-    to {
-      opacity: 1;
-      transform: translateY(15px);
-    }
-  }
+ @keyframes preloader {
+   to {
+     opacity: 1;
+     transform: translateY(15px);
+   }
+ }
 
-  @keyframes popIn {
-    from {
-      border-color: rgb(255, 255, 255);
-      box-shadow: 5px 5px 50px var(--mainColor);
-    }
+ @keyframes popIn {
+   from {
+     border-color: rgb(255, 255, 255);
+     box-shadow: 5px 5px 50px var(--mainColor);
+   }
 
-    to {
-      border-color: var(--mainColor);
-    }
-  }
+   to {
+     border-color: var(--mainColor);
+   }
+ }
+
+ .mybool{
+  position: relative;
+ }

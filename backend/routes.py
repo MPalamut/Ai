@@ -1,8 +1,9 @@
+from fastapi import APIRouter, Request
 import sqlite3
-from fastapi import APIRouter, HTTPException, Cookie, Response, Request
 from backend.database import DB_PATH
 import hashlib
 from datetime import datetime
+
 router = APIRouter()
 
 @router.get("/")
@@ -25,29 +26,6 @@ async def read_root(request: Request):
         conn.close()
     
     return {"status": status, "message": message}
-
-@router.get("/users")
-def get_items():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    
-    cursor.execute("SELECT * FROM users")
-    rows = cursor.fetchall()
-    
-    conn.close()
-    return {"data": rows}
-
-@router.post("/users")
-async def add_item(name : str):
-
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-
-    cursor.execute("INSERT INTO users (name) VALUES (?)", (name,))
-
-    conn.commit()
-    conn.close()
-    return {"status": "Eintrag erfolgreich!"}
 
 @router.post("/register")
 def register(data: dict):
@@ -82,12 +60,10 @@ def register(data: dict):
     return {"status": status, "message": message}
 
 @router.post("/login")
-def login(data: dict, response: Response):
+def login(data: dict):
     username = data.get("username")
     password = data.get("password")
-
-    password_bytes = password.encode('utf-8')
-    hashed_password = hashlib.sha256(password_bytes).hexdigest()
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
