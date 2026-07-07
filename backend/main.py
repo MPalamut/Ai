@@ -5,7 +5,6 @@ from pypdf import PdfReader
 import base64
 import io
 from docx import Document
-from datetime import datetime
 from backend.database import init_db
 from backend.routes import router as api_router
 
