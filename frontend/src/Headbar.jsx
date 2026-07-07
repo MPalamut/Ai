@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useRef } from "react"
+import { useState} from "react"
 import styles from './Headbar.module.css'
 import { AiOutlineHome, AiOutlineGithub } from "react-icons/ai";
 import Register from './Register';
