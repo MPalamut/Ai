@@ -94,7 +94,7 @@
 
  .lastMessage pre {
    animation: fadeIn .5s ease-in-out forwards,
-     popIn 5s ease-in-out !important;
+     popIn 2s ease-in-out !important;
  }
 
  @keyframes fadeIn {

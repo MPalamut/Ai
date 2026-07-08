@@ -20,7 +20,6 @@ export default function FetchModels() {
         fetchModels();
     }, []);
 
-
     return (
         <>
             <select name="models" id="models" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>

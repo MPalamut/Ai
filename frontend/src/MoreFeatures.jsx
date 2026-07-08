@@ -38,7 +38,6 @@ export default function Headbar() {
                         <option value="1.9">Tiefgründiges Denken</option>
                     </select>
                     </div>
-
             </div>}
 
         </>

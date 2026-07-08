@@ -82,19 +82,17 @@ export default function Register({ onClose }) {
                 <div className={styles.header}>
                     <button className={styles.close} onClick={onClose}>X</button>
                 </div>
-
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <div className={styles.auth}>
+                    <div className={styles.authmethod}>
                         <div>
-                            <input type="radio" id="register" name="auth" value="register" checked={authMode === "register"} onChange={() => setAuthMode("register")} />
+                            <input type="radio" id="register" value="register" checked={authMode === "register"} onChange={() => setAuthMode("register")} />
                             <label htmlFor="register">Registrieren</label>
                         </div>
 
                         <div>
-                            <input type="radio" id="login" name="auth" value="login" checked={authMode === "login"} onChange={() => setAuthMode("login")} />
+                            <input type="radio" id="login" value="login" checked={authMode === "login"} onChange={() => setAuthMode("login")} />
                             <label htmlFor="login">Einloggen</label>
                         </div>
-
                     </div>
                     <input
                         type="text"
@@ -113,6 +111,5 @@ export default function Register({ onClose }) {
                 </form>
             </div>
         </div>
-
     );
 }

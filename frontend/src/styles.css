@@ -24,7 +24,7 @@ body {
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(80, 129, 143);
+  --mainColor: rgb(108, 148, 159);
   --secondaryColor: rgb(197, 210, 220);
   --fontColor: rgb(2, 2, 2);
   --fontColorSecondary: rgb(255, 255, 255);
@@ -37,14 +37,13 @@ body {
 }
 
 [data-theme="contrast"] {
-  --mainColor: rgb(0, 0, 0);
-  --mainColorDarker: color-mix(in srgb, var(--maincolor) 85%, black);
+  --mainColor: rgb(0, 0, 0); 
+  --secondaryColor: rgb(200, 200, 200);
   --fontColor: rgb(255, 255, 255);
   --fontColorSecondary: rgb(201, 201, 201);
   --backgroundColor: rgb(43, 43, 43);
   --outputUserBgColor: rgb(145, 145, 145);
   --inputColor: rgb(220, 220, 220);
-  --secondaryColor: rgb(200, 200, 200);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
   --sidebarSettingsHoverBgColor: rgb(125, 125, 125);
   --disabledColor: rgb(202, 202, 202);

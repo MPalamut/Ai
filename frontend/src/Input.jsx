@@ -77,12 +77,11 @@ export default function Input() {
                 </div>
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
-                        <FetchModels/>
-                        <MoreFeatures />
-                        <FileUpload />
+                        <FetchModels />
                     </div>
                     <div className={styles.inputFooterRight}>
-
+                        <MoreFeatures />
+                        <FileUpload />
                     </div>
                 </div>
             </div>

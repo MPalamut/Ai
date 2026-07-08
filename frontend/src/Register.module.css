@@ -49,7 +49,7 @@
     filter: brightness(.6);
 }
 
-.auth {
+.authmethod {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -57,19 +57,29 @@
     border-radius: .5em;
     border: 1px solid rgb(104, 104, 104);
     background-color: var(--sidebarSettingsBgColor);
-    gap: 5px;
+    gap: 15px;
     padding: 5px;
 }
 
-.auth div {
+.authmethod div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
     justify-content: center;
-    gap: 5px;
+    border-radius: .2em;
+    transition: all .2s
 }
 
-.auth label {
+.authmethod div *{
+  padding: 10px;
+  cursor: pointer; 
+}
+
+.authmethod div:hover{
+     background-color: var(--mainColor); 
+}
+
+.authmethod label {
     font-size: small;
 }
 

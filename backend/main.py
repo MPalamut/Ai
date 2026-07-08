@@ -162,4 +162,3 @@ async def responses(payload: dict):
         
         response = requests.post(url, headers=headers, json=data)
         return response.json()
-    return {"message": "This is a test endpoint"}

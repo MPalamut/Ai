@@ -16,14 +16,13 @@
 }
 
 .menu{
-    background-color: aqua;
-      display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
     position: absolute;
     top: 1%;
-    left: 1%;
+    right: 1%;
     padding: 15px;
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);
