@@ -26,7 +26,7 @@ export default function Register({ onClose }) {
 
         if (authMode === "register") {
             if (password.length < 8) {
-                alert("Das Passwort muss mindestens 8 Zeichen lang sein");
+                setInformationModalText("Das Passwort muss mindestens 8 Zeichen lang sein")
                 return;
             }
             try {
