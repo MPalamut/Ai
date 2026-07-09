@@ -1,19 +1,21 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from "./Register.module.css"
+import InformationModal from './InformationModal';
 import { getStore } from "./Store";
 
 export default function Register({ onClose }) {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [authMode, setAuthMode] = useState("register");
+    const [informationModalText, setInformationModalText] = useState("")
     const { setUsername } = getStore()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!name || !password) {
-            alert("Bitte fülle alle Felder aus");
+            setInformationModalText("Bitte fülle alle Felder aus")
             return;
         }
 
@@ -39,14 +41,13 @@ export default function Register({ onClose }) {
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    alert(result.message);
-                    onClose();
+                    setInformationModalText(result.message)
                 } else {
-                    alert(result.message);
+                  setInformationModalText(result.message)
                 }
             } catch (error) {
                 console.error("Fehler:", error);
-                alert("Verbindungsfehler zum Server");
+               setInformationModalText("Verbindungsfehler")
             }
         }
 
@@ -64,19 +65,19 @@ export default function Register({ onClose }) {
 
                 if (result.status === "success") {
                     setUsername(name);
-                    alert(result.message);
-                    onClose();
+                    setInformationModalText(result.message)
                 } else {
-                    alert(result.message);
+                    setInformationModalText(result.message)
                 }
             } catch (error) {
                 console.error("Fehler:", error);
-                alert("Verbindungsfehler zum Server");
+                setInformationModalText("Verbindungsfehler")
             }
         }
     }
 
     return (
+        <>
         <div className={styles.bg} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.header}>
@@ -111,5 +112,7 @@ export default function Register({ onClose }) {
                 </form>
             </div>
         </div>
+               {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}
+        </>
     );
 }

@@ -1,0 +1,69 @@
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:15px;
+    align-items: stretch;
+    padding: 15px;
+    background-color: var(--sidebarSettingsBgColor);
+    box-shadow: 5px 5px 15px black;
+    border-radius: .5em;
+    animation: popup .2s ease-in-out forwards;
+    min-width: 15vw;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    border-radius: .2em;
+    padding: 5px;
+    cursor: pointer;
+    border: none;
+    width: 19px;
+    height: 19px;
+}
+
+.close:hover {
+    filter: brightness(.6);
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%) scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

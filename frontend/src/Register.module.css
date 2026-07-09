@@ -20,7 +20,7 @@
     background-color: var(--sidebarSettingsBgColor);
     border-radius: .5em;
     background-origin: padding-box;
-    box-shadow: 10px 10px 15px black;
+    box-shadow: 5px 5px 15px black;
     padding: 15px;
 }
 

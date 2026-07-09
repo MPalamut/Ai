@@ -7,6 +7,8 @@ DB_PATH = os.path.join(BASE_DIR, "local.db")
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
+    cursor.execute("PRAGMA foreign_keys = ON;")
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,9 +20,10 @@ def init_db():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS reports (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
             reportText TEXT NOT NULL,
-            createdAt TEXT NOT NULL    
+            createdAt TEXT NOT NULL,           
+            userId INTEGER NOT NULL,
+            FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE 
         )
     ''')
 

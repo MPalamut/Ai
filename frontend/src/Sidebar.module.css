@@ -97,7 +97,7 @@
     background-color: var(--secondaryColor);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 850px) {
     .sidebar {
         width: 50px;
     }

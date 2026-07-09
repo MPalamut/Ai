@@ -94,14 +94,23 @@ async def report(payload: dict):
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO reports (username, reportText, createdAt) VALUES (?,?,?)", (username, report_text, timestamp))
-        conn.commit() 
-        status = "success"
-        message = "Bericht eingetragen"
+        cursor.execute("PRAGMA foreign_keys = ON;")
+
+        cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
+        row = cursor.fetchone()
+        if row:
+            userId = row[0]
+            cursor.execute("INSERT INTO reports (reportText, createdAt, userId) VALUES (?,?,?)", (report_text, timestamp, userId))
+            conn.commit() 
+            status = "success"
+            message = "Bericht eingetragen"
+        else:
+            status = "error"
+            message = "Benutzer fehlt"
 
     except sqlite3.Error as e:
         status = "error"
-        message = e
+        message = str(e)
     finally:
         conn.close()
     

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./Sidebar.module.css"
 import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
-import Modal from './Modal.jsx'
+import SettingsModal from './SettingsModal.jsx'
 import { RxPencil2, RxGear, RxSun, RxMoon } from "react-icons/rx"
 import { getStore } from "./Store.jsx"
 
@@ -49,7 +49,7 @@ export default function Sidebar() {
                     </div>}
                 </div>
             </div>
-            {modalText && <Modal text={modalText} onClose={() => setModalText("")} />}
+            {modalText && <SettingsModal text={modalText} onClose={() => setModalText("")} />}
         </>
     )
 }
