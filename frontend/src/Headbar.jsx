@@ -15,9 +15,8 @@ export default function Headbar() {
   if (username) {
     setUsername("");
     setInformationModalText("Erfolgreich abgemeldet")
-
   } else {
-    setShowRegisterMenu(!showRegisterMenu);
+    setShowRegisterMenu(true);
   }
 }
     return (

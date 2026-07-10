@@ -4,13 +4,15 @@ import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
 import SettingsModal from './SettingsModal.jsx'
 import { RxPencil2, RxGear, RxSun, RxMoon } from "react-icons/rx"
+import InformationModal from './InformationModal.jsx'
 import { getStore } from "./Store.jsx"
 
 export default function Sidebar() {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const settingsOpenRef = useRef();
     const [modalText, setModalText] = useState("")
-    const { theme, setTheme } = getStore();
+    const [informationModalText, setInformationModalText] = useState("")
+    const { theme, setTheme , username} = getStore();
 
     useEffect(() => {
         function clickOutside(e) {
@@ -29,6 +31,14 @@ export default function Sidebar() {
         };
     }, [])
 
+  const handleClick = () => {
+  if (username) {
+   setModalText("report")
+  } else {
+    setInformationModalText("Anmeldung erforderlich")
+  }
+}
+
     return (
         <>
             <div className={styles.sidebar}>
@@ -43,13 +53,14 @@ export default function Sidebar() {
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
-                            <button className={styles.settingsBtn} onClick={() => setModalText("report")}>Bericht senden</button>
+                            <button className={styles.settingsBtn} onClick={() => handleClick()}>Bericht senden</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("about")}>About</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("version")}>Version</button>
                     </div>}
                 </div>
             </div>
             {modalText && <SettingsModal text={modalText} onClose={() => setModalText("")} />}
+            {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}
         </>
     )
 }

@@ -7,21 +7,21 @@ import { getStore } from "./Store";
 export default function SettingsModal({ text, onClose }) {
     const [reportText, setReportText] = useState("");
     const modalOpenref = useRef();
+    const [informationModalText, setInformationModalText] = useState("")
     const { username } = getStore();
 
-    useEffect(() => {
-        if (text === "report" && !username) {
-            alert("Bitte melde dich an, um einen Bericht zu senden");
-            onClose();
-        }
-    }, [text, username, onClose]);
+    // useEffect(() => {
+    //     if (!username) {
+    //       alert("Bitte melde dich an um einen Bericht zu schreiben")
+    //         onClose();
+    //     }
+    // }, [text, username, onClose]);
 
     const report = async () => {
         const reportData = {
             username: username,
             reportText: reportText.trim()
         }
-
         try {
             const url = "http://172.16.16.106:8000/report"
             const res = await fetch(url, {
@@ -162,7 +162,6 @@ export default function SettingsModal({ text, onClose }) {
                     <div className={styles.content}>{contents[text].content}</div>
                 </div>
             </div>
-
         </>
     )
 }
