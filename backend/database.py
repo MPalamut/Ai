@@ -35,5 +35,14 @@ def init_db():
         )
     ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS tokens (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            dateTime TEXT NOT NULL,
+            tokens INTEGER NOT NULL    
+        )
+    ''')
+
+
     conn.commit()
     conn.close()

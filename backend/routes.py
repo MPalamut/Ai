@@ -86,9 +86,9 @@ def login(data: dict):
     return {"status": status, "message": message}
    
 @router.post("/report")
-async def report(payload: dict):
-    username = payload.get("username")
-    report_text = payload.get("reportText")
+async def report(data: dict):
+    username = data.get("username")
+    report_text = data.get("reportText")
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     try:
@@ -115,3 +115,26 @@ async def report(payload: dict):
         conn.close()
     
     return {"status": status, "message": message}
+
+@router.post("/SaveTokens")
+async def tokens(data: dict):
+    tokens = data.get("tokens")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        cursor.execute("INSERT INTO tokens (dateTime, tokens) VALUES (?)", (timestamp, tokens))
+        conn.commit() 
+        status = "success"
+        message = "Tokens gespeichert"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = str(e)
+    finally:
+        conn.close()
+    
+    return {"status": status, "message": message}
+

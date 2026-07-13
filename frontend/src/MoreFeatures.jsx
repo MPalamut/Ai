@@ -30,7 +30,7 @@ export default function Headbar() {
         <>
             <button className={styles.moreFeatures} title="Mehr Funktionen" onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlineBars /></button>
 
-            {menuopen && <div className={styles.menu} ref={menuOpenRef}>
+            { menuopen && <div className={styles.menu} ref={menuOpenRef}>
                 <div className={styles.menu}>
                     <select className={styles.temperature} title="Denkweise" value={temperature} onChange={e => setTemperature(parseFloat(e.target.value))}>
                         <option value="0.1">Schnelles Denken</option>
@@ -39,7 +39,6 @@ export default function Headbar() {
                     </select>
                     </div>
             </div>}
-
         </>
     )
 }

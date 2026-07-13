@@ -21,9 +21,6 @@ export default function Input() {
         setLoading(true)
 
         try {
-            abortControllerRef.current = new AbortController();
-            const signal = abortControllerRef.current.signal;
-
             const requestData = {
                 input: input.trim(),
                 selectedModel: selectedModel,
@@ -48,8 +45,8 @@ export default function Input() {
             const tokensUsed = data.usage.total_tokens
             const responseID = data.id
 
-            setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
             if (!previousResponse) { setPreviousResponse(responseID) }
+            setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
             setGeneration(previous => previous + 1)
             setCompleteTokens(previous => previous + tokensUsed)
 
@@ -78,9 +75,10 @@ export default function Input() {
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
                         <FetchModels />
+                        <MoreFeatures />
                     </div>
                     <div className={styles.inputFooterRight}>
-                        <MoreFeatures />
+                        
                         <FileUpload />
                     </div>
                 </div>

@@ -2,11 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--mainColor);
+    background-color: transparent;
     color: var(--fontColor);
-    padding: 5px;
-    border: none;
-    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid var(--mainColor);
+    border-radius: .2em
 }
 
 .moreFeatures:hover {
@@ -15,14 +15,14 @@
     transition: all .2s
 }
 
-.menu{
+.menu {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
     position: absolute;
-    top: 1%;
-    right: 1%;
+    top: 2%;
+    left: 1%;
     padding: 15px;
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);

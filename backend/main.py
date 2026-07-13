@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from pypdf import PdfReader
@@ -6,7 +6,11 @@ import base64
 import io
 from docx import Document
 from backend.database import init_db
-from backend.routes import router as api_router
+import sqlite3
+from backend.database import DB_PATH
+import hashlib
+from datetime import datetime
+
 
 app = FastAPI()
 
@@ -25,7 +29,27 @@ app.add_middleware(
 )
 
 init_db()
-app.include_router(api_router)
+
+@app.get("/")
+async def read_root(request: Request):
+    ip = request.client.host
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO visits (ip, dateTime) VALUES (?,?)", (ip, timestamp))
+        conn.commit() 
+        status = "success"
+        message = "Visit saved"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = e
+    finally:
+        conn.close()
+    
+    return {"status": status, "message": message}
 
 @app.get("/models")
 def models():
@@ -43,19 +67,19 @@ async def responses(payload: dict):
     previous_response = payload.get("previousResponse")
     file = payload.get("file")
     image = payload.get("image")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     if file:
         extracted_text = ""
-        doc_type_label = ""
         docx = file.startswith("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document")
 
         if "," in file:
             file = file.split(",")[1]
+            
         file_bytes = base64.b64decode(file)
         file_stream = io.BytesIO(file_bytes)
         
         if docx:
-            doc_type_label = "Word"
             doc = Document(file_stream)
             for para in doc.paragraphs:
                 if para.text:
@@ -72,7 +96,6 @@ async def responses(payload: dict):
                 extracted_text = extracted_text[:max_chars]
                 
         else:
-            doc_type_label = "PDF"
             reader = PdfReader(file_stream)
             for page in reader.pages:
                 text = page.extract_text()
@@ -103,14 +126,8 @@ async def responses(payload: dict):
                 }
             ]
         }
-
-        if previous_response:
-            data["previous_response_id"] = previous_response
-
-        response = requests.post(url, headers=headers, json=data)
-        return response.json()
     
-    if image:
+    elif image:
         data = {
             "model": selected_model,
             "input": 
@@ -131,12 +148,6 @@ async def responses(payload: dict):
                 }
             ]
         }
-        
-        if previous_response:
-            data["previous_response_id"] = previous_response
-
-        response = requests.post(url, headers=headers, json=data)
-        return response.json()
 
     else:
         data = {
@@ -157,8 +168,160 @@ async def responses(payload: dict):
             "temperature": temperature
         }
 
-        if previous_response:
-            data["previous_response_id"] = previous_response
+    if previous_response:
+        data["previous_response_id"] = previous_response
         
-        response = requests.post(url, headers=headers, json=data)
-        return response.json()
+    response = requests.post(url, headers=headers, json=data)
+    responseData = response.json()
+
+    tokens = responseData.get("usage", {}).get("total_tokens", 0)
+    
+    try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+
+            cursor.execute("INSERT INTO tokens (dateTime, tokens) VALUES (?, ?)",(timestamp, tokens))
+            conn.commit()
+    except sqlite3.Error as e:
+            print(f"Datenbankfehler beim Token-Log: {e}")
+    finally:
+        conn.close()
+   
+    return response.json()
+    
+@app.post("/register")
+def register(data: dict):
+    username = data.get("username")
+    password = data.get("password")
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    
+    try: 
+        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            status = "error"
+            message = "Benutzername existiert bereits"
+        
+        else:
+            password_bytes = password.encode('utf-8')
+            hashed_password = hashlib.sha256(password_bytes).hexdigest()
+
+            cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
+            conn.commit()
+            status = "success"
+            message = f"Registrierung erfolgreich! Willkommen, {username}."
+    except sqlite3.Error as e:
+        status = "error"
+        message = f"Datenbankfehler: {str(e)}"
+    finally:
+        conn.close()
+        
+    return {"status": status, "message": message}
+
+@app.post("/login")
+def login(data: dict):
+    username = data.get("username")
+    password = data.get("password")
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, hashed_password))
+        user = cursor.fetchone()
+        if user:
+            status = "success"
+            message = f"Willkommen zurück, {username}!"
+        else:  
+            status = "error"
+            message = "Falscher Benutzername oder Passwort!"
+    except sqlite3.Error as e:
+        status = "error"
+        message = f"Datenbankfehler: {str(e)}"
+    finally:
+        conn.close
+    
+    return {"status": status, "message": message}
+   
+@app.post("/report")
+async def report(data: dict):
+    username = data.get("username")
+    report_text = data.get("reportText")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("PRAGMA foreign_keys = ON;")
+
+        cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
+        row = cursor.fetchone()
+        if row:
+            userId = row[0]
+            cursor.execute("INSERT INTO reports (reportText, createdAt, userId) VALUES (?,?,?)", (report_text, timestamp, userId))
+            conn.commit() 
+            status = "success"
+            message = "Bericht eingetragen"
+        else:
+            status = "error"
+            message = "Benutzer fehlt"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = str(e)
+    finally:
+        conn.close()
+    
+    return {"status": status, "message": message}
+
+@app.post("/saveTokens")
+async def tokens(data: dict):
+    tokens = data.get("tokens")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        cursor.execute("INSERT INTO tokens (dateTime, tokens) VALUES (?)", (timestamp, tokens))
+        conn.commit() 
+        status = "success"
+        message = "Tokens gespeichert"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = str(e)
+    finally:
+        conn.close()
+    
+    return {"status": status, "message": message}
+
+@app.get("/getTokens")
+async def getToken():
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("SELECT SUM(tokens) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
+        resultDaily = cursor.fetchone()
+        tokensDaily = resultDaily[0]
+
+        cursor.execute("SELECT SUM(tokens) FROM tokens")
+        resultAll = cursor.fetchone()
+        tokensAll = resultAll[0]
+
+        status = "success"
+        message = "Get Tokens"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = str(e)
+    finally:
+        conn.close()
+    
+    return {"status": status, "message": message, "tokensDaily": tokensDaily, "tokensAll": tokensAll}

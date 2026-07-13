@@ -4,6 +4,7 @@ import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
 import SettingsModal from './SettingsModal.jsx'
 import { RxPencil2, RxGear, RxSun, RxMoon } from "react-icons/rx"
+import Informations from './Informations.jsx'
 import InformationModal from './InformationModal.jsx'
 import { getStore } from "./Store.jsx"
 
@@ -46,6 +47,7 @@ export default function Sidebar() {
                     <img className={styles.icon} src={icon} alt="Your Ai" />
                     <button className={styles.sidebarBtn} title="Neuer Chat" onClick={() => { window.location.href = "/" }}><RxPencil2 /> <span className={styles.sidebarBtnSpan}>Neuer Chat</span></button>
                     <button className={styles.sidebarBtn} title="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} <span className={styles.sidebarBtnSpan}>Farbmodus</span> </button>
+                    <Informations />
                 </div>
 
                 <div className={styles.footer}>
