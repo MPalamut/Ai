@@ -3,12 +3,13 @@ import styles from "./Sidebar.module.css"
 import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
 import SettingsModal from './SettingsModal.jsx'
-import { RxPencil2, RxGear, RxSun, RxMoon } from "react-icons/rx"
+import { RxPencil2, RxSun, RxMoon, RxBarChart ,RxGear } from "react-icons/rx"
 import Informations from './Informations.jsx'
 import InformationModal from './InformationModal.jsx'
 import { getStore } from "./Store.jsx"
 
 export default function Sidebar() {
+    const [openInformationsMenu, setOpenInformationsMenu] = useState(false)
     const [settingsOpen, setSettingsOpen] = useState(false);
     const settingsOpenRef = useRef();
     const [modalText, setModalText] = useState("")
@@ -47,7 +48,8 @@ export default function Sidebar() {
                     <img className={styles.icon} src={icon} alt="Your Ai" />
                     <button className={styles.sidebarBtn} title="Neuer Chat" onClick={() => { window.location.href = "/" }}><RxPencil2 /> <span className={styles.sidebarBtnSpan}>Neuer Chat</span></button>
                     <button className={styles.sidebarBtn} title="Farbmodus" onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} <span className={styles.sidebarBtnSpan}>Farbmodus</span> </button>
-                    <Informations />
+                    <button className={styles.sidebarBtn} title="Infos" onClick= {() => setOpenInformationsMenu(!openInformationsMenu)}> <RxBarChart /> <span className={styles.sidebarBtnSpan}>Infos</span> </button>
+             
                 </div>
 
                 <div className={styles.footer}>
@@ -61,6 +63,7 @@ export default function Sidebar() {
                     </div>}
                 </div>
             </div>
+            {openInformationsMenu && <Informations onClose={() => setOpenInformationsMenu(false)}/>}
             {modalText && <SettingsModal text={modalText} onClose={() => setModalText("")} />}
             {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}
         </>

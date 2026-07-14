@@ -67,7 +67,7 @@ async def responses(payload: dict):
     previous_response = payload.get("previousResponse")
     file = payload.get("file")
     image = payload.get("image")
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
 
     if file:
         extracted_text = ""
@@ -180,7 +180,7 @@ async def responses(payload: dict):
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO tokens (dateTime, tokens) VALUES (?, ?)",(timestamp, tokens))
+            cursor.execute("INSERT INTO tokens (dateTime, amount) VALUES (?, ?)",(timestamp, tokens))
             conn.commit()
     except sqlite3.Error as e:
             print(f"Datenbankfehler beim Token-Log: {e}")
@@ -287,7 +287,7 @@ async def tokens(data: dict):
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO tokens (dateTime, tokens) VALUES (?)", (timestamp, tokens))
+        cursor.execute("INSERT INTO tokens (dateTime, amount) VALUES (?)", (timestamp, tokens))
         conn.commit() 
         status = "success"
         message = "Tokens gespeichert"
@@ -307,13 +307,17 @@ async def getToken():
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute("SELECT SUM(tokens) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
+        cursor.execute("SELECT SUM(amount) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
         resultDaily = cursor.fetchone()
         tokensDaily = resultDaily[0]
 
-        cursor.execute("SELECT SUM(tokens) FROM tokens")
+        cursor.execute("SELECT SUM(amount) FROM tokens")
         resultAll = cursor.fetchone()
         tokensAll = resultAll[0]
+
+        cursor.execute("SELECT MIN(dateTime) FROM tokens")
+        resultOldestDate = cursor.fetchone()
+        oldestDate = resultOldestDate[0]
 
         status = "success"
         message = "Get Tokens"
@@ -324,4 +328,4 @@ async def getToken():
     finally:
         conn.close()
     
-    return {"status": status, "message": message, "tokensDaily": tokensDaily, "tokensAll": tokensAll}
+    return {"status": status, "message": message, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "oldestDate": oldestDate}
