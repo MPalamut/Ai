@@ -23,7 +23,6 @@ height: 1px;
     color: var(--fontColor);
     border: none;
     transition: all .2s;
-
 }
 
 .headbar a:hover,  .headbar button:hover{    
