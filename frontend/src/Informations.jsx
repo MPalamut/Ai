@@ -72,9 +72,7 @@ export default function Informations({ onClose }) {
                 </div>
 
                 <div className={styles.registered}><span>Registrierte Benutzer</span><span>{usersCount}</span></div>
-                
             </div>
-
         </>
     )
 }
