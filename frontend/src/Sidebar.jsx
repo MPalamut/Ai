@@ -49,7 +49,6 @@ export default function Sidebar() {
                     <button className={styles.sidebarBtn} onClick={() => { window.location.href = "/" }}><RxPencil2 /> <span className={styles.sidebarBtnSpan}>Neuer Chat</span></button>
                     <button className={styles.sidebarBtn} onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} <span className={styles.sidebarBtnSpan}>Farbmodus</span> </button>
                     <button className={styles.sidebarBtn} id="stats" onClick= {() => setOpenInformationsMenu(!openInformationsMenu)}> <RxBarChart /> <span className={styles.sidebarBtnSpan}>Statistik</span> </button>
-             
                 </div>
 
                 <div className={styles.footer}>
