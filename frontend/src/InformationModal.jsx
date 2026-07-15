@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import styles from "./InformationModal.module.css"
 
 export default function InformationModal({ text, onClose }) {
-
     return (
         <>
             <div className={styles.bg} onClick={onClose}>
