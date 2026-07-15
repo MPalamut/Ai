@@ -4,7 +4,7 @@
     align-items: center;
     background-color: transparent;
     color: var(--fontColor);
-    padding: 2px;
+    padding: 5px 10px;
     border: 1px solid var(--mainColor);
     border-radius: .2em
 }
