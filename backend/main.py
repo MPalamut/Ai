@@ -300,13 +300,22 @@ async def tokens(data: dict):
     
     return {"status": status, "message": message}
 
-@app.get("/getTokens")
-async def getToken():
+@app.get("/infos")
+async def infos():
     timestamp = datetime.now().strftime("%Y-%m-%d")
 
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
+        resultPromptsDaily = cursor.fetchone()
+        promptsDaily = resultPromptsDaily[0]
+
+        cursor.execute("SELECT COUNT(*) FROM tokens")
+        resultPromptsAll = cursor.fetchone()
+        promptsAll = resultPromptsAll[0]
+
         cursor.execute("SELECT SUM(amount) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
         resultDaily = cursor.fetchone()
         tokensDaily = resultDaily[0]
@@ -319,6 +328,9 @@ async def getToken():
         resultOldestDate = cursor.fetchone()
         oldestDate = resultOldestDate[0]
 
+        cursor.execute("SELECT COUNT(*) FROM users")
+        resultUsersCount = cursor.fetchone()
+        usersCount = resultUsersCount[0]    
         status = "success"
         message = "Get Tokens"
 
@@ -328,4 +340,4 @@ async def getToken():
     finally:
         conn.close()
     
-    return {"status": status, "message": message, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "oldestDate": oldestDate}
+    return {"status": status, "message": message, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "oldestDate": oldestDate, "usersCount": usersCount}

@@ -1,7 +1,7 @@
 .menu{
     background-color: var(--sidebarSettingsBgColor);
       position: fixed;
-    top: 21%;
+    top: 25%;
     left: 0%;
     padding: 15px;
     color: var(--fontColor);
@@ -16,16 +16,41 @@
 
 .menu div{
     display: flex;
+}
+
+.prompts {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; 
+}
+
+.prompts div{
+    display: flex;
     justify-content: space-between;
-    align-items: center;
+    border-bottom: 1px solid var(--fontColorSecondary);
+}
+
+.tokens {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.tokens div{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--fontColorSecondary);
 }
 
 .small{
 font-size: .8em;
-margin-top: 15px;
 }
 
-
+.registered{
+  display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--fontColorSecondary);
+}
 
 @keyframes openMenu {
     from {
