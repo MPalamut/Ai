@@ -7,7 +7,6 @@
     top: 0px;
     left: 0px;
     height: 100vh;
-    font-size: .9em;
     padding: 10px;
     transition: all .2s ease-in-out;
 }
@@ -96,6 +95,13 @@
     background-color: var(--secondaryColor);
 }
 
+@keyframes openSideBar {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}
+
 @media (max-width: 850px) {
     .sidebar {
         width: 50px;
@@ -108,12 +114,5 @@
     .sidebarBtnSpan {
         display: none;
 
-    }
-}
-
-@keyframes openSideBar {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
     }
 }

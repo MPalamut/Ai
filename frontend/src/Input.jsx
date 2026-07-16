@@ -78,7 +78,6 @@ export default function Input() {
                         <MoreFeatures />
                     </div>
                     <div className={styles.inputFooterRight}>
-                        
                         <FileUpload />
                     </div>
                 </div>

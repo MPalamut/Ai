@@ -11,7 +11,6 @@ from backend.database import DB_PATH
 import hashlib
 from datetime import datetime
 
-
 app = FastAPI()
 
 origins = [
@@ -229,13 +228,15 @@ def login(data: dict):
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    
+    isAdmin = False
     try:
         cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, hashed_password))
         user = cursor.fetchone()
         if user:
             status = "success"
             message = f"Willkommen zurück, {username}!"
+            if user[3] == "admin":
+                isAdmin = True
         else:  
             status = "error"
             message = "Falscher Benutzername oder Passwort!"
@@ -243,9 +244,9 @@ def login(data: dict):
         status = "error"
         message = f"Datenbankfehler: {str(e)}"
     finally:
-        conn.close
+        conn.close()
     
-    return {"status": status, "message": message}
+    return {"status": status, "message": message, "isAdmin": isAdmin}
    
 @app.post("/report")
 async def report(data: dict):
@@ -287,7 +288,7 @@ async def tokens(data: dict):
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO tokens (dateTime, amount) VALUES (?)", (timestamp, tokens))
+        cursor.execute("INSERT INTO tokens (dateTime, amount) VALUES (?,?)", (timestamp, tokens))
         conn.commit() 
         status = "success"
         message = "Tokens gespeichert"

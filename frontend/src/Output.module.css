@@ -84,6 +84,7 @@
 
  .greetingSpan {
    color: rgb(92, 92, 92);
+   text-shadow: 2px 2px 5px black;
  }
 
  .tokens {
@@ -135,8 +136,4 @@
    to {
      border-color: var(--mainColor);
    }
- }
-
- .mybool{
-  position: relative;
  }

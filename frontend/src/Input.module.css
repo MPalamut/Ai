@@ -45,7 +45,7 @@
 
 .sendBtn:disabled {
     background-color: var(--disabledColor);
-    color: rgb(99, 99, 99);
+    color: var(--fontColorSecondary);
      pointer-events: none;
 }
 

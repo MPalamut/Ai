@@ -18,7 +18,7 @@
     color: var(--fontColor);
     border: 1px solid var(--mainColor);
     border-radius: .2em;
-    padding: 5px 10px;
+    padding: 6px;
     transition: all .2s ease-in-out;
 }
 
@@ -32,13 +32,12 @@
     justify-content: center;
     gap: 5px;
     position: absolute;
-    top: -15px;
-    right: 1px;
+    top: 6%;
+    right: 6%;
     padding: 15px;
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);
     border-radius: .5em;
-    font-size: .9em;
     box-shadow: 5px 5px 5px black;
     animation: .2s moveUp ease-in-out;
 }
@@ -72,7 +71,6 @@
 .clearButton {
     background-color: transparent;
     border: none;
-    color: var(--fontColor);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -82,11 +80,4 @@
     width: 16px;
     height: 16px;
     color: red;
-}
-
-@keyframes moveUp {
-    from {
-        opacity: 0;
-        transform: translateY(1px);
-    }
 }

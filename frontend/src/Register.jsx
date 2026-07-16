@@ -9,7 +9,7 @@ export default function Register({ onClose }) {
     const [password, setPassword] = useState("");
     const [authMode, setAuthMode] = useState("register");
     const [informationModalText, setInformationModalText] = useState("")
-    const { setUsername } = getStore()
+    const { setUsername, setAdmin} = getStore()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,6 +66,11 @@ export default function Register({ onClose }) {
                 if (result.status === "success") {
                     setUsername(name);
                     setInformationModalText(result.message)
+                    if(result.isAdmin) {
+                        setAdmin(true)
+                        console.log("admin true")
+                    }
+
                 } else {
                     setInformationModalText(result.message)
                 }

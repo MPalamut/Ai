@@ -7,7 +7,7 @@
 body {
   color: var(--fontColor);
   background-color: var(--backgroundColor);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif
 }
 
 :root {
@@ -41,10 +41,10 @@ body {
   --secondaryColor: rgb(200, 200, 200);
   --fontColor: rgb(255, 255, 255);
   --fontColorSecondary: rgb(201, 201, 201);
-  --backgroundColor: rgb(43, 43, 43);
+  --backgroundColor: rgb(48, 48, 48);
   --outputUserBgColor: rgb(145, 145, 145);
-  --inputColor: rgb(220, 220, 220);
+  --inputColor: rgb(35, 35, 35);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
   --sidebarSettingsHoverBgColor: rgb(125, 125, 125);
-  --disabledColor: rgb(202, 202, 202);
+  --disabledColor: rgb(23, 23, 23);
 }
