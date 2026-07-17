@@ -7,40 +7,7 @@ import { getStore } from "./Store";
 export default function SettingsModal({ text, onClose }) {
     const [reportText, setReportText] = useState("");
     const modalOpenref = useRef();
-    const [informationModalText, setInformationModalText] = useState("")
     const { username } = getStore();
-
-    // useEffect(() => {
-    //     if (!username) {
-    //       alert("Bitte melde dich an um einen Bericht zu schreiben")
-    //         onClose();
-    //     }
-    // }, [text, username, onClose]);
-
-    const report = async () => {
-        const reportData = {
-            username: username,
-            reportText: reportText.trim()
-        }
-        try {
-            const url = "http://172.16.16.106:8000/report"
-            const res = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(reportData)
-            })
-
-            const data = await res.json()
-
-            if (data.status === "success") {
-                alert("Bericht erfolgreich gesendet")
-                setReportText("")
-            } else { alert("Fehler beim Senden des Berichts") }
-        }
-        catch (error) { console.log(error) }
-    }
 
     const contents = {
         dsgvo: {
@@ -137,18 +104,6 @@ export default function SettingsModal({ text, onClose }) {
                 </>
             )
         },
-
-        report: {
-            title: "Bericht senden", content: (
-                <>
-                    <div className={styles.report}>
-                        <textarea value={reportText} onChange={(e) => setReportText(e.target.value)} cols="30" rows="10"></textarea>
-                        <button className={styles.reportBtn} onClick={(e) => { report() }} disabled={reportText.trim() === ""}>Absenden</button>
-                    </div>
-
-                </>
-            )
-        }
     }
 
     return (

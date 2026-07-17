@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef } from "react"
 import styles from "./Register.module.css"
 import InformationModal from './InformationModal';
+import { useNavigate } from 'react-router-dom';
 import { getStore } from "./Store";
 
 export default function Register({ onClose }) {
@@ -9,6 +10,7 @@ export default function Register({ onClose }) {
     const [password, setPassword] = useState("");
     const [authMode, setAuthMode] = useState("register");
     const [informationModalText, setInformationModalText] = useState("")
+    const navigate = useNavigate();
     const { setUsername, setAdmin} = getStore()
 
     const handleSubmit = async (e) => {
@@ -66,9 +68,14 @@ export default function Register({ onClose }) {
                 if (result.status === "success") {
                     setUsername(name);
                     setInformationModalText(result.message)
+
                     if(result.isAdmin) {
                         setAdmin(true)
-                        console.log("admin true")
+                        navigate("/admindashboard")
+                    }
+                    else
+                    {
+                        navigate("/defaultdashboard")
                     }
 
                 } else {

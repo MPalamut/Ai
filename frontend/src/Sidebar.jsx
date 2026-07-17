@@ -26,20 +26,11 @@ export default function Sidebar() {
                 }
             }
         }
-
         document.addEventListener('mouseup', clickOutside);
         return () => {
             document.removeEventListener('mouseup', clickOutside);
         };
     }, [])
-
-  const handleClick = () => {
-  if (username) {
-   setModalText("report")
-  } else {
-    setInformationModalText("Anmeldung erforderlich")
-  }
-}
 
     return (
         <>
@@ -56,7 +47,6 @@ export default function Sidebar() {
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
-                            <button className={styles.settingsBtn} onClick={() => handleClick()}>Bericht senden</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("about")}>About</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("version")}>Version</button>
                     </div>}
