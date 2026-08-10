@@ -40,7 +40,7 @@ async def read_root(request: Request):
         cursor.execute("INSERT INTO visits (ip, dateTime) VALUES (?,?)", (ip, timestamp))
         conn.commit() 
         status = "success"
-        message = "Visit saved"
+        message = "Welcome"
 
     except sqlite3.Error as e:
         status = "error"
