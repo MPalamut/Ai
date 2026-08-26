@@ -12,6 +12,18 @@ import hashlib
 from datetime import datetime
 
 app = FastAPI()
+init_db()
+
+def init():
+   url = "http://172.16.16.106:1234/api/v1/models/load"
+   payload = {"model": "google/gemma-4-e4b"}
+   try:
+         response = requests.post(url, json=payload)
+         response.raise_for_status()
+         print("Model loaded successfully")
+   except Exception as e:
+         print(f"Error loading model: {e}")
+init()
 
 origins = [
     "http://localhost",
@@ -26,8 +38,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-init_db()
 
 @app.get("/")
 async def read_root(request: Request):
