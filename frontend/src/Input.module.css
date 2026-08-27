@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 15px;
     position: absolute;
-    bottom: 5vh;
+    bottom: 15px;
     left: 50vw;
     transform: translateX(-50%);
     width: 50vw;
@@ -102,7 +102,6 @@
     animation: gradientMove .6s ease-in-out infinite alternate;
     box-shadow: 0 0 15px rgb(0, 166, 255);
 }
-
 
 @keyframes gradientMove {
     to {

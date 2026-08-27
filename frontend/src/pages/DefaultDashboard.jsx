@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
-import styles from "../DefaultDashboard.module.css"
+import styles from "./DefaultDashboard.module.css"
 import { getStore } from "../Store";
 
 export default function DefaultDashboard() {
@@ -9,13 +9,7 @@ export default function DefaultDashboard() {
     const { username } = getStore()
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (!username) {
-    //         navigate('/');
-    //     }
-    // }, [username, navigate]);
-
-
+ 
     const report = async () => {
         const reportData = {
             username: username,

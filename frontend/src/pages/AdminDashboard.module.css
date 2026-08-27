@@ -1,0 +1,49 @@
+
+
+.topbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(121, 128, 142);
+    width: 100vw;
+    padding: 15px;
+    gap: 15px;
+}
+
+.topbar button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    background-color: rgb(96, 107, 129);
+    border-radius: .5em;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--fontColor);
+    border: none;
+    transition: all .2s;
+}
+
+.topbar button:hover{
+    filter: brightness(.6);
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.userTable{
+    border-collapse: collapse;
+}
+.userTable th{
+    background-color: royalblue;
+    padding: 2px;
+}
+
+.userTable td{
+    border-bottom: 1px solid #ddd;
+}

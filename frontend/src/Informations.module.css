@@ -1,6 +1,6 @@
 .menu{
     background-color: var(--sidebarSettingsBgColor);
-      position: fixed;
+    position: fixed;
     top: 25%;
     left: 0%;
     padding: 15px;

@@ -202,6 +202,7 @@ async def responses(payload: dict):
 def register(data: dict):
     username = data.get("username")
     password = data.get("password")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
@@ -218,7 +219,7 @@ def register(data: dict):
             password_bytes = password.encode('utf-8')
             hashed_password = hashlib.sha256(password_bytes).hexdigest()
 
-            cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
+            cursor.execute("INSERT INTO users (username, password, registeredAt) VALUES (?, ?, ?)", (username, hashed_password, timestamp))
             conn.commit()
             status = "success"
             message = f"Registrierung erfolgreich! Willkommen, {username}."
@@ -352,3 +353,26 @@ async def infos():
         conn.close()
     
     return {"status": status, "message": message, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "oldestDate": oldestDate, "usersCount": usersCount}
+
+@app.get("/admininfos")
+async def admininfos():
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM users")
+        users = cursor.fetchall()
+
+        cursor.execute("SELECT * FROM reports")
+        reports = cursor.fetchall()
+
+        status = "success"
+        message = "Get Admin Infos"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = str(e)
+    finally:
+        conn.close()
+    
+    return {"status": status, "message": message, "users": users, "reports": reports}
