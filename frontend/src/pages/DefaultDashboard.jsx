@@ -7,9 +7,7 @@ import { getStore } from "../Store";
 export default function DefaultDashboard() {
     const [reportText, setReportText] = useState();
     const { username } = getStore()
-    const navigate = useNavigate();
 
- 
     const report = async () => {
         const reportData = {
             username: username,
