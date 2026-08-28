@@ -72,12 +72,10 @@ export default function Register({ onClose }) {
                     if(result.isAdmin) {
                         setAdmin(true)
                         navigate("/admindashboard")
-                        console.log("Admin logged in")
                     }
                     else
                     {
                         navigate("/defaultdashboard")
-                        console.log("User logged in")
                     }
 
                 } else {

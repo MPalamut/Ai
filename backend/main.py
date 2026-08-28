@@ -363,8 +363,11 @@ async def admininfos():
         cursor.execute("SELECT * FROM users")
         users = cursor.fetchall()
 
-        cursor.execute("SELECT * FROM reports")
+        cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id")
         reports = cursor.fetchall()
+
+        cursor.execute("SELECT Id, dateTime, COUNT(*) FROM tokens GROUP BY dateTime ORDER BY dateTime")
+        tokens = cursor.fetchall()
 
         status = "success"
         message = "Get Admin Infos"
@@ -374,5 +377,5 @@ async def admininfos():
         message = str(e)
     finally:
         conn.close()
-    
-    return {"status": status, "message": message, "users": users, "reports": reports}
+
+    return {"status": status, "message": message, "users": users, "reports": reports, "tokens": tokens}

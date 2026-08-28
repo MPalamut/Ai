@@ -10,7 +10,8 @@ export default function AdminDashboard() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [reports, setReports] = useState([]);
-    const [date, setDate] = useState();
+    const [tokens, setTokens] = useState([]);
+
 
     //  useEffect(() => {
     //         if (!username) {
@@ -24,10 +25,9 @@ export default function AdminDashboard() {
                 const response = await fetch(`http://172.16.16.106:8000/admininfos`);
                 const data = await response.json();
                 setUsers(data.users);
-                // const dateEnglish = new Date(data.date);
-                // const dateGerman = dateEnglish.toLocaleDateString('de-DE')
-
                 setReports(data.reports);
+                setTokens(data.tokens);
+
             } catch (error) {
                 console.error("Error fetching admin infos:", error);
             }
@@ -42,13 +42,13 @@ export default function AdminDashboard() {
             </div>
 
             <div className={styles.main}>
-                <h5>Benutzer</h5>
-                <table className={styles.userTable}>
+                <table>
+                    <caption>Benutzer</caption>
                     <thead>
                         <tr>
-                            <th>Vorname</th>
-                            <th>Nachname</th>
-                            <th>Datum</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Registrierungsdatum</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,16 +62,48 @@ export default function AdminDashboard() {
                     </tbody>
                 </table>
 
-
-
-                <div className={styles.allreports}>
-                    <h5>All Reports</h5>
-                    <ul>
+                <table>
+                    <caption>Reports</caption>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Report</th>
+                            <th>Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {reports.map((report, index) => (
-                            <li key={index}>ID: {report[0]} - Title: {report[1]}</li>
+                            <tr key={index}>
+                                <td>{report[0]}</td>
+                                <td>{report[5]}</td>
+                                <td>{report[1]}</td>
+                                <td>{new Date(report[2]).toLocaleDateString('de-DE')}</td>
+                            </tr>
                         ))}
-                    </ul>
-                </div>
+                    </tbody>
+                </table>
+
+                 <table>
+                    <caption>Prompts</caption>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Datum</th>
+                            <th>Prompts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tokens.map((token, index) => (
+                            <tr key={index}>
+                                <td>{token[0]}</td>
+                                <td>{new Date(token[1]).toLocaleDateString('de-DE')}</td>
+                                <td>{token[2]}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
             </div>
         </>
     )

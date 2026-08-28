@@ -24,12 +24,7 @@ export default function Headbar() {
             <div className={styles.headbar}>
                 <a href="https://snutig.de" target="_blank" title="Homepage" ><AiOutlineHome /></a>
                 <a href="https://github.com/MPalamut/Ai.git" target="_blank" title="Github Repository" > <AiOutlineGithub /> </a>
-                <button className={styles.anmelden} onClick={handleClick}> {username ? (<>
-                    <span>{username}</span>
-                    <span>Abmelden</span>
-                    </>): (
-                    "Anmelden"
-                )} </button>
+                <button className={styles.anmelden} onClick={handleClick}>Anmelden</button>
             </div>
             {showRegisterMenu && (<Register onClose={() => setShowRegisterMenu(false)} />)}
             {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}

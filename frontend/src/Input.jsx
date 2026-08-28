@@ -13,8 +13,6 @@ export default function Input() {
     const abortControllerRef = useRef(null);
     const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
 
-    setTimeout(() => { inputRef.current.focus() }, 1)
-
     async function Responses() {
         setInput("")
         setOutput(prev => [...prev, { text: input }])
