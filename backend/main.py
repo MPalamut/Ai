@@ -28,7 +28,7 @@ init()
 origins = [
     "http://localhost",
     "http://localhost:5173",
-    "http://172.16.16.106:5173"
+    "http://10.10.70.105:5173"
 ]
 
 app.add_middleware(
@@ -62,13 +62,13 @@ async def read_root(request: Request):
 
 @app.get("/models")
 def models():
-    url = "http://172.16.16.106:1234/v1/models"
+    url = "http://10.10.70.105:1234/v1/models"
     response = requests.get(url)
     return response.json()
 
 @app.post("/responses")
 async def responses(payload: dict):
-    url = "http://172.16.16.106:1234/v1/responses"
+    url = "http://10.10.70.105:1234/v1/responses"
     headers = {"Content-Type": "application/json"}
     selected_model = payload.get("selectedModel")
     input_text = payload.get("input")

@@ -55,7 +55,7 @@ export default function Register({ onClose }) {
 
         else {
             try {
-                const response = await fetch(`http://172.16.16.106:8000/login`, {
+                const response = await fetch(`http://10.10.70.105:8000/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

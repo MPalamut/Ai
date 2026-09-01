@@ -12,17 +12,10 @@ export default function AdminDashboard() {
     const [reports, setReports] = useState([]);
     const [tokens, setTokens] = useState([]);
 
-
-    //  useEffect(() => {
-    //         if (!username) {
-    //             navigate('/');
-    //         }
-    //     }, [username, navigate]);
-
     useEffect(() => {
         async function adminInfos() {
             try {
-                const response = await fetch(`http://172.16.16.106:8000/admininfos`);
+                const response = await fetch(`http://10.10.70.105:8000/admininfos`);
                 const data = await response.json();
                 setUsers(data.users);
                 setReports(data.reports);

@@ -14,7 +14,7 @@ export default function DefaultDashboard() {
             reportText: reportText.trim()
         }
         try {
-            const url = "http://172.16.16.106:8000/report"
+            const url = "http://10.10.70.105:8000/report"
             const res = await fetch(url, {
                 method: "POST",
                 headers: {

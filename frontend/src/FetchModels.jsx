@@ -9,7 +9,7 @@ export default function FetchModels() {
     useEffect(() => {
         async function fetchModels() {
             try {
-                const url = "http://172.16.16.106:8000/models"
+                const url = "http://10.10.70.105:8000/models"
                 const res = await fetch(url)
                 const data = await res.json()
                 setModels(data.data)

@@ -1,3 +1,7 @@
+:root {
+  --borderColor : gray;
+}
+
 .topbar {
     display: flex;
     justify-content: space-between;
@@ -39,15 +43,15 @@ table {
 }
 
 table caption {
-    background-color: #2e4753;
-    border: 1px solid #ddd;
+    background-color: #444c6e;
+    border: 1px solid var(--borderColor);
 }
 
 table th,
 td {
-    background-color: rgb(26, 33, 39);
+    background-color: rgb(48, 52, 56);
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--borderColor);
     text-align: center;
 }
 
