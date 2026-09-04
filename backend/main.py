@@ -15,7 +15,7 @@ app = FastAPI()
 init_db()
 
 def init():
-   url = "http://172.16.16.106:1234/api/v1/models/load"
+   url = "http://10.10.70.105:1234/api/v1/models/load"
    payload = {"model": "google/gemma-4-e4b"}
    try:
          response = requests.post(url, json=payload)
