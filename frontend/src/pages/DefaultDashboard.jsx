@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
+import { RxExit } from "react-icons/rx";
 import styles from "./DefaultDashboard.module.css"
 import { getStore } from "../Store";
 
 export default function DefaultDashboard() {
+    const navigate = useNavigate();
     const [reportText, setReportText] = useState();
     const { username } = getStore()
 
@@ -35,7 +37,11 @@ export default function DefaultDashboard() {
 
     return (
         <>
-            <h2>Hi {username}</h2>
+           <div className={styles.topbar}>
+                          <h2>{username}</h2>
+                          <button onClick={() => navigate("/")}> <RxExit /> Abmelden</button>
+                      </div>
+
             <div className={styles.main}>
                  <textarea  value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
             <button onClick={() => {report()}}>Bericht senden</button>

@@ -14,8 +14,7 @@ export default function Informations({ onClose }) {
     useEffect(() => {
         const fetchInformations = async () => {
             try {
-                console.log("INFOS")
-                const url = "http://172.16.16.106:8000/infos"
+                const url = "http://10.10.70.105:8000/infos"
                 const res = await fetch(url, { method: "GET" })
                 const data = await res.json()
                 if (data.status === "success") {
@@ -65,8 +64,8 @@ export default function Informations({ onClose }) {
 
                 <div className={styles.tokens}>
                     <div ><span>Tokenverbrauch heute </span> <span>{tokensDaily}</span></div>
-                    <div><span>Ersparnis heute</span> <span>{savedMoneyToday} €</span></div>
-                    <div><span>Tokenverbrauch gesamt seit {displayDate}</span> <span>{tokensAll}</span></div>
+                    <div><span>Tokenverbrauch gesamt seit {displayDate}</span> <span>{tokensAll}</span></div>    
+                     <div><span>Ersparnis heute</span> <span>{savedMoneyToday} €</span></div>
                     <div><span>Ersparnis gesamt seit {displayDate}</span> <span>{savedMoneyAll} €</span></div>
                     <span className={styles.small}>*Ersparnis gegenüber gängigen KI Sprachmodellen bei  5 € / 1 Mio Token</span>
                 </div>

@@ -32,7 +32,7 @@ export default function Register({ onClose }) {
                 return;
             }
             try {
-                const response = await fetch(`http://172.16.16.106:8000/register`, {
+                const response = await fetch(`http://10.10.70.105:8000/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

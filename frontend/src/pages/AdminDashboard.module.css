@@ -1,13 +1,13 @@
 :root {
-  --borderColor : gray;
+    --borderColor: rgb(106, 122, 153);
+    --buttonColor: rgb(80, 90, 222);
 }
 
 .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(121, 128, 142);
-    width: 100vw;
+    background-color: var(--borderColor);
     padding: 15px;
     gap: 15px;
 }
@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     gap: 2px;
-    background-color: rgb(96, 107, 129);
+    background-color: var(--buttonColor);
     border-radius: .5em;
     padding: 5px;
     cursor: pointer;
@@ -30,11 +30,39 @@
     filter: brightness(.6);
 }
 
+.date{
+    color: white;
+}
+
 .main {
+    display: flex;
+    margin-top: 15px;
+    height: 200px;
+    gap: 50px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    height: 150vh;
+    background-color: var(--borderColor);
+    padding: 15px;
+    color: rgb(3, 3, 3);
+    gap: 55px;
+}
+
+.infos div{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.tables {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 15px;
+    max-height: 150px;
 }
 
 table {
@@ -49,12 +77,9 @@ table caption {
 
 table th,
 td {
-    background-color: rgb(48, 52, 56);
+    background-color: rgb(58, 63, 69);
     padding: 15px;
     border: 1px solid var(--borderColor);
     text-align: center;
 }
 
-table tr {
-    background-color: rgb(113, 120, 131);
-}

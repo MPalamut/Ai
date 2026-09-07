@@ -45,5 +45,14 @@ def init_db():
         )
     ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS documents (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            fileName TEXT NOT NULL,
+            text TEXT NOT NULL,
+            dateTime TEXT NOT NULL   
+        )
+    ''')
+
     conn.commit()
     conn.close()

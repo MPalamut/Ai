@@ -1,6 +1,36 @@
+.topbar{
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--borderColor);
+    padding: 15px;
+    gap: 15px;
+}
+
+.topbar button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    background-color: var(--buttonColor);
+    border-radius: .5em;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--fontColor);
+    border: none;
+    transition: all .2s;
+}
+
+.topbar button:hover {
+    filter: brightness(.6);
+}
+
 .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 15vw;
+    margin: auto;
+    margin-top: 15px;
 }
+

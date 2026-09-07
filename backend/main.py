@@ -74,6 +74,7 @@ async def responses(payload: dict):
     input_text = payload.get("input")
     temperature = payload.get("temperature")
     previous_response = payload.get("previousResponse")
+    fileName = payload.get("fileName")
     file = payload.get("file")
     image = payload.get("image")
     timestamp = datetime.now().strftime("%Y-%m-%d")
@@ -135,7 +136,20 @@ async def responses(payload: dict):
                 }
             ]
         }
-    
+
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+
+            cursor.execute("INSERT INTO documents (fileName, text, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
+            conn.commit()
+
+        except sqlite3.Error as e:
+            status = "error"
+            message = str(e)
+        finally:
+            conn.close()
+
     elif image:
         data = {
             "model": selected_model,
@@ -356,6 +370,7 @@ async def infos():
 
 @app.get("/admininfos")
 async def admininfos():
+    timestamp = datetime.now().strftime("%Y-%m-%d")
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
@@ -363,11 +378,35 @@ async def admininfos():
         cursor.execute("SELECT * FROM users")
         users = cursor.fetchall()
 
+        cursor.execute("SELECT COUNT (*) FROM users")
+        usercount = cursor.fetchall()
+
         cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id")
         reports = cursor.fetchall()
 
+        cursor.execute("SELECT COUNT (*) FROM reports")
+        reportcount = cursor.fetchall()
+
+        cursor.execute("SELECT COUNT(*) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
+        promptsDaily = cursor.fetchone()
+
+        cursor.execute("SELECT COUNT(*) from tokens")
+        promptsAll = cursor.fetchone()
+
         cursor.execute("SELECT Id, dateTime, COUNT(*) FROM tokens GROUP BY dateTime ORDER BY dateTime")
         tokens = cursor.fetchall()
+
+        cursor.execute("SELECT SUM(amount) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
+        tokensDaily = cursor.fetchone()
+        
+        cursor.execute("SELECT SUM(amount) FROM tokens")
+        tokensAll = cursor.fetchone()
+
+        cursor.execute("SELECT * from visits")
+        visits = cursor.fetchall()
+
+        cursor.execute("SELECT * from documents")
+        documents = cursor.fetchall()
 
         status = "success"
         message = "Get Admin Infos"
@@ -378,4 +417,4 @@ async def admininfos():
     finally:
         conn.close()
 
-    return {"status": status, "message": message, "users": users, "reports": reports, "tokens": tokens}
+    return {"status": status, "message": message, "users": users, "usercount": usercount, "reports": reports, "reportcount": reportcount, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokens": tokens, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "visits": visits, "documents": documents}

@@ -11,7 +11,7 @@ export default function Input() {
     const [input, setInput] = useState("")
     const inputRef = useRef()
     const abortControllerRef = useRef(null);
-    const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
+    const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileName, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
 
     async function Responses() {
         setInput("")
@@ -26,7 +26,10 @@ export default function Input() {
             };
 
             if (previousResponse) { requestData.previousResponse = previousResponse; }
-            if (fileBase64) { requestData.file = fileBase64; }
+            if (fileBase64) {
+                requestData.fileName = fileName;
+                requestData.file = fileBase64;
+            }
             if (imageBase64) { requestData.image = imageBase64; }
 
             const url = "http://10.10.70.105:8000/responses"
