@@ -19,12 +19,11 @@ export default function AdminDashboard() {
     const [tokencountall, setTokencountall] = useState();
     const [visits, setVisits] = useState([]);
     const [documents, setDocuments] = useState([]);
+    const [documentsAll, setDocumentsAll] = useState();
     const date = new Date();
 
     useEffect(() => {
         async function adminInfos() {
-
-
             try {
                 const response = await fetch(`http://10.10.70.105:8000/admininfos`);
                 const data = await response.json();
@@ -39,6 +38,7 @@ export default function AdminDashboard() {
                 setTokencountall(data.tokensAll);
                 setVisits(data.visits);
                 setDocuments(data.documents);
+                setDocumentsAll(data.documentsAll)
 
             } catch (error) {
                 console.error("Error fetching admin infos:", error);
@@ -63,7 +63,8 @@ export default function AdminDashboard() {
                         <div><span>Prompts heute: </span> <span>{promptsDaily}</span></div>
                         <div><span>Prompts insgesamt:</span>  <span> {promptsAll}</span> </div><br />
                         <div><span>Tokenverbrauch heute: </span> <span>{tokencountdaily}</span></div>
-                        <div><span>Tokenverbrauch insgesamt </span> <span>{tokencountall}</span></div>
+                        <div><span>Tokenverbrauch insgesamt </span> <span>{tokencountall}</span></div><br />
+                        <div><span>Dokumente </span> <span>{documentsAll}</span></div>
                     </div>
                 </div>
 
@@ -156,7 +157,7 @@ export default function AdminDashboard() {
                             {documents.map((document, index) => (
                                 <tr key={index}>
                                     <td>{document[1]}</td>
-                                    <td>{new Date(document[3]).toLocaleDateString('de-DE')}</td>
+                                    <td>{new Date(document[2]).toLocaleDateString('de-DE')}</td>
                                 </tr>
                             ))}
                         </tbody>

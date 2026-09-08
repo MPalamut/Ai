@@ -8,7 +8,7 @@ import { getStore } from "./Store";
 export default function Register({ onClose }) {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    const [authMode, setAuthMode] = useState("register");
+    const [authMode, setAuthMode] = useState("login");
     const [informationModalText, setInformationModalText] = useState("")
     const navigate = useNavigate();
     const { setUsername, setAdmin} = getStore()
@@ -98,13 +98,13 @@ export default function Register({ onClose }) {
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.authmethod}>
                         <div>
-                            <input type="radio" id="register" value="register" checked={authMode === "register"} onChange={() => setAuthMode("register")} />
-                            <label htmlFor="register">Registrieren</label>
+                            <input type="radio" id="login" value="login" checked={authMode === "login"} onChange={() => setAuthMode("login")} />
+                            <label htmlFor="login">Einloggen</label>
                         </div>
 
                         <div>
-                            <input type="radio" id="login" value="login" checked={authMode === "login"} onChange={() => setAuthMode("login")} />
-                            <label htmlFor="login">Einloggen</label>
+                            <input type="radio" id="register" value="register" checked={authMode === "register"} onChange={() => setAuthMode("register")} />
+                            <label htmlFor="register">Registrieren</label>
                         </div>
                     </div>
                     <input

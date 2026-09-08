@@ -141,7 +141,7 @@ async def responses(payload: dict):
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO documents (fileName, text, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
+            cursor.execute("INSERT INTO documents (fileName, dateTime) VALUES (?, ?)", (fileName, timestamp))
             conn.commit()
 
         except sqlite3.Error as e:
@@ -368,6 +368,28 @@ async def infos():
     
     return {"status": status, "message": message, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "oldestDate": oldestDate, "usersCount": usersCount}
 
+@app.get("/defaultinfos")
+async def defaultinfos(username: str):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("SELECT * from users WHERE username = ?", (username,))
+        result = cursor.fetchone()
+        userId = result[0]
+        registerDate = result[4]
+
+        cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id")
+        reports = cursor.fetchall()
+      
+
+    except sqlite3.Error as e:
+        return {"status": "error", "message": str(e)}
+    finally:
+        conn.close()
+
+    return {"registerDate": registerDate, "reports": reports}
+    
 @app.get("/admininfos")
 async def admininfos():
     timestamp = datetime.now().strftime("%Y-%m-%d")
@@ -390,7 +412,7 @@ async def admininfos():
         cursor.execute("SELECT COUNT(*) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
         promptsDaily = cursor.fetchone()
 
-        cursor.execute("SELECT COUNT(*) from tokens")
+        cursor.execute("SELECT COUNT(*) FROM tokens")
         promptsAll = cursor.fetchone()
 
         cursor.execute("SELECT Id, dateTime, COUNT(*) FROM tokens GROUP BY dateTime ORDER BY dateTime")
@@ -402,11 +424,14 @@ async def admininfos():
         cursor.execute("SELECT SUM(amount) FROM tokens")
         tokensAll = cursor.fetchone()
 
-        cursor.execute("SELECT * from visits")
+        cursor.execute("SELECT * FROM visits")
         visits = cursor.fetchall()
 
-        cursor.execute("SELECT * from documents")
+        cursor.execute("SELECT * FROM documents")
         documents = cursor.fetchall()
+
+        cursor.execute("SELECT Count(*) FROM documents")
+        documentsAll = cursor.fetchone()
 
         status = "success"
         message = "Get Admin Infos"
@@ -417,4 +442,4 @@ async def admininfos():
     finally:
         conn.close()
 
-    return {"status": status, "message": message, "users": users, "usercount": usercount, "reports": reports, "reportcount": reportcount, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokens": tokens, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "visits": visits, "documents": documents}
+    return {"status": status, "message": message, "users": users, "usercount": usercount, "reports": reports, "reportcount": reportcount, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokens": tokens, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "visits": visits, "documents": documents, "documentsAll": documentsAll}
