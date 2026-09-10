@@ -4,8 +4,10 @@ import styles from "./Informations.module.css"
 
 export default function Informations({ onClose }) {
     const [promptsDaily, setPromptsDaily] = useState()
-    const [promptsAll, setPromptsAll] = useState()
     const [tokensDaily, setTokensDaily] = useState();
+    const [visits, setVisits] = useState();
+    const [promptsAll, setPromptsAll] = useState()
+  
     const [tokensAll, setTokensAll] = useState();
     const [oldestDate, setOldestDate] = useState("");
     const [usersCount, setUsersCount] = useState()
@@ -19,11 +21,14 @@ export default function Informations({ onClose }) {
                 const data = await res.json()
                 if (data.status === "success") {
                     setPromptsDaily(data.promptsDaily)
-                    setPromptsAll(data.promptsAll)
                     setTokensDaily(data.tokensDaily);
-                    setTokensAll(data.tokensAll);
-                    setOldestDate(data.oldestDate)
-                    setUsersCount(data.usersCount)
+                    setVisits(data.visits);
+                    
+                    // setPromptsAll(data.promptsAll)
+         
+                    // setTokensAll(data.tokensAll);
+                    // setOldestDate(data.oldestDate)
+                    // setUsersCount(data.usersCount)
                 }
 
             } catch (error) { console.error(error) }
@@ -48,30 +53,22 @@ export default function Informations({ onClose }) {
         return date.toLocaleDateString("de-DE");
     };
 
-    const displayDate = formatDateGerman(oldestDate)
-    const tokenprice = 0.000005
-    const savedMoneyToday = (tokensDaily * tokenprice).toFixed(2)
-    const savedMoneyAll = (tokensAll * tokenprice).toFixed(2)
+    // const displayDate = formatDateGerman(oldestDate)
+    // const tokenprice = 0.000005
+    // const savedMoneyToday = (tokensDaily * tokenprice).toFixed(2)
+    // const savedMoneyAll = (tokensAll * tokenprice).toFixed(2)
 
     return (
         <>
             <div className={styles.menu} ref={menuRef} >
 
-                <div className={styles.prompts}>
-                    <div><span>Prompts heute </span> <span>{promptsDaily}</span></div>
-                    <div><span>Prompts seit {displayDate} </span> <span>{promptsAll}</span></div>
-                </div>
-
-                <div className={styles.tokens}>
-                    <div ><span>Tokenverbrauch heute </span> <span>{tokensDaily}</span></div>
-                    <div><span>Tokenverbrauch gesamt seit {displayDate}</span> <span>{tokensAll}</span></div>    
-                     <div><span>Ersparnis heute</span> <span>{savedMoneyToday} €</span></div>
-                    <div><span>Ersparnis gesamt seit {displayDate}</span> <span>{savedMoneyAll} €</span></div>
-                    <span className={styles.small}>*Ersparnis gegenüber gängigen KI Sprachmodellen bei  5 € / 1 Mio Token</span>
-                </div>
-
-                <div className={styles.registered}><span>Registrierte Benutzer</span><span>{usersCount}</span></div>
+                <div className={styles.info}>
+                    <span>Heutige Statistik</span><br />
+                    <div><span>Prompts</span> <span>{promptsDaily}</span></div>
+                    <div ><span>Tokenverbrauch</span> <span>{tokensDaily}</span></div>
+                     <div ><span>Visits</span> <span>{visits}</span></div>
             </div>
+           </div>
         </>
     )
 }

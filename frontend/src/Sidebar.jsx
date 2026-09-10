@@ -39,7 +39,7 @@ export default function Sidebar() {
                     <img className={styles.icon} src={icon} alt="Your Ai" />
                     <button className={styles.sidebarBtn} onClick={() => { window.location.href = "/" }}><RxPencil2 /> <span className={styles.sidebarBtnSpan}>Neuer Chat</span></button>
                     <button className={styles.sidebarBtn} onClick={() => setTheme(theme === "root" ? "light" : "root")}>{theme === "root" ? <RxSun /> : <RxMoon />} <span className={styles.sidebarBtnSpan}>Farbmodus</span> </button>
-                    <button className={styles.sidebarBtn} id="stats" onClick= {() => setOpenInformationsMenu(!openInformationsMenu)}> <RxBarChart /> <span className={styles.sidebarBtnSpan}>Statistiken</span> </button>
+                    <button className={styles.sidebarBtn} id="stats" onClick= {() => setOpenInformationsMenu(!openInformationsMenu)}> <RxBarChart /> <span className={styles.sidebarBtnSpan}>Statistik</span> </button>
                 </div>
 
                 <div className={styles.footer}>
@@ -48,7 +48,6 @@ export default function Sidebar() {
                         <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("about")}>About</button>
-                        <button className={styles.settingsBtn} onClick={() => setModalText("version")}>Version</button>
                     </div>}
                 </div>
             </div>

@@ -13,85 +13,76 @@ export default function SettingsModal({ text, onClose }) {
         dsgvo: {
             title: "Datenschutz", content: (
                 <>
-                    <p>Dieses System nutzt zur Verarbeitung von Texteingaben und zur Generierung von Antworten eine rein lokale künstliche Intelligenz (KI) über die Software LM Studio innerhalb unseres geschlossenen Unternehmensnetzwerks.</p>
-                    <p>Im Gegensatz zu herkömmlichen, cloudbasierten KI-Diensten (wie ChatGPT, Copilot oder Claude) unterscheidet sich diese Architektur maßgeblich in Bezug auf den Schutz sensibler Unternehmensdaten:</p>
+                    <p>Dieses System nutzt zur Verarbeitung von Texteingaben und zur Generierung von Antworten ein lokales Sprachmodell über die Software LM Studio innerhalb unseres geschlossenen Unternehmensnetzwerks.</p>
+                    <p>Im Gegensatz zu herkömmlichen, cloudbasierten KI-Diensten unterscheidet sich diese Architektur maßgeblich in Bezug auf den DSGVO Aspekt.</p>
 
                     <br />
-                    <p><strong>Keine Datenübertragung ins Internet:</strong> Alle eingegebenen Texte, Prompts, internen Dokumente, Quellcodes, Kundendaten oder sonstigen geschäftlichen Informationen werden ausschließlich auf unserer lokalen Hardware bzw. auf Servern in unserem eigenen lokalen Netzwerk (LAN) verarbeitet.</p>
-                    <p><strong>Absoluter Schutz vor Daten-Leaks und Spionage:</strong> Da das System vollständig offline operiert und keine Verbindung zu zentralen Datenbanken externer KI-Anbieter herstellt, ist ein Abfließen (Leak) von Betriebs- und Geschäftsgeheimnissen ausgeschlossen.</p>
-                    <p><strong>Kein KI-Training mit Unternehmensdaten:</strong> Die eingegebenen Informationen und Dokumente werden nicht dazu verwendet, um das zugrundeliegende Sprachmodell weiterzuentwickeln oder zu trainieren.</p>
-                    <p><strong>Einhaltung von Compliance und DSGVO:</strong> Da keine Datenverarbeitung durch externe Dritte im Ausland stattfindet, entfallen die typischen datenschutzrechtlichen Risiken.</p>
+                    <p>Keine Datenübertragung ins Internet: Alle eingegebenen Texte, internen Dokumente, Quellcodes, Kundendaten oder sonstigen geschäftlichen Informationen werden ausschließlich auf unserer lokalen Hardware bzw. auf Servern in unserem eigenen lokalen Netzwerk verarbeitet.</p> <br />
+                    <p>Absoluter Schutz vor Daten-Leaks und Spionage: Da das System vollständig offline operiert und keine Verbindung zu zentralen Datenbanken externer KI-Anbieter herstellt, ist ein Abfließen von Betriebs- und Geschäftsgeheimnissen ausgeschlossen.</p> <br />
+                    <p>Einhaltung der Richtlinien: Da keine Datenverarbeitung durch externe Dritte im Ausland stattfindet, entfallen die typischen datenschutzrechtlichen Risiken.</p>
 
                     <br />
-                    <p className={styles.hinweis}>Lokale Sprachmodelle können fehlerhafte, unvollständige oder irreführende Informationen generieren. Die Ergebnisse der KI dürfen nicht ungeprüft in geschäftliche Entscheidungen, offizielle Dokumente oder Kundenkommunikationen übernommen werden und ersetzen nicht den fachlichen Verstand.</p>
+                    <p className={styles.hinweis}>Lokale Sprachmodelle können fehlerhafte, unvollständige oder irreführende Informationen generieren. Die Ergebnisse der KI sollten daher nicht ungeprüft in geschäftliche Entscheidungen, offizielle Dokumente oder Kundenkommunikationen übernommen werden und ersetzen nicht den fachlichen Verstand.</p>
                 </>
             )
         },
         hilfe: {
             title: "Bedienung und Tips", content: (
                 <>
-                    <p>Unsere lokale KI liefert die besten Ergebnisse, wenn deine Anfragen (Prompts) klar strukturiert sind. Nutze diese bewährten Best Practices:</p>
+                    <p>Das Sprachmodell liefert die besten Ergebnisse, wenn deine Prompts klar strukturiert sind. Nutze diese bewährten Tricks:</p>
 
                     <br />
-                    <h2>Das "Rolle-Kontext-Aufgabe"-Prinzip</h2>
-                    <p>Sag der KI genau, wer sie ist und wofür du das Ergebnis brauchst. Das verbessert die Qualität enorm:</p>
-                    <p><strong>Rolle:</strong> "Agiere als erfahrener Softwareentwickler..." oder "Du bist Marketing-Experte..."</p>
-                    <p><strong>Kontext:</strong> "...für ein internes Projekt im Bereich X..."</p>
-                    <p><strong>Aufgabe:</strong> "...erstelle mir eine verständliche Zusammenfassung."</p>
+                    <h3>Rolle Prinzip</h3>
+                    <p>Sag der KI genau, wer sie ist und wofür du das Ergebnis brauchst. Das verbessert die Qualität enorm.</p>
+                    <p>Rolle: "Agiere als erfahrener Softwareentwickler" oder "Du bist Marketing-Experte"</p>
+                    <p>Kontext: "Für ein internes Projekt im Bereich X"</p>
+                    <p>Aufgabe: "Erstelle mir eine verständliche Zusammenfassung"</p>
 
                     <br />
-                    <h2>Formatierung der Ausgabe vorgeben</h2>
-                    <p>Du kannst der KI exakt vorschreiben, in welcher Form du die Antwort haben möchtest:</p>
-                    <p><strong>Tabellen:</strong> "Gib das Ergebnis als übersichtliche HTML-Tabelle aus."</p>
-                    <p><strong>Listen:</strong> "Erstelle eine Bullet-Point-Liste, sortiert nach Priorität."</p>
-                    <p><strong>Vorlagen:</strong> "Schreibe die Antwort als kurze, formelle E-Mail-Vorlage."</p>
+                    <h3>Formatierung der Ausgabe vorgeben</h3>
+                    <p>Du kannst exakt vorschreiben, in welcher Form du die Antwort haben möchtest.</p>
+                    <p>Tabellen: "Gib das Ergebnis als übersichtliche HTML-Tabelle aus."</p>
+                    <p>Listen: "Erstelle eine Liste, sortiert nach Priorität."</p>
+                    <p>Vorlagen: "Schreibe die Antwort als kurze, formelle E-Mail-Vorlage."</p>
 
                     <br />
-                    <h2>Iteratives Arbeiten (Nachbessern)</h2>
-                    <p>Die erste Antwort ist selten perfekt. Du kannst das Ergebnis in Folge-Anfragen schrittweise verfeinern:</p>
-                    <p><strong>Kürzen:</strong> "Schreibe das etwas kürzer und weniger technisch."</p>
-                    <p><strong>Erweitern:</strong> "Füge zu Punkt 2 noch ein konkretes Praxisbeispiel hinzu."</p>
-                    <p><strong>Tonfall:</strong> "Formuliere den Tonfall etwas diplomatischer."</p>
+                    <h3>Nachbearbeitung</h3>
+                    <p>Die erste Antwort ist selten perfekt. Du kannst das Ergebnis schrittweise verfeinern.</p>
+                    <p>Kürzen: "Schreibe das etwas kürzer und weniger technisch"</p>
+                    <p>Erweitern: "Füge zu diesem Punkt noch ein konkretes Praxisbeispiel hinzu"</p>
+                    <p>Formulierung: "Formuliere das ganze etwas diplomatischer"</p>
 
                     <br />
-                    <h2>Tipp zur Sprache</h2>
-                    <p>Da viele Open-Source-Modelle primär mit englischen Daten trainiert wurden, sind sie bei komplexen logischen Aufgaben oder beim Programmieren (Coding) auf Englisch oft noch präziser. Bei Bedarf kannst du die KI das Ergebnis danach einfach auf Deutsch übersetzen lassen.</p>
+                    <h3>Tipps zur Sprache</h3>
+                    <p>Da viele Open-Source-Modelle primär mit englischen Daten trainiert wurden, sind sie bei komplexen logischen Aufgaben oder beim Programmieren auf Englisch oft noch präziser. Bei Bedarf kannst du die KI das Ergebnis danach einfach auf Deutsch übersetzen lassen.</p>
                 </>
             )
         },
         about: {
             title: "About", content: (
-                <><h2>Frameworks</h2>
-                    <p><strong>LM Studio API:</strong> Als lokale Schnittstelle für die Ausführung der Open-Source-Modelle.</p>
-                    <p><strong>React & Vite:</strong> Für eine schnelle, reaktive Benutzeroberfläche als Frontend.</p>
-                    <p><strong>FastAPI:</strong> Im Backend für eine asynchrone und blitzschnelle Kommunikation.</p>
-
-                    <br />
-                    <h2>Code und Repository</h2>
-                    <p><strong>GitHub:</strong> <a href="https://github.com/MPalamut/Ai" target="_blank" rel="noreferrer">github.com/MPalamut/Ai</a></p>
-                    <p><strong>Lizenz:</strong> MIT Lizenz (Freie Nutzung und Modifikation)</p>
-
-                    <br />
-                    <h2>Kontakt</h2>
-                    <p><strong>Entwickler:</strong> Murat Palamut</p>
-                    <p><strong>E-Mail:</strong> murat.palamut@snutig.de</p>
-                </>
-            )
-        },
-        version: {
-            title: "Version", content: (
                 <>
-                    <p><strong>Aktuelle Version:</strong> v1.2</p>
-                    <p><strong>Veröffentlichung:</strong> 01. Juli 2026</p>
-                    <p><strong>Lizensierung</strong> MIT Open Source Lizenz</p>
+                    <p>Aktuelle Version: v1.1</p>
+                    <p>Veröffentlichung: 01. Oktober 2026</p>
+                    <p>Lizensierung: MIT Open Source Lizenz</p>
                     <br />
-                    <h2>Urheberrecht (c) 2026 snutig GmbH</h2>
-                    <p> 
-                        Hiermit wird jeder Person, die eine Kopie dieser Software besitzt, gebührenfrei die Erlaubnis erteilt,
-                        uneingeschränkt mit der Software zu handeln, einschließlich, aber nicht beschränkt auf das Recht, sie zu nutzen, zu kopieren, zu modifizieren, zusammenzufügen,
-                        zu veröffentlichen, zu verbreiten, unterzulizenzieren und/oder Kopien der Software zu verkaufen, und Personen, denen die Software zur Verfügung gestellt wird,
+                    <h3>Urheberrecht (c) 2026 snutig GmbH</h3>
+
+                    <br />
+                    <h3>Code und Repository</h3>
+                    <p>GitHub: <a href="https://github.com/MPalamut/Ai" target="_blank" rel="noreferrer">github.com/MPalamut/Ai</a></p>
+                    <p>Lizenz: MIT Lizenz (Freie Nutzung und Modifikation)</p>
+
+                    <br />
+                    <h3>Kontakt</h3>
+                    <p>Entwickler: Murat Palamut</p>
+                    <p>E-Mail: murat.palamut@snutig.de</p>
+                    <br />
+                    <p>
+                        Jedem, der eine Kopie dieser Software und der zugehörigen Dokumentationsdateien erhält, wird hiermit kostenlos die Erlaubnis erteilt,
+                        ohne Einschränkung mit der Software zu handeln, einschließlich und ohne Einschränkung der Rechte zur Nutzung, zum Kopieren, Ändern, Zusammenführen,
+                        Veröffentlichen, Verteilen, Unterlizenzieren und/oder Verkaufen von Kopien der Software, und Personen, denen die Software zur Verfügung gestellt wird,
                         dies unter den folgenden Bedingungen zu gestatten:
-                        Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+                        Der obige Urheberrechtshinweis und dieser Genehmigungshinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
                     </p>
                     <br />
                     <p>
@@ -100,10 +91,9 @@ export default function SettingsModal({ text, onClose }) {
                         In keinem Fall sind die Autoren oder Urheberrechtsinhaber für Ansprüche, Schäden oder sonstige Haftung haftbar, ob in Folge eines Vertrages,
                         einer unerlaubten Handlung oder anderweitig, die sich aus, oder in Verbindung mit der Software oder der Nutzung oder anderen Geschäften mit der Software ergeben.
                     </p>
-
                 </>
             )
-        },
+        }
     }
 
     return (

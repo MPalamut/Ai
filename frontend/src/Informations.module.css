@@ -18,38 +18,16 @@
     display: flex;
 }
 
-.prompts {
+.info {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px; 
 }
 
-.prompts div{
+.info div{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--fontColorSecondary);
-}
-
-.tokens {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.tokens div{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--fontColorSecondary);
-}
-
-.small{
-font-size: .8em;
-}
-
-.registered{
-  display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--fontColorSecondary);
+    gap: 15px;
 }
 
 @keyframes openMenu {

@@ -30,7 +30,32 @@
     filter: brightness(.6);
 }
 
-.date{
+.right{
+    display: flex;
+    gap: 15px;
+}
+
+.settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    top: 55px;
+    right: 55px;
+    padding: 15px;
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    box-shadow: 5px 5px 5px black;
+}
+
+.settings div{
+display: flex;
+gap: 5px;
+}
+
+.date {
     color: white;
 }
 
@@ -52,17 +77,23 @@
     gap: 55px;
 }
 
-.infos div{
+.infos div {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.diagramms {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 90vh;
 }
 
 .tables {
     display: flex;
     justify-content: center;
     gap: 15px;
-    height: 450px;
     overflow: auto;
 }
 
@@ -82,6 +113,4 @@ td {
     padding: 15px;
     border: 1px solid var(--borderColor);
     text-align: center;
-    height: 100%;
 }
-

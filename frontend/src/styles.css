@@ -13,7 +13,7 @@ body {
 :root {
   --mainColor: rgb(153, 181, 150);
   --secondaryColor: #343e3d;
-  --fontColor: rgb(251, 251, 251);
+  --fontColor: rgb(255, 255, 255);
   --fontColorSecondary: rgb(0, 0, 0);
   --backgroundColor: rgb(29, 29, 29);
   --outputUserBgColor: rgb(49, 49, 49);
@@ -40,11 +40,11 @@ body {
   --mainColor: rgb(0, 0, 0); 
   --secondaryColor: rgb(200, 200, 200);
   --fontColor: rgb(255, 255, 255);
-  --fontColorSecondary: rgb(201, 201, 201);
-  --backgroundColor: rgb(48, 48, 48);
+  --fontColorSecondary: rgb(227, 227, 227);
+  --backgroundColor: rgb(75, 75, 75);
   --outputUserBgColor: rgb(145, 145, 145);
   --inputColor: rgb(35, 35, 35);
-  --sidebarSettingsBgColor: rgb(220, 220, 220);
+  --sidebarSettingsBgColor: rgb(93, 93, 93);
   --sidebarSettingsHoverBgColor: rgb(125, 125, 125);
   --disabledColor: rgb(23, 23, 23);
 }

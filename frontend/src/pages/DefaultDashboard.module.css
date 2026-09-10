@@ -25,6 +25,27 @@
     filter: brightness(.6);
 }
 
+.right{
+    display: flex;
+    gap: 15px;
+}
+
+.settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    top: 55px;
+    right: 55px;
+    padding: 15px;
+    background-color: var(--sidebarSettingsBgColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    box-shadow: 5px 5px 5px black;
+}
+
+
 .main {
     display: flex;
     margin-top: 15px;
@@ -41,6 +62,12 @@
     gap: 55px;
 }
 
+.infos div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
 .mainbar{
     display: flex;
     align-items: center;
@@ -51,20 +78,32 @@
 
 .report{
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    width: 15vw;
+    gap: 15px;
+    background-color: rgb(98, 105, 118);
+    width: 100%;
+    padding: 15px;
 }
 
 .report textarea{
     height: 15vh;
+    width: 500px;
 }
 
 .report button{
     padding: 15px;
     background-color: rgb(105, 112, 125);
     cursor: pointer;
+    width: 500px;
 }
 
 .date {
     color: white;
+}
+
+.tables{
+    display: flex;
+    gap: 15px;
 }

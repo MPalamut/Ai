@@ -42,7 +42,7 @@ app.add_middleware(
 @app.get("/")
 async def read_root(request: Request):
     ip = request.client.host
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
 
     try:
         conn = sqlite3.connect(DB_PATH)
@@ -67,7 +67,8 @@ def models():
     return response.json()
 
 @app.post("/responses")
-async def responses(payload: dict):
+async def responses(request: Request, payload: dict):
+    ip = request.client.host
     url = "http://10.10.70.105:1234/v1/responses"
     headers = {"Content-Type": "application/json"}
     selected_model = payload.get("selectedModel")
@@ -203,7 +204,7 @@ async def responses(payload: dict):
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO tokens (dateTime, amount) VALUES (?, ?)",(timestamp, tokens))
+            cursor.execute("INSERT INTO tokens (dateTime, amount, ip) VALUES (?, ?, ?)",(timestamp, tokens, ip))
             conn.commit()
     except sqlite3.Error as e:
             print(f"Datenbankfehler beim Token-Log: {e}")
@@ -277,7 +278,7 @@ def login(data: dict):
 async def report(data: dict):
     username = data.get("username")
     report_text = data.get("reportText")
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
 
     try:
         conn = sqlite3.connect(DB_PATH)
@@ -304,28 +305,6 @@ async def report(data: dict):
     
     return {"status": status, "message": message}
 
-@app.post("/saveTokens")
-async def tokens(data: dict):
-    tokens = data.get("tokens")
-    timestamp = datetime.now().strftime("%Y-%m-%d")
-
-    try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-
-        cursor.execute("INSERT INTO tokens (dateTime, amount) VALUES (?,?)", (timestamp, tokens))
-        conn.commit() 
-        status = "success"
-        message = "Tokens gespeichert"
-
-    except sqlite3.Error as e:
-        status = "error"
-        message = str(e)
-    finally:
-        conn.close()
-    
-    return {"status": status, "message": message}
-
 @app.get("/infos")
 async def infos():
     timestamp = datetime.now().strftime("%Y-%m-%d")
@@ -338,25 +317,29 @@ async def infos():
         resultPromptsDaily = cursor.fetchone()
         promptsDaily = resultPromptsDaily[0]
 
-        cursor.execute("SELECT COUNT(*) FROM tokens")
-        resultPromptsAll = cursor.fetchone()
-        promptsAll = resultPromptsAll[0]
-
         cursor.execute("SELECT SUM(amount) FROM tokens WHERE date(dateTime) = ?", (timestamp,))
         resultDaily = cursor.fetchone()
         tokensDaily = resultDaily[0]
 
-        cursor.execute("SELECT SUM(amount) FROM tokens")
-        resultAll = cursor.fetchone()
-        tokensAll = resultAll[0]
+        cursor.execute("SELECT COUNT(DISTINCT ip) FROM visits WHERE date(dateTime) = ?", (timestamp,))
+        visits = cursor.fetchall()
 
-        cursor.execute("SELECT MIN(dateTime) FROM tokens")
-        resultOldestDate = cursor.fetchone()
-        oldestDate = resultOldestDate[0]
+        # cursor.execute("SELECT COUNT(*) FROM tokens")
+        # resultPromptsAll = cursor.fetchone()
+        # promptsAll = resultPromptsAll[0]
 
-        cursor.execute("SELECT COUNT(*) FROM users")
-        resultUsersCount = cursor.fetchone()
-        usersCount = resultUsersCount[0]    
+        # cursor.execute("SELECT SUM(amount) FROM tokens")
+        # resultAll = cursor.fetchone()
+        # tokensAll = resultAll[0]
+
+        # cursor.execute("SELECT MIN(dateTime) FROM tokens")
+        # resultOldestDate = cursor.fetchone()
+        # oldestDate = resultOldestDate[0]
+
+        # cursor.execute("SELECT COUNT(*) FROM users")
+        # resultUsersCount = cursor.fetchone()
+        # usersCount = resultUsersCount[0]   
+
         status = "success"
         message = "Get Tokens"
 
@@ -366,29 +349,37 @@ async def infos():
     finally:
         conn.close()
     
-    return {"status": status, "message": message, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "oldestDate": oldestDate, "usersCount": usersCount}
+    return {"status": status, "message": message, "promptsDaily": promptsDaily, "tokensDaily": tokensDaily, "visits": visits}
 
 @app.get("/defaultinfos")
-async def defaultinfos(username: str):
+async def defaultinfos(request: Request, username: str):
+    ip = request.client.host
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     try:
         cursor.execute("SELECT * from users WHERE username = ?", (username,))
         result = cursor.fetchone()
-        userId = result[0]
         registerDate = result[4]
 
-        cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id")
+        cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id WHERE users.username = ?", (username,))
         reports = cursor.fetchall()
-      
+
+        cursor.execute("SELECT COUNT(*) FROM reports JOIN users on reports.userId = users.id WHERE users.username = ?", (username,))
+        reportCount = cursor.fetchall()
+
+        cursor.execute("SELECT * FROM tokens WHERE ip = ?", (ip,))
+        tokens = cursor.fetchall()
+
+        cursor.execute("SELECT SUM(amount) FROM tokens WHERE ip = ?", (ip,))
+        tokenCount = cursor.fetchall()
 
     except sqlite3.Error as e:
         return {"status": "error", "message": str(e)}
     finally:
         conn.close()
 
-    return {"registerDate": registerDate, "reports": reports}
+    return {"registerDate": registerDate, "reports": reports, "reportCount": reportCount, "tokens": tokens, "tokenCount": tokenCount}
     
 @app.get("/admininfos")
 async def admininfos():
@@ -427,6 +418,9 @@ async def admininfos():
         cursor.execute("SELECT * FROM visits")
         visits = cursor.fetchall()
 
+        cursor.execute("SELECT COUNT(DISTINCT ip) FROM visits")
+        visitCount = cursor.fetchall()
+
         cursor.execute("SELECT * FROM documents")
         documents = cursor.fetchall()
 
@@ -442,4 +436,41 @@ async def admininfos():
     finally:
         conn.close()
 
-    return {"status": status, "message": message, "users": users, "usercount": usercount, "reports": reports, "reportcount": reportcount, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokens": tokens, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "visits": visits, "documents": documents, "documentsAll": documentsAll}
+    return {"status": status, "message": message, "users": users, "usercount": usercount, "reports": reports, "reportcount": reportcount, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokens": tokens, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "visits": visits, "visitCount": visitCount, "documents": documents, "documentsAll": documentsAll}
+
+@app.post("/changepassword")
+async def changepassword(data: dict):
+    username = data.get("username")
+    oldPassword = data.get("oldPassword")
+    newPassword = data.get("newPassword")
+
+    hashedOldPasswordBytes = oldPassword.encode('utf-8')
+    hashedOldPassword = hashlib.sha256(hashedOldPasswordBytes).hexdigest()
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        user = cursor.fetchone()
+        hashedOldpw = user[2]
+        if hashedOldPassword == hashedOldpw:
+            hashedNewPasswordBytes = newPassword.encode("utf-8")
+            hashedNewPassword = hashlib.sha256(hashedNewPasswordBytes).hexdigest()
+            cursor.execute("UPDATE users SET password = ? WHERE username = ?", (hashedNewPassword, username))
+            conn.commit()
+   
+        status = "success"
+        message = "Get Admin Infos"
+
+    except sqlite3.Error as e:
+        status = "error"
+        message = str(e)
+    finally:
+        conn.close()
+
+    return {"status": status, "message": message}
+
+
+
+

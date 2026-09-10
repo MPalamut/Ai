@@ -41,7 +41,8 @@ def init_db():
         CREATE TABLE IF NOT EXISTS tokens (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             dateTime TEXT NOT NULL,
-            amount INTEGER NOT NULL    
+            amount INTEGER NOT NULL,
+            ip TEXT NOT NULL
         )
     ''')
 

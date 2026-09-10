@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
-import { RxExit } from "react-icons/rx";
+import { RxGear, RxExit } from "react-icons/rx";
 import styles from "./DefaultDashboard.module.css"
 import { getStore } from "../Store";
 
@@ -10,7 +10,14 @@ export default function DefaultDashboard() {
     const [reportText, setReportText] = useState();
     const [registerDate, setRegisterDate] = useState();
     const [reports, setReports] = useState([]);
+    const [reportCount, setReportCount] = useState();
+    const [tokens, setTokens] = useState([]);
+    const [tokenCount, setTokenCount] = useState()
     const date = new Date();
+    const [openSettings, setOpenSettings] = useState(false);
+    const [oldPassword, setOldPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const { username } = getStore()
 
     useEffect(() => {
@@ -23,10 +30,34 @@ export default function DefaultDashboard() {
             const data = await res.json()
             setRegisterDate(data.registerDate)
             setReports(data.reports)
+            setReportCount(data.reportCount)
+            setTokens(data.tokens)
+            setTokenCount(data.tokenCount)
         }
         fetchname()
     }, [])
 
+    const handleClick = async () => {
+        if (newPassword == confirmPassword) {
+            try {
+                const response = await fetch("http://10.10.70.105:8000/changepassword", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        username: username,
+                        oldPassword: oldPassword,
+                        newPassword: newPassword
+                    })
+                })
+                const result = await response.json()
+                if (response.ok) {
+                    alert("Passwort geändert")
+                    setOpenSettings(false)
+                }
+            }
+            catch (error) { console.log("Error") }
+        }
+    }
     const report = async () => {
         const reportData = {
             username: username,
@@ -54,13 +85,28 @@ export default function DefaultDashboard() {
         <>
             <div className={styles.topbar}>
                 <h2>{username}</h2>
-                <button onClick={() => navigate("/")}> <RxExit /> Abmelden</button>
+                <div className={styles.right}>
+                    <button onClick={() => setOpenSettings(!openSettings)}> <RxGear />Einstellungen</button>
+                    <button onClick={() => navigate("/")}> <RxExit /> Abmelden</button>
+
+                    {openSettings && <div className={styles.settings}>
+                        <div><input id="altesPasswort" type="password" placeholder='Altes Passwort' value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} /></div>
+                        <div><input id="neuesPasswort" type="password" placeholder='Neues Passwort' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /></div>
+                        <div><input id="neuesPasswort" type="password" placeholder='Neues Passwort wiederholen' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></div>
+                        <button onClick={handleClick}> Passwort ändern</button>
+                    </div>
+                    }
+                </div>
+                {/* <button onClick={() => navigate("/")}> <RxExit /> Abmelden</button> */}
             </div>
 
             <div className={styles.main}>
                 <div className={styles.sidebar}>
                     <div className={styles.date}>{date.toLocaleDateString("de-DE", { weekday: "long" })} {date.toLocaleDateString()}</div>
-                    <div>{`Registrierdatum: ${new Date(registerDate).toLocaleDateString("de-DE")}`}</div>
+                    <div className={styles.infos}>
+                        <div><span>Reports: </span> <span>{reportCount}</span></div>
+                        <div><span>Tokens: </span> <span>{tokenCount}</span></div>
+                    </div>
                 </div>
 
                 <div className={styles.mainbar}>
@@ -69,9 +115,9 @@ export default function DefaultDashboard() {
                         <button onClick={() => { report() }}>Bericht senden</button>
                     </div>
 
-                    <div>
+                    <div className={styles.tables}>
                         <table>
-                            <caption>Meine Reports</caption>
+                            <caption>Reports</caption>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -89,12 +135,28 @@ export default function DefaultDashboard() {
                                 ))}
                             </tbody>
                         </table>
-                    </div>
 
+                        <table>
+                            <caption>Tokens</caption>
+                            <thead>
+                                <tr>
+                                    <th>Datum</th>
+                                    <th>Token</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tokens.map((token, index) => (
+                                    <tr key={index}>
+                                        <td>{new Date(token[1]).toLocaleDateString("de-DE")}</td>
+                                        <td>{token[2]}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
-
-
         </>
     )
 }
