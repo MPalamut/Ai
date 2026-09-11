@@ -12,12 +12,7 @@ export default function Headbar() {
     const { username, setUsername } = getStore();
 
     const handleClick = () => {
-  if (username) {
-    setUsername("");
-    setInformationModalText("Erfolgreich abgemeldet")
-  } else {
     setShowRegisterMenu(true);
-  }
 }
     return (
         <>
