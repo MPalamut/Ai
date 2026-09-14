@@ -23,12 +23,6 @@ export default function Informations({ onClose }) {
                     setPromptsDaily(data.promptsDaily)
                     setTokensDaily(data.tokensDaily);
                     setVisits(data.visits);
-                    
-                    // setPromptsAll(data.promptsAll)
-         
-                    // setTokensAll(data.tokensAll);
-                    // setOldestDate(data.oldestDate)
-                    // setUsersCount(data.usersCount)
                 }
 
             } catch (error) { console.error(error) }
@@ -53,11 +47,6 @@ export default function Informations({ onClose }) {
         return date.toLocaleDateString("de-DE");
     };
 
-    // const displayDate = formatDateGerman(oldestDate)
-    // const tokenprice = 0.000005
-    // const savedMoneyToday = (tokensDaily * tokenprice).toFixed(2)
-    // const savedMoneyAll = (tokensAll * tokenprice).toFixed(2)
-
     return (
         <>
             <div className={styles.menu} ref={menuRef} >
@@ -66,7 +55,7 @@ export default function Informations({ onClose }) {
                     <span>Heutige Statistik</span><br />
                     <div><span>Prompts</span> <span>{promptsDaily}</span></div>
                     <div ><span>Tokenverbrauch</span> <span>{tokensDaily}</span></div>
-                     <div ><span>Visits</span> <span>{visits}</span></div>
+                    <div ><span>Einzigartige Besucher</span> <span>{visits}</span></div>
             </div>
            </div>
         </>

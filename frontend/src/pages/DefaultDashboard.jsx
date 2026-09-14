@@ -13,7 +13,6 @@ export default function DefaultDashboard() {
     const [reportCount, setReportCount] = useState();
     const [tokens, setTokens] = useState([]);
     const [tokenCount, setTokenCount] = useState()
-    const date = new Date();
     const [openSettings, setOpenSettings] = useState(false);
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -102,17 +101,20 @@ export default function DefaultDashboard() {
 
             <div className={styles.main}>
                 <div className={styles.sidebar}>
-                    <div className={styles.date}>{date.toLocaleDateString("de-DE", { weekday: "long" })} {date.toLocaleDateString()}</div>
+                    <div className={styles.date}>{new Date().toLocaleDateString("de-DE", { weekday: "long" })} {new Date().toLocaleDateString()}</div>
                     <div className={styles.infos}>
-                        <div><span>Reports: </span> <span>{reportCount}</span></div>
+                        <div><span>Reports: </span> <span>{reportCount}</span></div><br />
                         <div><span>Tokens: </span> <span>{tokenCount}</span></div>
                     </div>
                 </div>
 
                 <div className={styles.mainbar}>
                     <div className={styles.report}>
-                        <textarea value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
-                        <button onClick={() => { report() }}>Bericht senden</button>
+                        <div><h2>Report senden</h2></div>
+                        <div className={styles.reportfield}>
+                            <textarea value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
+                        <button onClick={() => { report() }}>Report senden</button>
+                        </div>
                     </div>
 
                     <div className={styles.tables}>

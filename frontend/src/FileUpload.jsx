@@ -80,10 +80,10 @@ export default function FileUpload() {
                 :
                 <>
                     <div className="wrapper">
-                        <button className={styles.uploadButton} title="Datei hochladen"  onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
+                        <button className={styles.uploadButton} title="Datei prüfen"  onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
                         {menuopen && <div className={styles.menu} ref={menuOpenRef}>
-                            <button className={styles.menuButton} title="Dokument hochladen" onClick={openFileDialog}><AiOutlineFile /> Dokument hochladen</button>
-                            <button className={styles.menuButton} title="Bild hochladen" onClick={openImageDialog}> <AiOutlineFileImage /> Bild hochladen </button>
+                            <button className={styles.menuButton} title="Dokument prüfen" onClick={openFileDialog}><AiOutlineFile /> Dokument prüfen</button>
+                            <button className={styles.menuButton} title="Bild prüfen" onClick={openImageDialog}> <AiOutlineFileImage /> Bild prüfen</button>
                         </div>
                         }
                     </div>
