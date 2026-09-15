@@ -289,7 +289,7 @@ async def report(data: dict):
         row = cursor.fetchone()
         if row:
             userId = row[0]
-            cursor.execute("INSERT INTO reports (reportText, createdAt, userId) VALUES (?,?,?)", (report_text, timestamp, userId))
+            cursor.execute("INSERT INTO reports (reportText,  createdAt, userId) VALUES (?,?,?)", (report_text, timestamp, userId))
             conn.commit() 
             status = "success"
             message = "Bericht eingetragen"
@@ -438,6 +438,71 @@ async def admininfos():
 
     return {"status": status, "message": message, "users": users, "usercount": usercount, "reports": reports, "reportcount": reportcount, "promptsDaily": promptsDaily, "promptsAll": promptsAll, "tokens": tokens, "tokensDaily": tokensDaily, "tokensAll": tokensAll, "visits": visits, "visitCount": visitCount, "documents": documents, "documentsAll": documentsAll}
 
+@app.post("/newuser")
+async def newUser(data: dict):
+    newusername =  data.get("newusername")
+    newuserpassword = data.get("newuserpassword")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+
+    password_bytes = newuserpassword.encode('utf-8')
+    hashed_password = hashlib.sha256(password_bytes).hexdigest()
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("INSERT INTO users (username, password, registeredAt) VALUES (?, ?, ?)", (newusername, hashed_password, timestamp))
+        conn.commit()
+
+        status = "success"
+
+    except sqlite3.Error as e:
+        status = "error"
+    finally:
+        conn.close()
+    
+    return {"status": status}
+
+@app.post("/removeuser")
+async def newUser(data: dict):
+    removeuserid =  data.get("removeuserid")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("DELETE FROM users WHERE id = ?", (removeuserid))
+        conn.commit()
+
+        status = "success"
+
+    except sqlite3.Error as e:
+        status = "error"
+    finally:
+        conn.close()
+    
+    return {"status": status}
+
+@app.post("/editreport")
+async def newUser(data: dict):
+    editreportid =  data.get("editreportid")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("UPDATE reports SET status = 'erledigt' WHERE id = ?", (editreportid))
+        conn.commit()
+
+        status = "success"
+
+    except sqlite3.Error as e:
+        status = "error"
+    finally:
+        conn.close()
+    
+    return {"status": status}
+
 @app.post("/changepassword")
 async def changepassword(data: dict):
     username = data.get("username")
@@ -470,7 +535,3 @@ async def changepassword(data: dict):
         conn.close()
 
     return {"status": status, "message": message}
-
-
-
-

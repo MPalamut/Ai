@@ -46,7 +46,7 @@ export default function Sidebar() {
                     <button className={styles.sidebarBtn} onClick={() => { setSettingsOpen(!settingsOpen) }}><RxInfoCircled /> <span className={styles.sidebarBtnSpan}>Informationen</span></button>
                     {settingsOpen && <div className={styles.settings} ref={settingsOpenRef}>
                         <button className={styles.settingsBtn} onClick={() => setModalText("dsgvo")}>Datenschutz</button>
-                        <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tips </button>
+                        <button className={styles.settingsBtn} onClick={() => setModalText("hilfe")}>Bedienung und Tipps </button>
                         <button className={styles.settingsBtn} onClick={() => setModalText("about")}>About</button>
                     </div>}
                 </div>

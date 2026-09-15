@@ -114,3 +114,20 @@ td {
     border: 1px solid var(--borderColor);
     text-align: center;
 }
+
+.edit {
+    display: flex;
+ gap: 15px;
+    width: 100%;
+    background-color: var(--borderColor);
+    padding: 5px;
+}
+
+fieldset {
+    padding: 15px;
+    height: 100%;
+}
+
+fieldset *{
+width: 100%;
+}

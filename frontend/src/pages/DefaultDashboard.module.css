@@ -108,4 +108,5 @@
 .tables{
     display: flex;
     gap: 15px;
+    height: 60vh;
 }

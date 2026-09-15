@@ -23,6 +23,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS reports (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             reportText TEXT NOT NULL,
+            status TEXT DEFAULT 'offen',
             createdAt TEXT NOT NULL,           
             userId INTEGER NOT NULL,
             FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE 

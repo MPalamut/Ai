@@ -124,6 +124,7 @@ export default function DefaultDashboard() {
                                 <tr>
                                     <th>Name</th>
                                     <th>Report</th>
+                                    <th>Status</th>
                                     <th>Datum</th>
                                 </tr>
                             </thead>
@@ -132,7 +133,8 @@ export default function DefaultDashboard() {
                                     <tr key={index}>
                                         <td>{report[5]}</td>
                                         <td>{report[1]}</td>
-                                        <td>{new Date(report[2]).toLocaleDateString("de-DE")}</td>
+                                        <td>{report[2]}</td>
+                                        <td>{new Date(report[3]).toLocaleDateString("de-DE")}</td>
                                     </tr>
                                 ))}
                             </tbody>
