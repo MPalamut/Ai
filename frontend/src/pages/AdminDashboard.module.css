@@ -1,6 +1,10 @@
 :root {
-    --borderColor: rgb(106, 122, 153);
-    --buttonColor: rgb(80, 90, 222);
+    --borderColor: rgb(75, 107, 130);
+    --buttonColor: rgb(22, 61, 95);
+}
+
+body {
+    scrollbar-color: red;
 }
 
 .topbar {
@@ -30,12 +34,12 @@
     filter: brightness(.6);
 }
 
-.right{
+.right {
     display: flex;
     gap: 15px;
 }
 
-.settings{
+.settings {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,7 +54,7 @@
     box-shadow: 5px 5px 5px black;
 }
 
-.settings div{
+.settings div {
     display: flex;
     gap: 5px;
 }
@@ -94,8 +98,8 @@
     display: flex;
     justify-content: center;
     gap: 15px;
-overflow-y: auto;
-overflow-x: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 table {
@@ -104,13 +108,13 @@ table {
 }
 
 table caption {
-    background-color: #444c6e;
+    background-color: var(--buttonColor);
     border: 1px solid var(--borderColor);
 }
 
 table th,
 td {
-    background-color: rgb(58, 63, 69);
+    background-color: rgb(43, 56, 72);
     padding: 15px;
     border: 1px solid var(--borderColor);
     text-align: center;
@@ -118,17 +122,32 @@ td {
 
 .edit {
     display: flex;
- gap: 15px;
+    gap: 15px;
     width: 100%;
     background-color: var(--borderColor);
     padding: 5px;
 }
 
 fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
     padding: 15px;
     height: 100%;
 }
 
-fieldset *{
-width: 100%;
+fieldset * {
+    width: 100%;
+}
+fieldset input{
+    background-color: #bedfea;
+}
+
+fieldset button {
+    background-color: var(--buttonColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    border: none;
+    padding: 5px;
 }

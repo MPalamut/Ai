@@ -268,23 +268,19 @@ export default function AdminDashboard() {
                     </div>
 
                     <div className={styles.edit}>
-                        <div className={styles.edituser}>
                             <fieldset>
                                 <legend>Benutzer anlegen</legend>
                                 <div><input id="newusername" type="text" placeholder='Neuer Benutzer' value={newusername} onChange={(e) => setNewsusername(e.target.value)} /></div>
                                 <div><input id="newuserpassword" type="password" placeholder='Passwort' value={newuserpassword} onChange={(e) => setNewuserpassword(e.target.value)} /></div>
                                 <button onClick={newUser}>Benutzer anlegen</button>
                             </fieldset>
-                        </div>
-
-                        <div className={styles.edituser}>
+                       
                             <fieldset>
                                 <legend>Benutzer löschen</legend>
                                 <div><input id="removeuser" type="text" placeholder='Benutzer Id' value={removeuserid} onChange={(e) => setRemoveuserid(e.target.value)} /></div>
                                 <button onClick={removeUser}>Benutzer löschen</button>
                             </fieldset>
-                        </div>
-
+                        
                          <fieldset>
                                 <legend>Reports bearbeiten</legend>
                                 <div><input id="editreportid" type="text" placeholder='Report Id' value={editreportid} onChange={(e) => setEditreportid(e.target.value)} /></div>
@@ -304,7 +300,7 @@ export default function AdminDashboard() {
                                 <XAxis dataKey="datum" tick={{ fontSize: 12 }} />
                                 <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
                                 <Tooltip />
-                                <Bar dataKey="prompts" fill="#4F46E5" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="prompts" fill="#0074c8ff" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
