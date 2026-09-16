@@ -1,5 +1,5 @@
 import { useState, useRef } from "react"
-import { AiOutlineSend, AiOutlineBars } from "react-icons/ai";
+import { AiOutlineSend} from "react-icons/ai";
 import MoreFeatures from "./MoreFeatures"
 import FileAnalyse from "./FileAnalyse";
 import FetchModels from './FetchModels';
