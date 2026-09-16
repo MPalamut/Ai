@@ -1,11 +1,10 @@
-import React from 'react'
-import { useState, useEffect, useRef } from "react"
-import styles from "./Input.module.css"
+import { useState, useRef } from "react"
 import { AiOutlineSend, AiOutlineBars } from "react-icons/ai";
 import MoreFeatures from "./MoreFeatures"
-import FileUpload from "./FileUpload";
-import { getStore } from "./Store";
+import FileAnalyse from "./FileAnalyse";
 import FetchModels from './FetchModels';
+import styles from "./Input.module.css"
+import { getStore } from "./Store";
 
 export default function Input() {
     const [input, setInput] = useState("")
@@ -79,7 +78,7 @@ export default function Input() {
                         <MoreFeatures />
                     </div>
                     <div className={styles.inputFooterRight}>
-                        <FileUpload />
+                        <FileAnalyse />
                     </div>
                 </div>
             </div>

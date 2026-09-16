@@ -1,16 +1,15 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
-import styles from "./Informations.module.css"
+import styles from "./DailyInformations.module.css"
 
-export default function Informations({ onClose }) {
+export default function DailyInformations({ onClose }) {
     const [promptsDaily, setPromptsDaily] = useState()
     const [tokensDaily, setTokensDaily] = useState();
     const [visits, setVisits] = useState();
-    const [promptsAll, setPromptsAll] = useState()
-  
-    const [tokensAll, setTokensAll] = useState();
-    const [oldestDate, setOldestDate] = useState("");
-    const [usersCount, setUsersCount] = useState()
+    // const [promptsAll, setPromptsAll] = useState()
+    // const [tokensAll, setTokensAll] = useState();
+    // const [oldestDate, setOldestDate] = useState("");
+    // const [usersCount, setUsersCount] = useState()
     const menuRef = useRef()
 
     useEffect(() => {

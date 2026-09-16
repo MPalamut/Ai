@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from "react"
-import styles from "./Register.module.css"
-import InformationModal from './InformationModal';
+import styles from "./Registration.module.css"
 import { useNavigate } from 'react-router-dom';
 import { getStore } from "./Store";
 
@@ -9,7 +8,6 @@ export default function Register({ onClose }) {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [authMode, setAuthMode] = useState("login");
-    const [informationModalText, setInformationModalText] = useState("")
     const navigate = useNavigate();
     const { setUsername, setAdmin} = getStore()
 
@@ -17,7 +15,7 @@ export default function Register({ onClose }) {
         e.preventDefault();
 
         if (!name || !password) {
-            setInformationModalText("Bitte fülle alle Felder aus")
+            alert("Bitte fülle alle Felder aus")
             return;
         }
 
@@ -28,28 +26,26 @@ export default function Register({ onClose }) {
 
         if (authMode === "register") {
             if (password.length < 8) {
-                setInformationModalText("Das Passwort muss mindestens 8 Zeichen lang sein")
+                alert("Das Passwort muss mindestens 8 Zeichen beinhalten")
                 return;
             }
             try {
                 const response = await fetch(`http://10.10.70.105:8000/register`, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers: {"Content-Type": "application/json",},
                     body: JSON.stringify(payload),
                 });
 
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    setInformationModalText(result.message)
+                    alert(result.message)
                 } else {
-                  setInformationModalText(result.message)
+                  alert(result.message)
                 }
             } catch (error) {
                 console.error("Fehler:", error);
-               setInformationModalText("Verbindungsfehler")
+               alert("Verbindungsfehler")
             }
         }
 
@@ -67,7 +63,6 @@ export default function Register({ onClose }) {
 
                 if (result.status === "success") {
                     setUsername(name);
-                    setInformationModalText(result.message)
 
                     if(result.isAdmin) {
                         setAdmin(true)
@@ -79,11 +74,11 @@ export default function Register({ onClose }) {
                     }
 
                 } else {
-                    setInformationModalText(result.message)
+                    alert(result.message)
                 }
             } catch (error) {
                 console.error("Fehler:", error);
-                setInformationModalText("Verbindungsfehler")
+                alert("Verbindungsfehler")
             }
         }
     }
@@ -124,7 +119,6 @@ export default function Register({ onClose }) {
                 </form>
             </div>
         </div>
-               {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}
         </>
     );
 }

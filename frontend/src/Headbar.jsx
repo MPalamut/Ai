@@ -2,14 +2,10 @@ import React, { use } from 'react'
 import { useState} from "react"
 import styles from './Headbar.module.css'
 import { AiOutlineHome, AiOutlineGithub } from "react-icons/ai";
-import Register from './Register';
-import InformationModal from './InformationModal';
-import { getStore } from "./Store";
+import Register from './Registration';
 
 export default function Headbar() {
     const [showRegisterMenu, setShowRegisterMenu] = useState(false);
-    const [informationModalText, setInformationModalText] = useState("")
-    const { username, setUsername } = getStore();
 
     const handleClick = () => {
     setShowRegisterMenu(true);
@@ -22,7 +18,6 @@ export default function Headbar() {
                 <button className={styles.anmelden} onClick={handleClick}>Anmelden</button>
             </div>
             {showRegisterMenu && (<Register onClose={() => setShowRegisterMenu(false)} />)}
-            {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}
         </>
     )
 }

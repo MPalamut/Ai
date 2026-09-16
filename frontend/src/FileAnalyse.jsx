@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react"
-import styles from "./FileUpload.module.css"
+import styles from "./FileAnalyse.module.css"
 import { getStore } from "./Store.jsx";
 import { AiOutlinePaperClip, AiOutlineFile, AiOutlineFileImage, AiOutlineClose } from "react-icons/ai";
 
-export default function FileUpload() {
+export default function FileAnalyse() {
     const [menuopen, setMenuOpen] = useState(false)
     const menuOpenRef = useRef()
     const fileInputRef = useRef();
@@ -82,8 +82,8 @@ export default function FileUpload() {
                     <div className="wrapper">
                         <button className={styles.uploadButton} title="Datei prüfen"  onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
                         {menuopen && <div className={styles.menu} ref={menuOpenRef}>
-                            <button className={styles.menuButton} title="Dokument prüfen" onClick={openFileDialog}><AiOutlineFile /> Dokument prüfen</button>
-                            <button className={styles.menuButton} title="Bild prüfen" onClick={openImageDialog}> <AiOutlineFileImage /> Bild prüfen</button>
+                            <button className={styles.menuButton} title="Dokument prüfen" onClick={openFileDialog}><AiOutlineFile />Dokument analysieren</button>
+                            <button className={styles.menuButton} title="Bild prüfen" onClick={openImageDialog}> <AiOutlineFileImage />Bild analysieren</button>
                         </div>
                         }
                     </div>

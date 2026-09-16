@@ -1,11 +1,9 @@
-import React from 'react'
-import { useState, useEffect, useRef } from "react"
-import styles from './SettingsModal.module.css'
+import { useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai";
+import styles from './Modalwindow.module.css'
 import { getStore } from "./Store";
 
 export default function SettingsModal({ text, onClose }) {
-    const [reportText, setReportText] = useState("");
     const modalOpenref = useRef();
     const { username } = getStore();
 

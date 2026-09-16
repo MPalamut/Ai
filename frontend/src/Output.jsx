@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { useEffect, useRef } from "react";
 import styles from "./Output.module.css"
 import { getStore } from "./Store.jsx";

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect } from "react"
 import Headbar from '../Headbar'
 import Input from '../Input'

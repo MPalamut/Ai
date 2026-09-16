@@ -2,10 +2,9 @@ import React from 'react'
 import styles from "./Sidebar.module.css"
 import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
-import SettingsModal from './SettingsModal.jsx'
+import Modalwindow from './Modalwindow.jsx'
 import { RxPencil2, RxSun, RxMoon, RxBarChart, RxInfoCircled ,RxGear } from "react-icons/rx"
-import Informations from './Informations.jsx'
-import InformationModal from './InformationModal.jsx'
+import DailyInformations from './DailyInformations.jsx'
 import { getStore } from "./Store.jsx"
 
 export default function Sidebar() {
@@ -13,7 +12,6 @@ export default function Sidebar() {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const settingsOpenRef = useRef();
     const [modalText, setModalText] = useState("")
-    const [informationModalText, setInformationModalText] = useState("")
     const { theme, setTheme , username} = getStore();
 
     useEffect(() => {
@@ -51,9 +49,8 @@ export default function Sidebar() {
                     </div>}
                 </div>
             </div>
-            {openInformationsMenu && <Informations onClose={() => setOpenInformationsMenu(false)}/>}
-            {modalText && <SettingsModal text={modalText} onClose={() => setModalText("")} />}
-            {informationModalText && <InformationModal text={informationModalText} onClose={() => setInformationModalText("")} />}
+            {openInformationsMenu && <DailyInformations onClose={() => setOpenInformationsMenu(false)}/>}
+            {modalText && <Modalwindow text={modalText} onClose={() => setModalText("")} />}
         </>
     )
 }
