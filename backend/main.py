@@ -20,7 +20,7 @@ def init():
    try:
          response = requests.post(url, json=payload)
          response.raise_for_status()
-         print("Model loaded successfully")
+         print("Model loaded")
    except Exception as e:
          print(f"Error loading model: {e}")
 init()

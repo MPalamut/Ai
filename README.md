@@ -1,1 +1,1 @@
-react project
+Entwicklung und Implementierung einer datenschutzkonformen Webanwendung zur sicheren Nutzung eines lokalen Sprachmodells

@@ -291,9 +291,9 @@ export default function AdminDashboard() {
                                 <div><input id="editreportid" type="text" placeholder='Report Id' value={editreportid} onChange={(e) => setEditreportid(e.target.value)} /></div>
                                 <button onClick={editreport}>Report bearbeiten</button>
                             </fieldset>
-
                         
                     </div>
+                    
                     <div className="chart"><div style={{ width: '100%', height: 400, padding: '20px', background: '#b2b9bfff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
                         <h2 style={{ fontFamily: 'sans-serif', fontSize: '18px', marginBottom: '20px', color: '#2a2a2aff' }}>
                             Tägliche Prompts
