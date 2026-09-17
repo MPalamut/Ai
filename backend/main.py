@@ -74,6 +74,7 @@ async def responses(request: Request, payload: dict):
     selected_model = payload.get("selectedModel")
     input_text = payload.get("input")
     temperature = payload.get("temperature")
+    searchdocs = payload.get("searchdocs")
     previous_response = payload.get("previousResponse")
     fileName = payload.get("fileName")
     file = payload.get("file")
@@ -142,12 +143,15 @@ async def responses(request: Request, payload: dict):
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO documents (fileName, dateTime) VALUES (?, ?)", (fileName, timestamp))
-            conn.commit()
+            cursor.execute("SELECT * FROM documents WHERE fileName = ?", (fileName,))
+            existing_doc = cursor.fetchone()
+
+            if not existing_doc:
+                cursor.execute("INSERT INTO documents (fileName, file, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
+                conn.commit()
 
         except sqlite3.Error as e:
-            status = "error"
-            message = str(e)
+            print(f"Datenbankfehler: {e}")
         finally:
             conn.close()
 
@@ -172,6 +176,49 @@ async def responses(request: Request, payload: dict):
                 }
             ]
         }
+
+    elif searchdocs:
+        print("searhdocs")
+        alldocsextracted_text = ""
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT fileName, file FROM documents")
+            alldocs = cursor.fetchall()
+
+            print(alldocs)
+
+            for docname, doctext in alldocs:
+                alldocsextracted_text += f"\nDokumentname: {docname} -- \n{doctext}"
+            
+            print(alldocsextracted_text)
+            
+            data = {
+            "model": selected_model,
+            "input": 
+            [
+                {
+                    "role": "user",
+                    "content": 
+                    [
+                        { 
+                            "type": "input_text", 
+                            "text": input_text 
+                        },
+                        { 
+                            "type": "input_text",
+                            "text": alldocsextracted_text
+                        }
+                    ]
+                }
+            ]
+        }
+
+        except sqlite3.Error as e:
+            print(f"Datenbankfehler: {e}")
+        finally:
+            conn.close()
 
     else:
         data = {
@@ -371,6 +418,9 @@ async def defaultinfos(request: Request, username: str):
         cursor.execute("SELECT * FROM tokens WHERE ip = ?", (ip,))
         tokens = cursor.fetchall()
 
+        cursor.execute("SELECT Id, dateTime, COUNT(*) FROM tokens WHERE ip = ? GROUP BY dateTime ORDER BY dateTime ", (ip,))
+        tokensDaily = cursor.fetchall()
+
         cursor.execute("SELECT SUM(amount) FROM tokens WHERE ip = ?", (ip,))
         tokenCount = cursor.fetchall()
 
@@ -379,7 +429,7 @@ async def defaultinfos(request: Request, username: str):
     finally:
         conn.close()
 
-    return {"registerDate": registerDate, "reports": reports, "reportCount": reportCount, "tokens": tokens, "tokenCount": tokenCount}
+    return {"registerDate": registerDate, "reports": reports, "reportCount": reportCount, "tokens": tokens, "tokensDaily": tokensDaily, "tokenCount": tokenCount}
     
 @app.get("/admininfos")
 async def admininfos():

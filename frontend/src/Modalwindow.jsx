@@ -3,9 +3,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import styles from './Modalwindow.module.css'
 import { getStore } from "./Store";
 
-export default function SettingsModal({ text, onClose }) {
+export default function ModalWindow({ text, onClose }) {
     const modalOpenref = useRef();
-    const { username } = getStore();
 
     const contents = {
         dsgvo: {
@@ -16,7 +15,7 @@ export default function SettingsModal({ text, onClose }) {
 
                     <br />
                     <p>Keine Datenübertragung ins Internet: Alle eingegebenen Texte, internen Dokumente, Quellcodes, Kundendaten oder sonstigen geschäftlichen Informationen werden ausschließlich auf unserer lokalen Hardware bzw. auf Servern in unserem eigenen lokalen Netzwerk verarbeitet.</p> <br />
-                    <p>Absoluter Schutz vor Daten-Leaks und Spionage: Da das System vollständig offline operiert und keine Verbindung zu zentralen Datenbanken externer KI-Anbieter herstellt, ist ein Abfließen von Betriebs- und Geschäftsgeheimnissen ausgeschlossen.</p> <br />
+                    <p>Absoluter Schutz vor Datenleaks und Spionage: Da das System vollständig offline arbeitet und keine Verbindung zu zentralen Datenbanken externer Anbieter herstellt, ist ein Abfließen von Betriebs- und Geschäftsgeheimnissen ausgeschlossen.</p> <br />
                     <p>Einhaltung der Richtlinien: Da keine Datenverarbeitung durch externe Dritte im Ausland stattfindet, entfallen die typischen datenschutzrechtlichen Risiken.</p>
 
                     <br />

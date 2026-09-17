@@ -25,12 +25,36 @@
     filter: brightness(.6);
 }
 
-.right{
+.right {
     display: flex;
     gap: 15px;
 }
 
-.settings{
+.main {
+    display: flex;
+    gap: 50px;
+    margin-top: 15px;
+    width: 99vw;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    height: 91vh;
+    background-color: var(--borderColor);
+    padding: 15px;
+    color: rgb(3, 3, 3);
+    gap: 55px;
+}
+
+.infos div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.settings {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,68 +69,67 @@
     box-shadow: 5px 5px 5px black;
 }
 
-.main {
-    display: flex;
-    margin-top: 15px;
-}
-
-.sidebar {
+.mainbar {
     display: flex;
     flex-direction: column;
-    width: 15vw;
-    height: 95vh;
-    background-color: var(--borderColor);
-    padding: 15px;
-    color: rgb(3, 3, 3);
-    gap: 55px;
-}
-
-.infos div {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(0, 0, 0);
-}
-
-.mainbar{
-    display: flex;
-    gap: 55px;
-}
-
-.report{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
-    background-color: rgb(98, 105, 118);
-    width: 100%;
-    padding: 15px;
-}
-
-.reportfield{
-    display: flex;
-    flex-direction: column;
-    margin-top: 55px;
-}
-
-.report textarea{
-    height: 50vh;
-    width: 500px; 
-    background-color: rgb(221, 226, 230);
-}
-
-.report button{
-    padding: 15px;
-    background-color: rgb(184, 189, 198);
-    cursor: pointer;
-    width: 500px;
+    gap: 5px;
+    width: 86vw;
 }
 
 .date {
     color: rgb(255, 255, 255);
 }
 
-.tables{
+.tables {
     display: flex;
     gap: 15px;
-    height: 60vh;
+    height: 48vh;
+    background-color: var(--borderColor);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bottom {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.report {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgb(98, 105, 118);
+    padding: 15px;
+    border-radius: .5em;
+    width: 15vw;
+}
+
+.reportfield {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 55px;
+
+}
+
+.report textarea {
+    height: 15vh;
+    background-color: #b2b9bfff;
+    border-radius: .5em;
+}
+
+.report button {
+    padding: 15px;
+    color: var(--fontColor);
+    background-color: var(--buttonColor);
+    cursor: pointer;
+    border: none;
+    border-radius: .5em;
+    transition: all .2s;
+}
+
+.report button:hover {
+    filter: brightness(.6);
 }

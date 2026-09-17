@@ -268,32 +268,28 @@ export default function AdminDashboard() {
                     </div>
 
                     <div className={styles.edit}>
-                            <fieldset>
-                                <legend>Benutzer anlegen</legend>
-                                <div><input id="newusername" type="text" placeholder='Neuer Benutzer' value={newusername} onChange={(e) => setNewsusername(e.target.value)} /></div>
-                                <div><input id="newuserpassword" type="password" placeholder='Passwort' value={newuserpassword} onChange={(e) => setNewuserpassword(e.target.value)} /></div>
-                                <button onClick={newUser}>Benutzer anlegen</button>
-                            </fieldset>
-                       
-                            <fieldset>
-                                <legend>Benutzer löschen</legend>
-                                <div><input id="removeuser" type="text" placeholder='Benutzer Id' value={removeuserid} onChange={(e) => setRemoveuserid(e.target.value)} /></div>
-                                <button onClick={removeUser}>Benutzer löschen</button>
-                            </fieldset>
-                        
-                         <fieldset>
-                                <legend>Reports bearbeiten</legend>
-                                <div><input id="editreportid" type="text" placeholder='Report Id' value={editreportid} onChange={(e) => setEditreportid(e.target.value)} /></div>
-                                <button onClick={editreport}>Report bearbeiten</button>
-                            </fieldset>
-                        
-                    </div>
-                    
-                    <div className="chart"><div style={{ width: '100%', height: 400, padding: '20px', background: '#b2b9bfff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                        <h2 style={{ fontFamily: 'sans-serif', fontSize: '18px', marginBottom: '20px', color: '#2a2a2aff' }}>
-                            Tägliche Prompts
-                        </h2>
+                        <fieldset>
+                            <legend>Benutzer anlegen</legend>
+                            <div><input id="newusername" type="text" placeholder='Neuer Benutzer' value={newusername} onChange={(e) => setNewsusername(e.target.value)} /></div>
+                            <div><input id="newuserpassword" type="password" placeholder='Passwort' value={newuserpassword} onChange={(e) => setNewuserpassword(e.target.value)} /></div>
+                            <button onClick={newUser}>Benutzer anlegen</button>
+                        </fieldset>
 
+                        <fieldset>
+                            <legend>Benutzer löschen</legend>
+                            <div><input id="removeuser" type="text" placeholder='Benutzer Id' value={removeuserid} onChange={(e) => setRemoveuserid(e.target.value)} /></div>
+                            <button onClick={removeUser}>Benutzer löschen</button>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Reports bearbeiten</legend>
+                            <div><input id="editreportid" type="text" placeholder='Report Id' value={editreportid} onChange={(e) => setEditreportid(e.target.value)} /></div>
+                            <button onClick={editreport}>Report bearbeiten</button>
+                        </fieldset>
+                    </div>
+
+                    <div className="chart"><div style={{ width: '100%', height: 400, padding: '20px', background: '#b2b9bfff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                        <h2 style={{ fontFamily: 'sans-serif', fontSize: '18px', marginBottom: '20px', color: '#2a2a2aff' }}> Prompts insgesamt </h2>
                         <ResponsiveContainer width="100%" height="85%">
                             <BarChart data={formatedDates}>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -305,6 +301,7 @@ export default function AdminDashboard() {
                         </ResponsiveContainer>
                     </div>
                     </div>
+                    
                 </div>
             </div>
         </>

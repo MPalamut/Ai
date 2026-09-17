@@ -1,10 +1,6 @@
 :root {
-    --borderColor: rgb(75, 107, 130);
+    --borderColor: rgb(99, 129, 150);
     --buttonColor: rgb(22, 61, 95);
-}
-
-body {
-    scrollbar-color: red;
 }
 
 .topbar {
@@ -66,7 +62,6 @@ body {
 .main {
     display: flex;
     margin-top: 15px;
-    height: 200px;
     gap: 50px;
 }
 
@@ -90,7 +85,7 @@ body {
 .diagramms {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 15px;    
     height: 90vh;
 }
 
@@ -100,11 +95,13 @@ body {
     gap: 15px;
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: var(--borderColor);
 }
 
 table {
     border-collapse: collapse;
     border-radius: 1em;
+
 }
 
 table caption {
@@ -150,4 +147,10 @@ fieldset button {
     border-radius: .5em;
     border: none;
     padding: 5px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+fieldset button:hover{
+filter: brightness(.6);
 }

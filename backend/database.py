@@ -51,6 +51,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS documents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             fileName TEXT NOT NULL,
+            file TEXT NOT NULL,
             dateTime TEXT NOT NULL   
         )
     ''')

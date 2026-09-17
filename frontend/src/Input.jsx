@@ -1,5 +1,5 @@
 import { useState, useRef } from "react"
-import { AiOutlineSend} from "react-icons/ai";
+import { AiOutlineSend } from "react-icons/ai";
 import MoreFeatures from "./MoreFeatures"
 import FileAnalyse from "./FileAnalyse";
 import FetchModels from './FetchModels';
@@ -8,8 +8,8 @@ import { getStore } from "./Store";
 
 export default function Input() {
     const [input, setInput] = useState("")
+    const [searchdocs, setSearchdocs] = useState(false)
     const inputRef = useRef()
-    const abortControllerRef = useRef(null);
     const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileName, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
 
     async function Responses() {
@@ -21,7 +21,8 @@ export default function Input() {
             const requestData = {
                 input: input.trim(),
                 selectedModel: selectedModel,
-                temperature: temperature
+                temperature: temperature,
+                searchdocs: searchdocs
             };
 
             if (previousResponse) { requestData.previousResponse = previousResponse; }
@@ -52,7 +53,7 @@ export default function Input() {
 
         } catch (error) { console.error(error) }
         setLoading(false)
-        abortControllerRef.current = null;
+
         setTimeout(() => { inputRef.current.focus() }, 1)
     }
 
@@ -60,15 +61,8 @@ export default function Input() {
         <>
             <div className={`${styles.inputContainer} ${loading ? styles.loading : ""}`}>
                 <div className={styles.inputHeader}>
-                    <input
-                        id="prompt"
-                        ref={inputRef}
-                        type="text"
-                        placeholder={loading ? "Bitte warten" : "Frage stellen"}
-                        value={input}
-                        onChange={e => setInput(e.target.value)}
-                        onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }}
-                        disabled={loading}
+                    <input id="prompt" ref={inputRef} type="text" placeholder={loading ? "Bitte warten" : "Frage stellen"} value={input} onChange={e => setInput(e.target.value)}
+                        onKeyDown={e => { if (e.key === 'Enter' && input.trim()) { setInput(e.target.value); Responses(); } }} disabled={loading}
                     />
                     <button className={styles.sendBtn} title="Senden" onClick={Responses} disabled={!input.trim()}><AiOutlineSend /></button>
                 </div>
@@ -76,6 +70,15 @@ export default function Input() {
                     <div className={styles.inputFooterLeft}>
                         <FetchModels />
                         <MoreFeatures />
+                        <div><label>
+                            <input
+                                type="checkbox"
+                                checked={searchdocs}
+                                onChange={(e) => setSearchdocs(e.target.checked)}
+                            />
+                            Intern basiert
+                        </label></div>
+
                     </div>
                     <div className={styles.inputFooterRight}>
                         <FileAnalyse />

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
 import { RxGear, RxExit } from "react-icons/rx";
 import styles from "./DefaultDashboard.module.css"
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { getStore } from "../Store";
 
 export default function DefaultDashboard() {
@@ -12,6 +13,7 @@ export default function DefaultDashboard() {
     const [reports, setReports] = useState([]);
     const [reportCount, setReportCount] = useState();
     const [tokens, setTokens] = useState([]);
+    const [tokensDaily, setTokensDaily] = useState([]);
     const [tokenCount, setTokenCount] = useState()
     const [openSettings, setOpenSettings] = useState(false);
     const [oldPassword, setOldPassword] = useState("");
@@ -31,6 +33,7 @@ export default function DefaultDashboard() {
             setReports(data.reports)
             setReportCount(data.reportCount)
             setTokens(data.tokens)
+            setTokensDaily(data.tokensDaily)
             setTokenCount(data.tokenCount)
         }
         fetchname()
@@ -57,6 +60,7 @@ export default function DefaultDashboard() {
             catch (error) { console.log("Error") }
         }
     }
+
     const report = async () => {
         const reportData = {
             username: username,
@@ -80,6 +84,12 @@ export default function DefaultDashboard() {
         catch (error) { console.log(error) }
     }
 
+    const formatedtokensdaily = tokensDaily.map(item => ({
+        id: item[0],
+        datum: item[1],
+        prompts: item[2]
+    }))
+
     return (
         <>
             <div className={styles.topbar}>
@@ -96,7 +106,6 @@ export default function DefaultDashboard() {
                     </div>
                     }
                 </div>
-                {/* <button onClick={() => navigate("/")}> <RxExit /> Abmelden</button> */}
             </div>
 
             <div className={styles.main}>
@@ -109,13 +118,6 @@ export default function DefaultDashboard() {
                 </div>
 
                 <div className={styles.mainbar}>
-                    <div className={styles.report}>
-                        <div><h2>Report senden</h2></div>
-                        <div className={styles.reportfield}>
-                            <textarea value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
-                        <button onClick={() => { report() }}>Report senden</button>
-                        </div>
-                    </div>
 
                     <div className={styles.tables}>
                         <table>
@@ -157,8 +159,35 @@ export default function DefaultDashboard() {
                                 ))}
                             </tbody>
                         </table>
-
                     </div>
+
+                    <div className={styles.bottom}>
+
+                        <div className={styles.report}>
+                            <div><h2>Report senden</h2></div>
+                            <div className={styles.reportfield}>
+                                <textarea value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
+                                <button onClick={() => { report() }}>Report senden</button>
+                            </div>
+                        </div>
+
+
+                       <div style={{ width: '100%', height: 400, padding: '20px', background: '#b2b9bfff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                            <h2 style={{ fontFamily: 'sans-serif', fontSize: '18px', marginBottom: '20px', color: '#2a2a2aff' }}>Prompts</h2>
+                            <ResponsiveContainer width="100%" height="85%">
+                                <BarChart data={formatedtokensdaily}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="datum" tick={{ fontSize: 12 }} />
+                                    <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
+                                    <Tooltip />
+                                    <Bar dataKey="prompts" fill="#0074c8ff" radius={[4, 4, 0, 0]} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                       
+                        
+                        
+                        </div>
                 </div>
             </div>
         </>

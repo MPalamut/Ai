@@ -5,7 +5,6 @@ import Register from './Registration';
 
 export default function Headbar() {
     const [showRegisterMenu, setShowRegisterMenu] = useState(false);
-
     const handleClick = () => {
     setShowRegisterMenu(true);
 }

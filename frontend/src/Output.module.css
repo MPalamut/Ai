@@ -126,14 +126,3 @@
      transform: translateY(15px);
    }
  }
-
- @keyframes popIn {
-   from {
-     border-color: rgb(255, 255, 255);
-     box-shadow: 5px 5px 50px var(--mainColor);
-   }
-
-   to {
-     border-color: var(--mainColor);
-   }
- }
