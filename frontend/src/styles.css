@@ -24,13 +24,13 @@ body {
 }
 
 [data-theme="light"] {
-  --mainColor: rgb(108, 148, 159);
-  --secondaryColor: rgb(197, 210, 220);
+  --mainColor: rgb(171, 208, 225);
+  --secondaryColor: rgb(136, 159, 165);
   --fontColor: rgb(2, 2, 2);
   --fontColorSecondary: rgb(255, 255, 255);
   --backgroundColor: rgb(255, 255, 255);
   --outputUserBgColor: rgb(235, 235, 235);
-  --inputColor: rgb(231, 231, 231);
+  --inputColor: rgb(241, 241, 241);
   --sidebarSettingsBgColor: rgb(220, 220, 220);
   --sidebarSettingsHoverBgColor: rgb(236, 236, 236);
   --disabledColor: rgb(202, 202, 202);
