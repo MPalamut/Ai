@@ -28,11 +28,9 @@ export default function DefaultDashboard() {
         const fetchname = async () => {
             const url = `http://10.10.70.105:8000/defaultinfos?username=${username}`
             const res = await fetch(url, {
-                method: "GET",
                 headers: { "Content-Type": "application/json" },
             })
             const data = await res.json()
-            setRegisterDate(data.registerDate)
             setReports(data.reports)
             setReportCount(data.reportCount)
             setTokens(data.tokens)
@@ -55,7 +53,6 @@ export default function DefaultDashboard() {
                         newPassword: newPassword
                     })
                 })
-                const result = await response.json()
                 if (response.ok) {
                     alert("Passwort geändert")
                     setOpenSettings(false)

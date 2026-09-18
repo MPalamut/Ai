@@ -385,14 +385,10 @@ async def defaultinfos(request: Request, username: str):
     cursor = conn.cursor()
     
     try:
-        cursor.execute("SELECT * from users WHERE name = ?", (username,))
-        result = cursor.fetchone()
-        registerDate = result[4]
-
-        cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id WHERE users.username = ?", (username,))
+        cursor.execute("SELECT * FROM reports INNER JOIN users ON reports.userId = users.id WHERE users.name = ?", (username,))
         reports = cursor.fetchall()
 
-        cursor.execute("SELECT COUNT(*) FROM reports JOIN users on reports.userId = users.id WHERE users.username = ?", (username,))
+        cursor.execute("SELECT COUNT(*) FROM reports JOIN users on reports.userId = users.id WHERE users.name = ?", (username,))
         reportCount = cursor.fetchall()
 
         cursor.execute("SELECT * FROM tokens WHERE ip = ?", (ip,))
@@ -412,7 +408,7 @@ async def defaultinfos(request: Request, username: str):
     finally:
         conn.close()
 
-    return {"registerDate": registerDate, "reports": reports, "reportCount": reportCount, "tokens": tokens, "tokensDaily": tokensDaily, "tokenCount": tokenCount, "documents": documents}
+    return {"reports": reports, "reportCount": reportCount, "tokens": tokens, "tokensDaily": tokensDaily, "tokenCount": tokenCount, "documents": documents}
     
 @app.get("/admininfos")
 async def admininfos():
