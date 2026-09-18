@@ -64,6 +64,7 @@ export default function FileAnalyse() {
         fileInputRef.current.value = "";
         imageInputRef.current.value = "";
     };
+    
     return (
         <>
             <input className={styles.inputFile} ref={fileInputRef} type="file" accept=".pdf, .docx" onChange={handleFileChange} />
