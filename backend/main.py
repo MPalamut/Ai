@@ -67,19 +67,21 @@ def models():
     return response.json()
 
 @app.post("/responses")
-async def responses(request: Request, payload: dict):
+async def responses(request: Request, data: dict):
     ip = request.client.host
     url = "http://10.10.70.105:1234/v1/responses"
     headers = {"Content-Type": "application/json"}
-    selected_model = payload.get("selectedModel")
-    input_text = payload.get("input")
-    temperature = payload.get("temperature")
-    searchdocs = payload.get("searchdocs")
-    previous_response = payload.get("previousResponse")
-    fileName = payload.get("fileName")
-    file = payload.get("file")
-    image = payload.get("image")
+    selected_model = data.get("selectedModel")
+    input_text = data.get("input")
+    temperature = data.get("temperature")
+    searchdocs = data.get("searchdocs")
+    previous_response = data.get("previousResponse")
+    fileName = data.get("fileName")
+    file = data.get("file")
+    image = data.get("image")
     timestamp = datetime.now().strftime("%Y-%m-%d")
+
+    print(searchdocs)
 
     if file:
         extracted_text = ""
@@ -139,21 +141,21 @@ async def responses(request: Request, payload: dict):
             ]
         }
 
-        try:
-            conn = sqlite3.connect(DB_PATH)
-            cursor = conn.cursor()
+        # try:
+        #     conn = sqlite3.connect(DB_PATH)
+        #     cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM documents WHERE fileName = ?", (fileName,))
-            existing_doc = cursor.fetchone()
+        #     cursor.execute("SELECT * FROM documents WHERE fileName = ?", (fileName,))
+        #     existing_doc = cursor.fetchone()
 
-            if not existing_doc:
-                cursor.execute("INSERT INTO documents (fileName, file, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
-                conn.commit()
+        #     if not existing_doc:
+        #         cursor.execute("INSERT INTO documents (fileName, file, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
+        #         conn.commit()
 
-        except sqlite3.Error as e:
-            print(f"Datenbankfehler: {e}")
-        finally:
-            conn.close()
+        # except sqlite3.Error as e:
+        #     print(f"Datenbankfehler: {e}")
+        # finally:
+        #     conn.close()
 
     elif image:
         data = {
@@ -178,7 +180,6 @@ async def responses(request: Request, payload: dict):
         }
 
     elif searchdocs:
-        print("searhdocs")
         alldocsextracted_text = ""
         try:
             conn = sqlite3.connect(DB_PATH)
@@ -187,12 +188,8 @@ async def responses(request: Request, payload: dict):
             cursor.execute("SELECT fileName, file FROM documents")
             alldocs = cursor.fetchall()
 
-            print(alldocs)
-
             for docname, doctext in alldocs:
                 alldocsextracted_text += f"\nDokumentname: {docname} -- \n{doctext}"
-            
-            print(alldocsextracted_text)
             
             data = {
             "model": selected_model,
@@ -424,12 +421,15 @@ async def defaultinfos(request: Request, username: str):
         cursor.execute("SELECT SUM(amount) FROM tokens WHERE ip = ?", (ip,))
         tokenCount = cursor.fetchall()
 
+        cursor.execute("SELECT * FROM documents")
+        documents = cursor.fetchall()
+
     except sqlite3.Error as e:
         return {"status": "error", "message": str(e)}
     finally:
         conn.close()
 
-    return {"registerDate": registerDate, "reports": reports, "reportCount": reportCount, "tokens": tokens, "tokensDaily": tokensDaily, "tokenCount": tokenCount}
+    return {"registerDate": registerDate, "reports": reports, "reportCount": reportCount, "tokens": tokens, "tokensDaily": tokensDaily, "tokenCount": tokenCount, "documents": documents}
     
 @app.get("/admininfos")
 async def admininfos():
@@ -542,6 +542,64 @@ async def newUser(data: dict):
         cursor = conn.cursor()
         
         cursor.execute("UPDATE reports SET status = 'erledigt' WHERE id = ?", (editreportid))
+        conn.commit()
+
+        status = "success"
+
+    except sqlite3.Error as e:
+        status = "error"
+    finally:
+        conn.close()
+    
+    return {"status": status}
+
+@app.post("/newDocument")
+async def newDocument(data: dict):
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+    fileName = data.get("fileName")
+    file = data.get("file")
+
+    extracted_text = ""
+    docx = file.startswith("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+
+    if "," in file:
+            file = file.split(",")[1]
+            
+    file_bytes = base64.b64decode(file)
+    file_stream = io.BytesIO(file_bytes)
+        
+    if docx:
+        doc = Document(file_stream)
+        for para in doc.paragraphs:
+                if para.text:
+                    extracted_text += para.text + "\n"
+                
+        for table in doc.tables:
+                for row in table.rows:
+                    row_text = [cell.text.strip() for cell in row.cells if cell.text.strip()]
+                    if row_text:
+                        extracted_text += "\n" + "\t".join(row_text) + "\n"
+
+        max_chars = 11000
+        if len(extracted_text) > max_chars:
+                extracted_text = extracted_text[:max_chars]
+                
+    else:
+        reader = PdfReader(file_stream)
+        for page in reader.pages:
+            text = page.extract_text()
+            if text:
+                extracted_text += text + "\n"
+
+        max_chars = 12000
+        if len(extracted_text) > max_chars:
+            extracted_text = extracted_text[:max_chars]
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("INSERT INTO documents (fileName, file, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
         conn.commit()
 
         status = "success"

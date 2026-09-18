@@ -5,17 +5,13 @@ export default function DailyInformations({ onClose }) {
     const [promptsDaily, setPromptsDaily] = useState()
     const [tokensDaily, setTokensDaily] = useState();
     const [visits, setVisits] = useState();
-    // const [promptsAll, setPromptsAll] = useState()
-    // const [tokensAll, setTokensAll] = useState();
-    // const [oldestDate, setOldestDate] = useState("");
-    // const [usersCount, setUsersCount] = useState()
     const menuRef = useRef()
 
     useEffect(() => {
         const fetchInformations = async () => {
             try {
                 const url = "http://10.10.70.105:8000/infos"
-                const res = await fetch(url, { method: "GET" })
+                const res = await fetch(url)
                 const data = await res.json()
                 if (data.status === "success") {
                     setPromptsDaily(data.promptsDaily)
@@ -40,15 +36,9 @@ export default function DailyInformations({ onClose }) {
         };
     }, [onClose]);
 
-    const formatDateGerman = (dateStr) => {
-        const date = new Date(dateStr);
-        return date.toLocaleDateString("de-DE");
-    };
-
     return (
         <>
             <div className={styles.menu} ref={menuRef} >
-
                 <div className={styles.info}>
                     <span>Heutige Statistik</span><br />
                     <div><span>Prompts</span> <span>{promptsDaily}</span></div>

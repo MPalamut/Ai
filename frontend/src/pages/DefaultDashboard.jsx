@@ -15,9 +15,12 @@ export default function DefaultDashboard() {
     const [tokens, setTokens] = useState([]);
     const [tokensDaily, setTokensDaily] = useState([]);
     const [tokenCount, setTokenCount] = useState()
+    const [documents, setDocuments] = useState([])
     const [openSettings, setOpenSettings] = useState(false);
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const [newDocumentName, setNewDocumentName] = useState("")
+    const [newDocument, setNewDocument] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("");
     const { username } = getStore()
 
@@ -35,6 +38,7 @@ export default function DefaultDashboard() {
             setTokens(data.tokens)
             setTokensDaily(data.tokensDaily)
             setTokenCount(data.tokenCount)
+            setDocuments(data.documents)
         }
         fetchname()
     }, [])
@@ -83,7 +87,33 @@ export default function DefaultDashboard() {
         }
         catch (error) { console.log(error) }
     }
+ const handleFileChange = (event) => {
+        setNewDocument("")
+        const file = event.target.files[0];
+        if (file) {
+            setNewDocumentName(file.name)
+            const reader = new FileReader();
+            reader.onloadend = () => { setNewDocument(reader.result); };
+            reader.readAsDataURL(file);
+        }
+    };
 
+    const handleFileSave = async () => {
+        if (newDocument) {
+            const requestData = {
+                fileName: newDocumentName,
+                file: newDocument
+            }
+
+            const url = "http://10.10.70.105:8000/newDocument"
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData)
+            })
+            alert("document saved")
+        }
+    }
     const formatedtokensdaily = tokensDaily.map(item => ({
         id: item[0],
         datum: item[1],
@@ -112,8 +142,8 @@ export default function DefaultDashboard() {
                 <div className={styles.sidebar}>
                     <div className={styles.date}>{new Date().toLocaleDateString("de-DE", { weekday: "long" })} {new Date().toLocaleDateString()}</div>
                     <div className={styles.infos}>
-                        <div><span>Reports: </span> <span>{reportCount}</span></div><br />
-                        <div><span>Tokens: </span> <span>{tokenCount}</span></div>
+                        <div><span>Meine Reports: </span> <span>{reportCount}</span></div><br />
+                        <div><span>Mein verbrauchten Tokens: </span> <span>{tokenCount}</span></div>
                     </div>
                 </div>
 
@@ -121,7 +151,7 @@ export default function DefaultDashboard() {
 
                     <div className={styles.tables}>
                         <table>
-                            <caption>Reports</caption>
+                            <caption>Meine Reports</caption>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -143,7 +173,7 @@ export default function DefaultDashboard() {
                         </table>
 
                         <table>
-                            <caption>Tokens</caption>
+                            <caption>Meine verbrauchten Tokens</caption>
                             <thead>
                                 <tr>
                                     <th>Datum</th>
@@ -159,21 +189,44 @@ export default function DefaultDashboard() {
                                 ))}
                             </tbody>
                         </table>
+
+                          <table>
+                            <caption>Dokumente</caption>
+                            <thead>
+                                <tr>
+                                    <th>Dateiname</th>
+                                    <th>Datum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {documents.map((document, index) => (
+                                    <tr key={index}>
+                                        <td>{document[1]}</td>
+                                        <td>{new Date(document[3]).toLocaleDateString('de-DE')}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className={styles.edit}>
+
+                         <fieldset>
+                            <legend>Report senden</legend>
+                             <textarea value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
+                            <button onClick={() => { report() }}>Report senden</button>
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>Dokument speichern</legend>
+                            <input id="newdocument" type="file" accept=".pdf, .docx" onChange={handleFileChange} />
+                            <button onClick={handleFileSave}>Dokument speichern</button>
+                        </fieldset>
                     </div>
 
                     <div className={styles.bottom}>
-
-                        <div className={styles.report}>
-                            <div><h2>Report senden</h2></div>
-                            <div className={styles.reportfield}>
-                                <textarea value={reportText} onChange={(e) => setReportText(e.target.value)}></textarea>
-                                <button onClick={() => { report() }}>Report senden</button>
-                            </div>
-                        </div>
-
-
-                       <div style={{ width: '100%', height: 400, padding: '20px', background: '#b2b9bfff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                            <h2 style={{ fontFamily: 'sans-serif', fontSize: '18px', marginBottom: '20px', color: '#2a2a2aff' }}>Prompts</h2>
+                        <div style={{ width: '100%', height: 400, padding: '20px', background: '#b2b9bfff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                            <h2 style={{ fontFamily: 'sans-serif', fontSize: '18px', marginBottom: '20px', color: '#2a2a2aff' }}> Meine Prompts</h2>
                             <ResponsiveContainer width="100%" height="85%">
                                 <BarChart data={formatedtokensdaily}>
                                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -184,10 +237,10 @@ export default function DefaultDashboard() {
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
-                       
-                        
-                        
-                        </div>
+
+
+
+                    </div>
                 </div>
             </div>
         </>

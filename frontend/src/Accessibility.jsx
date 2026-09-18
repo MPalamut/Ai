@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Accessibility.module.css"
 import { BsUniversalAccessCircle } from "react-icons/bs"

@@ -83,53 +83,50 @@
 .tables {
     display: flex;
     gap: 15px;
-    height: 48vh;
+    height: 35vh;
     background-color: var(--borderColor);
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.edit {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    background-color: var(--borderColor);
+    padding: 5px;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 15px;
+    height: 100%;
+
+}
+
+fieldset * {
+    width: 100%;
+}
+
+fieldset button {
+    background-color: var(--buttonColor);
+    color: var(--fontColor);
+    border-radius: .5em;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+fieldset button:hover{
+filter: brightness(.6);
 }
 
 .bottom {
     display: flex;
     gap: 15px;
     width: 100%;
-}
-
-.report {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-    background-color: rgb(98, 105, 118);
-    padding: 15px;
-    border-radius: .5em;
-    width: 15vw;
-}
-
-.reportfield {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 55px;
-
-}
-
-.report textarea {
-    height: 15vh;
-    background-color: #b2b9bfff;
-    border-radius: .5em;
-}
-
-.report button {
-    padding: 15px;
-    color: var(--fontColor);
-    background-color: var(--buttonColor);
-    cursor: pointer;
-    border: none;
-    border-radius: .5em;
-    transition: all .2s;
-}
-
-.report button:hover {
-    filter: brightness(.6);
 }

@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import { AppProvider } from './Store'
 import Home from './pages/Home'
 import AdminDashboard from './pages/AdminDashboard'

@@ -28,6 +28,8 @@ export default function AdminDashboard() {
     const [newuserpassword, setNewuserpassword] = useState("")
     const [removeuserid, setRemoveuserid] = useState("")
     const [editreportid, setEditreportid] = useState()
+    const [newDocumentName, setNewDocumentName] = useState("")
+    const [newDocument, setNewDocument] = useState("")
     const { username } = getStore()
 
     useEffect(() => {
@@ -123,6 +125,34 @@ export default function AdminDashboard() {
             }
         }
         catch (error) { console.log("Error") }
+    }
+
+    const handleFileChange = (event) => {
+        setNewDocument("")
+        const file = event.target.files[0];
+        if (file) {
+            setNewDocumentName(file.name)
+            const reader = new FileReader();
+            reader.onloadend = () => { setNewDocument(reader.result); };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleFileSave = async () => {
+        if (newDocument) {
+            const requestData = {
+                fileName: newDocumentName,
+                file: newDocument
+            }
+
+            const url = "http://10.10.70.105:8000/newDocument"
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData)
+            })
+            alert("document saved")
+        }
     }
 
     const formatedDates = tokens.map(item => ({
@@ -260,7 +290,7 @@ export default function AdminDashboard() {
                                 {documents.map((document, index) => (
                                     <tr key={index}>
                                         <td>{document[1]}</td>
-                                        <td>{new Date(document[2]).toLocaleDateString('de-DE')}</td>
+                                        <td>{new Date(document[3]).toLocaleDateString('de-DE')}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -270,21 +300,27 @@ export default function AdminDashboard() {
                     <div className={styles.edit}>
                         <fieldset>
                             <legend>Benutzer anlegen</legend>
-                            <div><input id="newusername" type="text" placeholder='Neuer Benutzer' value={newusername} onChange={(e) => setNewsusername(e.target.value)} /></div>
-                            <div><input id="newuserpassword" type="password" placeholder='Passwort' value={newuserpassword} onChange={(e) => setNewuserpassword(e.target.value)} /></div>
+                            <input type="text" placeholder='Neuer Benutzer' value={newusername} onChange={(e) => setNewsusername(e.target.value)} />
+                            <input type="password" placeholder='Passwort' value={newuserpassword} onChange={(e) => setNewuserpassword(e.target.value)} />
                             <button onClick={newUser}>Benutzer anlegen</button>
                         </fieldset>
 
                         <fieldset>
                             <legend>Benutzer löschen</legend>
-                            <div><input id="removeuser" type="text" placeholder='Benutzer Id' value={removeuserid} onChange={(e) => setRemoveuserid(e.target.value)} /></div>
+                            <input type="text" placeholder='Benutzer Id' value={removeuserid} onChange={(e) => setRemoveuserid(e.target.value)} />
                             <button onClick={removeUser}>Benutzer löschen</button>
                         </fieldset>
 
                         <fieldset>
                             <legend>Reports bearbeiten</legend>
-                            <div><input id="editreportid" type="text" placeholder='Report Id' value={editreportid} onChange={(e) => setEditreportid(e.target.value)} /></div>
+                            <input  type="text" placeholder='Report Id' value={editreportid} onChange={(e) => setEditreportid(e.target.value)} />
                             <button onClick={editreport}>Report bearbeiten</button>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Dokument speichern</legend>
+                            <input type="file" accept=".pdf, .docx" onChange={handleFileChange} />
+                            <button onClick={handleFileSave}>Dokument speichern</button>
                         </fieldset>
                     </div>
 
@@ -301,7 +337,7 @@ export default function AdminDashboard() {
                         </ResponsiveContainer>
                     </div>
                     </div>
-                    
+
                 </div>
             </div>
         </>

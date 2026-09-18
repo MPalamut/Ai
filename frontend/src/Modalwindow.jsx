@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai";
 import styles from './Modalwindow.module.css'
-import { getStore } from "./Store";
 
 export default function ModalWindow({ text, onClose }) {
     const modalOpenref = useRef();

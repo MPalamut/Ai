@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import styles from "./Registration.module.css"
 import { useNavigate } from 'react-router-dom';
 import { getStore } from "./Store";

@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react"
 import styles from "./FileAnalyse.module.css"
-import { getStore } from "./Store.jsx";
 import { AiOutlinePaperClip, AiOutlineFile, AiOutlineFileImage, AiOutlineClose } from "react-icons/ai";
+import { getStore } from "./Store.jsx";
 
 export default function FileAnalyse() {
     const [menuopen, setMenuOpen] = useState(false)
     const menuOpenRef = useRef()
     const fileInputRef = useRef();
     const imageInputRef = useRef();
-    const { setPreviousResponse, fileName, setFileName, fileBase64, setFileBase64, imageName, setImageName, imageBase64, setImageBase64 } = getStore();
+    const { setPreviousResponse, fileName, setFileName, setFileBase64, imageName, setImageName, setImageBase64 } = getStore();
 
     useEffect(() => {
         function clickOutside(e) {
@@ -79,10 +79,10 @@ export default function FileAnalyse() {
                 :
                 <>
                     <div className="wrapper">
-                        <button className={styles.uploadButton} title="Datei prüfen"  onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
+                        <button className={styles.uploadButton} title="Datei analysieren"  onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlinePaperClip /></button>
                         {menuopen && <div className={styles.menu} ref={menuOpenRef}>
-                            <button className={styles.menuButton} title="Dokument prüfen" onClick={openFileDialog}><AiOutlineFile />Dokument analysieren</button>
-                            <button className={styles.menuButton} title="Bild prüfen" onClick={openImageDialog}> <AiOutlineFileImage />Bild analysieren</button>
+                            <button className={styles.menuButton} title="Dokument analysieren" onClick={openFileDialog}><AiOutlineFile />Dokument analysieren</button>
+                            <button className={styles.menuButton} title="Bild analysieren" onClick={openImageDialog}> <AiOutlineFileImage />Bild analysieren</button>
                         </div>
                         }
                     </div>

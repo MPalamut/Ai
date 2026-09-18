@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from "./Sidebar.module.css"
 import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"

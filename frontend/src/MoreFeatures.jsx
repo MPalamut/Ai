@@ -1,10 +1,10 @@
-import React from 'react'
+
 import { useState, useEffect, useRef } from "react"
 import styles from './MoreFeatures.module.css'
 import { AiOutlineBars } from "react-icons/ai";
 import { getStore } from "./Store.jsx"
 
-export default function Headbar() {
+export default function MoreFeatures() {
     const [menuopen, setMenuOpen] = useState(false)
     const menuOpenRef = useRef()
     const { temperature, setTemperature } = getStore();
@@ -29,7 +29,6 @@ export default function Headbar() {
     return (
         <>
             <button className={styles.moreFeatures} title="Mehr Funktionen" onClick={() => { setMenuOpen(!menuopen) }}> <AiOutlineBars /></button>
-
             {menuopen && <div className={styles.menu} ref={menuOpenRef}>
                 <div className={styles.radioGroup}>
                     <label className={styles.radioLabel}>

@@ -70,6 +70,15 @@
     gap: 10px;
 }
 
+.searchdocs {
+    display: flex;
+    gap: 5px;
+    border: 1px solid var(--mainColor);
+    padding: 6px;
+    border-radius: .2em;
+    font-size: small;
+}
+
 .inputFooterRight {
     display: flex;
     align-items: center;

@@ -13,6 +13,7 @@ export default function Input() {
     const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileName, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
 
     async function Responses() {
+        console.log(searchdocs)
         setInput("")
         setOutput(prev => [...prev, { text: input }])
         setLoading(true)
@@ -26,10 +27,12 @@ export default function Input() {
             };
 
             if (previousResponse) { requestData.previousResponse = previousResponse; }
+            
             if (fileBase64) {
                 requestData.fileName = fileName;
                 requestData.file = fileBase64;
             }
+            
             if (imageBase64) { requestData.image = imageBase64; }
 
             const url = "http://10.10.70.105:8000/responses"
@@ -69,15 +72,10 @@ export default function Input() {
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
                         <FetchModels />
+                        <div className={styles.searchdocs}>
+                            <input type="checkbox" checked={searchdocs} onChange={(e) => { setSearchdocs(e.target.checked) }} /> <label>Interne Dokumente nutzen</label>
+                        </div>
                         <MoreFeatures />
-                        <div><label>
-                            <input
-                                type="checkbox"
-                                checked={searchdocs}
-                                onChange={(e) => setSearchdocs(e.target.checked)}
-                            />
-                            Intern basiert
-                        </label></div>
 
                     </div>
                     <div className={styles.inputFooterRight}>

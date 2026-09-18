@@ -101,17 +101,18 @@
 table {
     border-collapse: collapse;
     border-radius: 1em;
-
 }
 
 table caption {
     background-color: var(--buttonColor);
     border: 1px solid var(--borderColor);
+    font-size: small;
+    padding: 5px;
 }
 
 table th,
 td {
-    background-color: rgb(43, 56, 72);
+    background-color: rgb(51, 66, 86);
     padding: 15px;
     border: 1px solid var(--borderColor);
     text-align: center;
@@ -131,15 +132,13 @@ fieldset {
     justify-content: space-between;
     gap: 5px;
     padding: 15px;
-    height: 100%;
+    width: 15vw;
 }
 
 fieldset * {
     width: 100%;
 }
-fieldset input{
-    background-color: #bedfea;
-}
+
 
 fieldset button {
     background-color: var(--buttonColor);

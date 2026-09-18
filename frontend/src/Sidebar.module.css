@@ -104,11 +104,10 @@
 
 @media (max-width: 850px) {
     .sidebar {
-        width: 50px;
+        width: 50px; 
     }
 
-    .icon {
-        visibility: hidden;
+    .icon { visibility: hidden;
     }
 
     .sidebarBtnSpan {
