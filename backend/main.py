@@ -76,7 +76,6 @@ async def responses(request: Request, data: dict):
     temperature = data.get("temperature")
     searchdocs = data.get("searchdocs")
     previous_response = data.get("previousResponse")
-    fileName = data.get("fileName")
     file = data.get("file")
     image = data.get("image")
     timestamp = datetime.now().strftime("%Y-%m-%d")
@@ -267,7 +266,7 @@ def register(data: dict):
     cursor = conn.cursor()
     
     try: 
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE name = ?", (username,))
         existing_user = cursor.fetchone()
 
         if existing_user:
@@ -278,7 +277,7 @@ def register(data: dict):
             password_bytes = password.encode('utf-8')
             hashed_password = hashlib.sha256(password_bytes).hexdigest()
 
-            cursor.execute("INSERT INTO users (username, password, registeredAt) VALUES (?, ?, ?)", (username, hashed_password, timestamp))
+            cursor.execute("INSERT INTO users (name, password, registeredAt) VALUES (?, ?, ?)", (username, hashed_password, timestamp))
             conn.commit()
             status = "success"
             message = f"Registrierung erfolgreich! Willkommen, {username}."
@@ -300,7 +299,7 @@ def login(data: dict):
     cursor = conn.cursor()
     isAdmin = False
     try:
-        cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, hashed_password))
+        cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, hashed_password))
         user = cursor.fetchone()
         if user:
             status = "success"
@@ -329,7 +328,7 @@ async def report(data: dict):
         cursor = conn.cursor()
         cursor.execute("PRAGMA foreign_keys = ON;")
 
-        cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT id FROM users WHERE name = ?", (username,))
         row = cursor.fetchone()
         if row:
             userId = row[0]
@@ -368,22 +367,6 @@ async def infos():
         cursor.execute("SELECT COUNT(DISTINCT ip) FROM visits WHERE date(dateTime) = ?", (timestamp,))
         visits = cursor.fetchall()
 
-        # cursor.execute("SELECT COUNT(*) FROM tokens")
-        # resultPromptsAll = cursor.fetchone()
-        # promptsAll = resultPromptsAll[0]
-
-        # cursor.execute("SELECT SUM(amount) FROM tokens")
-        # resultAll = cursor.fetchone()
-        # tokensAll = resultAll[0]
-
-        # cursor.execute("SELECT MIN(dateTime) FROM tokens")
-        # resultOldestDate = cursor.fetchone()
-        # oldestDate = resultOldestDate[0]
-
-        # cursor.execute("SELECT COUNT(*) FROM users")
-        # resultUsersCount = cursor.fetchone()
-        # usersCount = resultUsersCount[0]   
-
         status = "success"
         message = "Get Tokens"
 
@@ -402,7 +385,7 @@ async def defaultinfos(request: Request, username: str):
     cursor = conn.cursor()
     
     try:
-        cursor.execute("SELECT * from users WHERE username = ?", (username,))
+        cursor.execute("SELECT * from users WHERE name = ?", (username,))
         result = cursor.fetchone()
         registerDate = result[4]
 
@@ -501,7 +484,7 @@ async def newUser(data: dict):
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         
-        cursor.execute("INSERT INTO users (username, password, registeredAt) VALUES (?, ?, ?)", (newusername, hashed_password, timestamp))
+        cursor.execute("INSERT INTO users (name, password, registeredAt) VALUES (?, ?, ?)", (newusername, hashed_password, timestamp))
         conn.commit()
 
         status = "success"
@@ -624,13 +607,13 @@ async def changepassword(data: dict):
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT * FROM users WHERE name = ?", (username,))
         user = cursor.fetchone()
         hashedOldpw = user[2]
         if hashedOldPassword == hashedOldpw:
             hashedNewPasswordBytes = newPassword.encode("utf-8")
             hashedNewPassword = hashlib.sha256(hashedNewPasswordBytes).hexdigest()
-            cursor.execute("UPDATE users SET password = ? WHERE username = ?", (hashedNewPassword, username))
+            cursor.execute("UPDATE users SET password = ? WHERE name = ?", (hashedNewPassword, username))
             conn.commit()
    
         status = "success"
