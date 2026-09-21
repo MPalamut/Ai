@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
 import { RxGear, RxExit } from "react-icons/rx";
-import styles from "./DefaultDashboard.module.css"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import styles from "./DefaultDashboard.module.css"
 import { getStore } from "../Store";
 
 export default function DefaultDashboard() {
