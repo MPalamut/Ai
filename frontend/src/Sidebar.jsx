@@ -1,10 +1,10 @@
-import styles from "./Sidebar.module.css"
-import icon from "./assets/icon.svg"
 import { useState, useEffect, useRef } from "react"
+import icon from "./assets/icon.svg"
 import Modalwindow from './Modalwindow.jsx'
 import { RxPencil2, RxSun, RxMoon, RxBarChart, RxInfoCircled ,RxGear } from "react-icons/rx"
 import DailyInformations from './DailyInformations.jsx'
 import { getStore } from "./Store.jsx"
+import styles from "./Sidebar.module.css"
 
 export default function Sidebar() {
     const [openInformationsMenu, setOpenInformationsMenu] = useState(false)

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import styles from "./Output.module.css"
 import { getStore } from "./Store.jsx";
+import styles from "./Output.module.css"
 
 export default function Output() {
     const { output , loading , fontSize} = getStore()

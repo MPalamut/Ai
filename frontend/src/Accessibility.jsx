@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import styles from "./Accessibility.module.css"
 import { BsUniversalAccessCircle } from "react-icons/bs"
 import { getStore } from "./Store.jsx";
+import styles from "./Accessibility.module.css"
 
 export default function Accessiblity() {
     const [accessibilityMenuOpen, setAccessibilityMenuOpen] = useState(false)

@@ -3,8 +3,8 @@ import { AiOutlineSend } from "react-icons/ai";
 import MoreFeatures from "./MoreFeatures"
 import FileAnalyse from "./FileAnalyse";
 import FetchModels from './FetchModels';
-import styles from "./Input.module.css"
 import { getStore } from "./Store";
+import styles from "./Input.module.css"
 
 export default function Input() {
     const [input, setInput] = useState("")
@@ -27,12 +27,12 @@ export default function Input() {
             };
 
             if (previousResponse) { requestData.previousResponse = previousResponse; }
-            
+
             if (fileBase64) {
                 requestData.fileName = fileName;
                 requestData.file = fileBase64;
             }
-            
+
             if (imageBase64) { requestData.image = imageBase64; }
 
             const url = "http://10.10.70.105:8000/responses"
@@ -72,14 +72,15 @@ export default function Input() {
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
                         <FetchModels />
-                        <div className={styles.searchdocs}>
+      <MoreFeatures />
+                        
+                  <div className={styles.searchdocs}>
                             <input type="checkbox" checked={searchdocs} onChange={(e) => { setSearchdocs(e.target.checked) }} /> <label>Interne Dokumente nutzen</label>
                         </div>
-                        <MoreFeatures />
-
+                        <FileAnalyse />
                     </div>
                     <div className={styles.inputFooterRight}>
-                        <FileAnalyse />
+
                     </div>
                 </div>
             </div>

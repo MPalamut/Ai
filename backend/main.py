@@ -140,22 +140,6 @@ async def responses(request: Request, data: dict):
             ]
         }
 
-        # try:
-        #     conn = sqlite3.connect(DB_PATH)
-        #     cursor = conn.cursor()
-
-        #     cursor.execute("SELECT * FROM documents WHERE fileName = ?", (fileName,))
-        #     existing_doc = cursor.fetchone()
-
-        #     if not existing_doc:
-        #         cursor.execute("INSERT INTO documents (fileName, file, dateTime) VALUES (?, ?, ?)", (fileName, extracted_text, timestamp))
-        #         conn.commit()
-
-        # except sqlite3.Error as e:
-        #     print(f"Datenbankfehler: {e}")
-        # finally:
-        #     conn.close()
-
     elif image:
         data = {
             "model": selected_model,
@@ -250,7 +234,7 @@ async def responses(request: Request, data: dict):
             cursor.execute("INSERT INTO tokens (dateTime, amount, ip) VALUES (?, ?, ?)",(timestamp, tokens, ip))
             conn.commit()
     except sqlite3.Error as e:
-            print(f"Datenbankfehler beim Token-Log: {e}")
+            print(f"Datenbankfehler {e}")
     finally:
         conn.close()
    

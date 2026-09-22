@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { getStore } from "./Store";
 
 export default function FetchModels() {

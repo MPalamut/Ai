@@ -1,9 +1,9 @@
 import { useState } from "react"
-import styles from "./Registration.module.css"
 import { useNavigate } from 'react-router-dom';
 import { getStore } from "./Store";
+import styles from "./Registration.module.css"
 
-export default function Register({ onClose }) {
+export default function Registration({ onClose }) {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [authMode, setAuthMode] = useState("login");

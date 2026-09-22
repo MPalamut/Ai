@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
-import styles from "./FileAnalyse.module.css"
 import { AiOutlinePaperClip, AiOutlineFile, AiOutlineFileImage, AiOutlineClose } from "react-icons/ai";
 import { getStore } from "./Store.jsx";
+import styles from "./FileAnalyse.module.css"
 
 export default function FileAnalyse() {
     const [menuopen, setMenuOpen] = useState(false)

@@ -18,7 +18,6 @@ export default function DailyInformations({ onClose }) {
                     setTokensDaily(data.tokensDaily);
                     setVisits(data.visits);
                 }
-
             } catch (error) { console.error(error) }
         };
         fetchInformations();

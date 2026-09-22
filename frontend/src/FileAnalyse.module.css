@@ -32,8 +32,8 @@
     justify-content: center;
     gap: 5px;
     position: absolute;
-    top: 6%;
-    right: 6%;
+    top: 10%;
+    right: 29%;
     padding: 15px;
     background-color: var(--sidebarSettingsBgColor);
     color: var(--fontColor);
