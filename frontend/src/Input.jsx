@@ -72,9 +72,9 @@ export default function Input() {
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
                         <FetchModels />
-      <MoreFeatures />
-                        
-                  <div className={styles.searchdocs}>
+                        <MoreFeatures />
+
+                        <div className={styles.searchdocs}>
                             <input type="checkbox" checked={searchdocs} onChange={(e) => { setSearchdocs(e.target.checked) }} /> <label>Interne Dokumente nutzen</label>
                         </div>
                         <FileAnalyse />
