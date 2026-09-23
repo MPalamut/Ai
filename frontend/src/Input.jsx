@@ -56,7 +56,6 @@ export default function Input() {
 
         } catch (error) { console.error(error) }
         setLoading(false)
-
         setTimeout(() => { inputRef.current.focus() }, 1)
     }
 
