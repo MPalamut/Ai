@@ -10,10 +10,9 @@ export default function Input() {
     const [input, setInput] = useState("")
     const [searchdocs, setSearchdocs] = useState(false)
     const inputRef = useRef()
-    const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileName, fileBase64, imageBase64, setLoading, temperature, setGeneration, setCompleteTokens } = getStore()
+    const { selectedModel, setOutput, previousResponse, setPreviousResponse, loading, fileName, fileBase64, imageBase64, setLoading, temperature, setCompleteTokens } = getStore()
 
     async function Responses() {
-        console.log(searchdocs)
         setInput("")
         setOutput(prev => [...prev, { text: input }])
         setLoading(true)
@@ -51,7 +50,6 @@ export default function Input() {
 
             if (!previousResponse) { setPreviousResponse(responseID) }
             setOutput(prev => [...prev, { role: "ai", text: responseText, tokens: tokensUsed }])
-            setGeneration(previous => previous + 1)
             setCompleteTokens(previous => previous + tokensUsed)
 
         } catch (error) { console.error(error) }
@@ -71,15 +69,14 @@ export default function Input() {
                 <div className={styles.inputFooter}>
                     <div className={styles.inputFooterLeft}>
                         <FetchModels />
-                        <MoreFeatures />
-
                         <div className={styles.searchdocs}>
                             <input type="checkbox" checked={searchdocs} onChange={(e) => { setSearchdocs(e.target.checked) }} /> <label>Interne Dokumente nutzen</label>
                         </div>
+                        <MoreFeatures />
                         <FileAnalyse />
                     </div>
+                    
                     <div className={styles.inputFooterRight}>
-
                     </div>
                 </div>
             </div>
