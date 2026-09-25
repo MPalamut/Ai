@@ -80,8 +80,6 @@ async def responses(request: Request, data: dict):
     image = data.get("image")
     timestamp = datetime.now().strftime("%Y-%m-%d")
 
-    print(searchdocs)
-
     if file:
         extracted_text = ""
         docx = file.startswith("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document")
@@ -245,7 +243,6 @@ def register(data: dict):
     username = data.get("username")
     password = data.get("password")
     timestamp = datetime.now().strftime("%Y-%m-%d")
-
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
@@ -278,7 +275,6 @@ def login(data: dict):
     username = data.get("username")
     password = data.get("password")
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     isAdmin = False
@@ -456,7 +452,6 @@ async def newUser(data: dict):
     newusername =  data.get("newusername")
     newuserpassword = data.get("newuserpassword")
     timestamp = datetime.now().strftime("%Y-%m-%d")
-
     password_bytes = newuserpassword.encode('utf-8')
     hashed_password = hashlib.sha256(password_bytes).hexdigest()
 
@@ -521,7 +516,6 @@ async def newDocument(data: dict):
     timestamp = datetime.now().strftime("%Y-%m-%d")
     fileName = data.get("fileName")
     file = data.get("file")
-
     extracted_text = ""
     docx = file.startswith("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document")
 
@@ -579,7 +573,6 @@ async def changepassword(data: dict):
     username = data.get("username")
     oldPassword = data.get("oldPassword")
     newPassword = data.get("newPassword")
-
     hashedOldPasswordBytes = oldPassword.encode('utf-8')
     hashedOldPassword = hashlib.sha256(hashedOldPasswordBytes).hexdigest()
 

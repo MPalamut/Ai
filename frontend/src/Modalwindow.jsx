@@ -4,7 +4,6 @@ import styles from './Modalwindow.module.css'
 
 export default function ModalWindow({ text, onClose }) {
     const modalOpenref = useRef();
-
     const contents = {
         dsgvo: {
             title: "Datenschutz", content: (

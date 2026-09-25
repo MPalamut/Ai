@@ -83,6 +83,7 @@ export default function DefaultDashboard() {
         }
         catch (error) { console.log(error) }
     }
+    
  const handleFileChange = (event) => {
         setNewDocument("")
         const file = event.target.files[0];
@@ -233,9 +234,6 @@ export default function DefaultDashboard() {
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
